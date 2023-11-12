@@ -12,9 +12,9 @@ export default function About() {
             <div className='text-center'>
             <p className=' text-center text-xl mx-auto py-2 leading-8 text-gray-800 dark:text-gray-200'>
             As a frontend developer with expertise in React.js, JavaScript, 
-            Tailwind CSS, Docker, Node.js, writing smart webs, and Bootstrap.<br/> I'm 
+            Tailwind CSS, Docker, Node.js and writing smart webs.<br/> I'm 
             excited to offer my services to help businesses 
-            and individuals create stunning and functional web experiences<br/>
+            and individuals create stunning and functional web applications<br/>
 
           
             I have specialized in React.js development, which allows me to build dynamic and interactive user interfaces.<br/> Whether you need a 
@@ -22,10 +22,6 @@ export default function About() {
             <br/>
             I thrive on solving complex frontend challenges and finding innovative solutions.<br/> Your unique project
              requirements are opportunities for me to showcase my problem-solving skills.
-
-            
-             In the ever-evolving world of web development, I'm committed to continuous learning. I stay updated with the latest trends
-              and technologies to ensure that your projects are future-proof.
 
             </p>
             </div>

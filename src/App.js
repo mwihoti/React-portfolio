@@ -8,9 +8,10 @@ import Contact from './components/contact'
 import { useState } from 'react';
 
 function App() {   
+  const [darkMode, setDarkMode] = useState(false);
     
   return (
-    <div className=''>
+    <div className={darkMode ? "dark" : ""}>
            <Profile />
            <About />  
            <Skills />

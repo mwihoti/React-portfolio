@@ -19,8 +19,9 @@ const Contact = () => {
 
   return (
     <>
-   <div className='bg-#94a3b8'>
-   <h2 class="text-2xl pb-3 font-bold underline text-teal-700 text-center m-2" >
+   <div className='bg-#94a3b8 border border-black'>
+   <div>
+   <h2 className="text-2xl pb-3 font-bold underline text-teal-700 text-center m-2" >
         Send Message
     </h2>
     
@@ -49,6 +50,8 @@ const Contact = () => {
         Send
       </button>
       </div>
+      </div>
+
     
     </>
   );

@@ -47,18 +47,18 @@ export default function Work() {
             {/* Hover Effects */}
             <div className=' flex justify-center items-center flex-col'>
               <span className=' text-lg font-bold  tracking-wider'>
-                Planner Application
+                Mood-Journal-Ai
               </span>
-              <p className='text-center py-3'>Helps users Plan  activites on an online calendar and a timer.
-              I  developed it  using react.js
+              <p className='text-center py-3'>
+              Journal  your mood and get mood analysis with the help of AI
               </p>
               <div className='pt-8 text-center'>
-                <a href='https://mwihoti-planner-77kta5spw-mwihoti.vercel.app/' target= "_blank">
+                <a href='https://moodjournal-ai.vercel.app/' target= "_blank">
                   <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-gray-700 font-bold text-lg'>
                     Website
                   </button>
                 </a>
-                <a href='https://github.com/mwihoti/React-projects/tree/master/kanban-app'>
+                <a href='https://github.com/mwihoti/Moodjournal-AI.git'>
                   <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-gray-700 font-bold text-lg'>
                     Code
                   </button>
@@ -73,19 +73,20 @@ export default function Work() {
             {/* Hover Effects */}
             <div className='flex justify-center items-center flex-col'>
               <span className=' text-lg font-bold  tracking-wider'>
-                Kanban app
+               Neema Store
               </span>
               <p className='text-center py-3'>
-
-                Kanban app helps you keep track plans and goals. Created with React.js
+              Ecommerce-React-application-with-stripe-Payment
+                          
+                Buy electronics online.
               </p>
               <div className='pt-8 text-center'>
-                <a href='https://mwihoti-kanban-app.vercel.app/' target='_blank'>
+                <a href=' https://ecommerce-react-application-with-stripe-payment.vercel.app' target='_blank'>
                   <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-gray-700 font-bold text-lg'>
                     Website
                   </button>
                 </a>
-                <a href='https://github.com/mwihoti/React-projects/tree/master/kanban-app' target='_blank'>
+                <a href='https://github.com/mwihoti/Ecommerce-React-application-with-stripe-Payment.git' target='_blank'>
                   <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-gray-700 font-bold text-lg'>
                     Code
                   </button>

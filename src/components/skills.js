@@ -13,10 +13,10 @@ export default function Skills() {
           </div>
           <div className='w-full grid grid-cols-2 sm:grid-cols-4 gap-4 text-center py-8'>
               <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>HTML</p>
+                  <p className='my-4'>NextJs</p>
               </div>
               <div className='shadow-md   hover:scale-110 duration-500'>
-                  <p className='my-4'>CSS</p>
+                  <p className='my-4'>C</p>
               </div>
               <div className='shadow-md  hover:scale-110 duration-500'>
                   <p className='my-4'>JAVASCRIPT</p>
@@ -36,18 +36,7 @@ export default function Skills() {
               <div className='shadow-md  hover:scale-110 duration-500'>
                   <p className='my-4'>EXPRESS</p>
               </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>DOCKER</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>C+</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>BLOCKCHAIN</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>VMWARE</p>
-              </div>
+             
           </div>
         </section>
     </div>
