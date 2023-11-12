@@ -1,8 +1,10 @@
 import React from 'react';
 import {BsFillMoonStarsFill} from 'react-icons/bs';
 import { AiFillGithub } from "react-icons/ai"
+import { GoTriangleDown } from "react-icons/go";
 
 import resume from '../assets/DANIELEDWARDCV (1).pdf';
+
 
 import me from '../assets/me.jpg'
 import { useState } from 'react';
@@ -30,11 +32,13 @@ export default function Profile() {
           Besides that 
           I love learning new things.
           <br />
-           Join me below !
-         </p>
+           Join me below ! 
+             </p>
+            
           </div>
+        
           <div className='text-5xl flex justify-center gap-10 py-3 text-blue-600 dark:text-gray-400'>
-          
+            
             <div>
             <a href='https://github.com/mwihoti' target='_blank'>
             <AiFillGithub />

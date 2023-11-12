@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.9f9a54fb.css",
-    "main.js": "/static/js/main.d0935c44.js",
+    "main.css": "/static/css/main.766d57dc.css",
+    "main.js": "/static/js/main.a5921cc2.js",
     "static/js/787.1ed0c42c.chunk.js": "/static/js/787.1ed0c42c.chunk.js",
     "static/media/me.jpg": "/static/media/me.9d872d489a31ef0fc55b.jpg",
-    "static/media/DANIELEDWARDRESUME.pdf": "/static/media/DANIELEDWARDRESUME.375370eea8641b7edaeb.pdf",
     "static/media/Burtons.otf": "/static/media/Burtons.c46a2405716f236c4a9a.otf",
+    "static/media/DANIELEDWARDCV (1).pdf": "/static/media/DANIELEDWARDCV (1).586ad3da324cd6ccc87f.pdf",
     "index.html": "/index.html",
-    "main.9f9a54fb.css.map": "/static/css/main.9f9a54fb.css.map",
-    "main.d0935c44.js.map": "/static/js/main.d0935c44.js.map",
+    "main.766d57dc.css.map": "/static/css/main.766d57dc.css.map",
+    "main.a5921cc2.js.map": "/static/js/main.a5921cc2.js.map",
     "787.1ed0c42c.chunk.js.map": "/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9f9a54fb.css",
-    "static/js/main.d0935c44.js"
+    "static/css/main.766d57dc.css",
+    "static/js/main.a5921cc2.js"
   ]
 }
