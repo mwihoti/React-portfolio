@@ -42,3 +42,27 @@
   font-family: "burtons";
   src: url("../public/Burtons.otf")
 }
+.theme__dark {
+  background-color: #121212;
+  color: #ffffff; 
+  transition: 0.5s;
+}
+ .theme__dark * {
+  color: white !important;
+}
+
+.theme__dark a {
+  color: #bb86fc; /* Light purple for links */
+}
+.theme__dark div[class*="tags"] span {
+  background-color: rgb(153, 0, 255) !important;
+}
+.theme__dark #showcase article {
+	background-color: rgb(212, 148, 255, 0.187);
+}
+.theme__dark #footer, .theme__dark nav {
+	background-color: rgb(212, 148, 255, 0.187);
+}
+.theme__dark #shadow * {
+	color: $text !important;
+}

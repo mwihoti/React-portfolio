@@ -26,8 +26,8 @@ export default function About() {
             </p>
             </div>
           </div>
-          <div  className='lg:flex gap-10'>
-            <div className='text-center shadow-lg p-10 rounded-xl  my-10 dark:bg-white flex-1'> 
+          <div  className='lg:flex gap-10 dark:bg-slate-800'>
+            <div className='text-center shadow-lg p-10 rounded-xl  my-10 dark:text-white flex-1'> 
               <img src={jsicon} width={100} height={100}/>
               <h3 className='text-lg font-medium pt-8 pb-2'> Javascript</h3>
               <p className='py-2 text-2xl'>
@@ -40,7 +40,7 @@ export default function About() {
                user experiences and add interactivity.
               </p>
             </div>
-            <div className='text-center shadow-lg p-10 rounded-xl  my-10 dark:bg-white flex-1'> 
+            <div className='text-center shadow-lg p-10 rounded-xl  my-10  flex-1'> 
               <img src={devicon} width={100} height={100}  />
               <h3 className='text-lg font-medium pt-8 pb-2'> Website development</h3>
               <p className='py-2 text-2xl'>
@@ -52,7 +52,7 @@ export default function About() {
                 me to build dynamic and interactive user interfaces.
               </p>
             </div>
-            <div className='text-center shadow-lg p-10 rounded-xl  my-10 dark:bg-white flex-1'> 
+            <div className='text-center shadow-lg p-10 rounded-xl  my-10  flex-1'> 
               <img src={web} width={100} height={100} />
               <h3 className='text-lg font-medium pt-8 pb-2'> Web 3</h3>
               <p className='py-2 text-2xl'>
