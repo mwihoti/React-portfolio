@@ -6,8 +6,8 @@ function Switch() {
     const theme = useContext(ThemeContext);
 
     return (
-        <div className='justify-center flex' onClick={() => dispatch({type: "toggle"})} >
-            {theme ? '🌙 Dark Mode' : '☾ Light Mode'}
+        <div className='justify-center flex  text-2xl' onClick={() => dispatch({type: "toggle"})} >
+            {theme ? '🌙 ' : '☾ '}
         </div>
     )
 }
