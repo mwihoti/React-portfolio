@@ -10,9 +10,9 @@ export default function Skills() {
           </div>
           <div className='max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center'>
               {[
-                'PYTHON', 'C', 'JAVASCRIPT', 'REACTJS', 
-                'GITHUB', 'FASTAPI', 'SQL/NOSQL', 'Express', 
-                'web3 Zetachain', 'Rust', 'Nestjs'
+                'Python', 'C', 'Javascript', 'Reactjs', 
+                'Github', 'FastAPI', 'SQL/NOSQL', 'Express', 
+                'web3 Zetachain', 'Rust', 'Nestjs', 'Tailwindcss', 'Docker', 'Nginx', 'Vite'
               ].map((skill) => (
                 <div key={skill} className='shadow-lg bg-gradient-to-r from-teal-500 to-teal-400 dark:from-teal-600 dark:to-teal-500 hover:scale-105 hover:shadow-xl transition-transform duration-300 rounded-lg p-6'>
                   <p className='text-lg font-semibold text-white'>{skill}</p>

@@ -16,13 +16,15 @@ export default function Profile() {
       <section className='min-h-screen dark:bg-slate-900' >
       <nav className='py-10 mb-12 flex justify-center  items-center bg-slate-200 dark:text-white'>
         <div className='flex '>
-          <div className='p-2'>
+          
+ <div className='p-3  '>
+   <ul className='flex space-x-8'>
+ <li>
   <h1 className='text-xl font-bold'>Daniel Mwihoti Portfolio</h1>
-  </div>
- <div className='p-3 absolute right-0 '> <ul className='flex space-x-4'>
-    <li><Switch  /></li>
+  </li>
+    <li className=''><Switch  /></li>
     <li>
-      <a className='bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-4 py-2 rounded-md' href={'#'} target="_blank"> 
+      <a className='bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-4 py-2 rounded-md absolute right-4'  href={'#'} target="_blank"> 
         Resume
       </a>
     </li>
