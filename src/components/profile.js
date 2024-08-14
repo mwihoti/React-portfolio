@@ -12,8 +12,8 @@ import me from '../assets/me.jpg'
 export default function Profile() {
  
   return (
-    <div>
-      <section className='min-h-screen'>
+    <div >
+      <section className='min-h-screen dark:bg-slate-900' >
         <nav className='py-10 mb-12 flex justify-between dark:text-white'>
           <h1 className='text-xl font-bold'>Daniel Mwihoti Portfolio</h1>
           <ul className='flex items-center'>
@@ -25,7 +25,7 @@ export default function Profile() {
           </ul>
           
         </nav>
-        <div className='text-center p-10'>
+        <div className='text-center p-10 '>
          <h2 className='text-5xl py-2 text-teal-600 font-medium dark:text-teal-400 md:text-6xl'>Daniel Edward Mwihoti </h2>
          <h3 className='text-2xl py-2 md:text-3xl dark:text-white'> Frontend Developer</h3>
          <p className='text-md py-5 leading-8 text-gray-800 dark:text-gray-200 max-w-xl mx-auto md:text-xl' >

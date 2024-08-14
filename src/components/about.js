@@ -7,10 +7,10 @@ export default function About() {
   return (
     <div>
         <section >
-          <div className='p-10 text-center'>
+          <div className='p-10 text-center dark:bg-slate-900'>
             <h3 className='text-4xl py-2 font-bold  dark:text-white'>About</h3>
             <div className='text-center'>
-            <p className=' text-center text-xl mx-auto py-2 leading-8 text-gray-800 dark:text-gray-200'>
+            <p className=' text-center text-xl mx-auto py-2 leading-8 text-gray-800  dark:text-gray-200'>
             As a frontend developer with expertise in React.js, JavaScript, 
             Tailwind CSS, Docker, Node.js and writing smart webs.<br/> I'm 
             excited to offer my services to help businesses 
@@ -26,9 +26,11 @@ export default function About() {
             </p>
             </div>
           </div>
-          <div  className='lg:flex gap-10 dark:bg-slate-800'>
+          <div  className='lg:flex gap-10 dark:bg-slate-900'>
             <div className='text-center shadow-lg p-10 rounded-xl  my-10 dark:text-white flex-1'> 
-              <img src={jsicon} width={100} height={100}/>
+             < div className='flex justify-center'>
+             <img src={jsicon} width={100} height={100}/>
+             </div>
               <h3 className='text-lg font-medium pt-8 pb-2'> Javascript</h3>
               <p className='py-2 text-2xl'>
                 Creating dynamic and interactive website with javascript
@@ -41,7 +43,7 @@ export default function About() {
               </p>
             </div>
             <div className='text-center shadow-lg p-10 rounded-xl  my-10  flex-1'> 
-              <img src={devicon} width={100} height={100}  />
+            < div className='flex justify-center'> <img src={devicon} width={100} height={100}  /> </div>
               <h3 className='text-lg font-medium pt-8 pb-2'> Website development</h3>
               <p className='py-2 text-2xl'>
                 Website development with React.js
@@ -53,7 +55,7 @@ export default function About() {
               </p>
             </div>
             <div className='text-center shadow-lg p-10 rounded-xl  my-10  flex-1'> 
-              <img src={web} width={100} height={100} />
+            < div className='flex justify-center'> <img src={web} width={100} height={100} /> </div>
               <h3 className='text-lg font-medium pt-8 pb-2'> Web 3</h3>
               <p className='py-2 text-2xl'>
                 Using Web 3 to interact with with the Ethereum blockchain.

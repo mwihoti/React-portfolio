@@ -1,42 +1,23 @@
 import React from 'react';
 
-
 export default function Skills() {
   return (
-    <div>
+    <div className='dark:bg-slate-900  py-12'>
         <section>
           <div className='p-10 text-center'>
-      <p className='text-4xl  font-bold '> Skills.</p>
-            <p className='text-2xl p-2'>I enjoy diving into and learning new things. Here's a list of
-            technologies I have worked with.</p>
-
+            <p className='text-4xl font-bold  dark:text-teal-400 mb-6'>Skills</p>
+            <p className='text-2xl text-gray-700 dark:text-gray-300'>I have experience with:</p>
           </div>
-          <div className='w-full grid grid-cols-2 sm:grid-cols-4 gap-4 text-center py-8'>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>NextJs</p>
-              </div>
-              <div className='shadow-md   hover:scale-110 duration-500'>
-                  <p className='my-4'>C</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>JAVASCRIPT</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>REACT</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>GITHUB</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>NODE JS</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>MONGO DB / MONGOOSE</p>
-              </div>
-              <div className='shadow-md  hover:scale-110 duration-500'>
-                  <p className='my-4'>EXPRESS</p>
-              </div>
-             
+          <div className='max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center'>
+              {[
+                'PYTHON', 'C', 'JAVASCRIPT', 'REACTJS', 
+                'GITHUB', 'FASTAPI', 'SQL/NOSQL', 'Express', 
+                'web3 Zetachain', 'Rust', 'Nestjs'
+              ].map((skill) => (
+                <div key={skill} className='shadow-lg bg-gradient-to-r from-teal-500 to-teal-400 dark:from-teal-600 dark:to-teal-500 hover:scale-105 hover:shadow-xl transition-transform duration-300 rounded-lg p-6'>
+                  <p className='text-lg font-semibold text-white'>{skill}</p>
+                </div>
+              ))}
           </div>
         </section>
     </div>
