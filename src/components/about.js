@@ -21,7 +21,7 @@ export default function About() {
           </div>
           
           <div className='grid gap-6'>
-          <div className="border rounded-lg shadow-md p-6 space-y-4 bg-white">
+           <div className="border rounded-lg shadow-md p-6 space-y-4 bg-white">
             <p className="text-gray-600 leading-relaxed">
               As a passionate Software Developer, I specialize in creating robust, user-centric web applications. With expertise in both front-end and back-end development, I bring a comprehensive approach to software development.
             </p>
@@ -33,32 +33,22 @@ export default function About() {
             </p>
           </div>
 
-            <div className='text-center shadow-lg p-10 rounded-xl my-10 flex-1'>
-              <div className='flex justify-center'>
-                <img src={devicon} width={100} height={100} alt="React icon" />
+          <div className='grid md:grid-cols-3 gap-6'>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0}}
+              viewport={{ once: true}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              >
+               <div className="border rounded-lg shadow-md p-6 text-center bg-white">
+                <h3 className="font-semibold mb-2">Education</h3>
+                <p className="text-sm text-gray-600">BSc in Information Technology</p>
+                <p className="text-sm text-gray-600">KCA University, 2019-2023</p>
               </div>
-              <h3 className='text-lg font-medium pt-8 pb-2'>Website Development</h3>
-              <p className='text-2xl'>
-                Website development with React.js.
-              </p>
-              <p className='py-2'>
-                My expertise with React, a JavaScript framework, has allowed me to build dynamic and interactive user interfaces.
-              </p>
-            </div>
 
-            <div className='text-center shadow-lg p-10 rounded-xl my-10 flex-1'>
-              <div className='flex justify-center'>
-                <img src={web} width={100} height={100} alt="Web3 icon" />
-              </div>
-              <h3 className='text-lg font-medium pt-8 pb-2'>Web3</h3>
-              <p className='text-2xl'>
-              Utilizing Web3 to build decentralized applications.
-              </p>
-              <p className='py-2'>
-                With Web3, I develop  decentralized applications (DApps) that operate on blockchain technology.
-              </p>
-            </div>
-          </div>
+              </motion.div>
+         </div>
+         </div>
         
     
 
