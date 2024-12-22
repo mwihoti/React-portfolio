@@ -2,40 +2,36 @@ import React from 'react';
 import jsicon from '../assets/jsicon.png';
 import devicon from '../assets/devicon.png';
 import web from '../assets/web3.png';
+import { motion } from 'framer-motion';
 
 export default function About() {
   return (
     <div>
-        <section className='p-10 dark:bg-slate-900'>
-          <div className='text-center'>
-            <h3 className='text-4xl py-2 font-bold dark:text-white'>About</h3>
-            <div className='text-center block text-xl mx-auto py-2 leading-8 text-gray-800 dark:text-gray-200'>
-              As a Software Developer with expertise in <br/>
-              <span className='font-bold text-teal-600 dark:text-teal-400'> React.js, JavaScript, Tailwind CSS, Docker, Nginx, Node.js, Python, FastAPI, MongoDB, NoSQL, MySQL, Rust, PostgreSQL, Postman, and Vite</span>.
-              <br /> 
-              I'm excited to offer my services to help businesses and individuals create stunning and functional web applications.
-              
-              I have specialized in React.js development, which allows me to build dynamic and interactive user interfaces.
-             
-              I thrive on solving complex challenges and finding innovative solutions.
-              <br />
-              Your unique project requirements are opportunities for me to showcase my problem-solving skills.
-            </div>
+        <section className='py-20 px-4' id="about">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewPort={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx:auto space-y-8">
+        <div className='text-center'>
+            <h2 className='text-4xl py-2 font-bold dark:text-white'>About Me</h2>
+            <p className="text-muted-foreground">Solution-oriented Full Stack Developer</p>
+
           </div>
           
-          <div className='lg:flex gap-10 justify-center dark:bg-slate-900'>
-            <div className='text-center shadow-lg p-10 rounded-xl my-10 dark:text-white flex-1'>
-              <div className='flex justify-center'>
-                <img src={jsicon} width={100} height={100} alt="JavaScript icon" />
-              </div>
-              <h3 className='text-lg font-medium pt-8 pb-2'>JavaScript</h3>
-              <p className='text-2xl'>
-                Creating dynamic and interactive websites with JavaScript.
-              </p>
-              <p className='py-2'>
-                With JavaScript, I leverage its power to enhance user experiences and add interactivity.
-              </p>
-            </div>
+          <div className='grid gap-6'>
+          <div className="border rounded-lg shadow-md p-6 space-y-4 bg-white">
+            <p className="text-gray-600 leading-relaxed">
+              As a passionate Software Developer, I specialize in creating robust, user-centric web applications. With expertise in both front-end and back-end development, I bring a comprehensive approach to software development.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              My tech stack includes but is not limited to JavaScript, Node.js and its frameworks, Python, SQL/NoSQL databases, and Git. I also have experience in Machine Learning and AI, leveraging data-driven solutions to solve real-world problems.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Additionally, I have a strong understanding of Web3 technologies and enjoy building decentralized applications (dApps) that harness the power of blockchain to create innovative and secure solutions.
+            </p>
+          </div>
 
             <div className='text-center shadow-lg p-10 rounded-xl my-10 flex-1'>
               <div className='flex justify-center'>
@@ -63,7 +59,12 @@ export default function About() {
               </p>
             </div>
           </div>
-        </section>
-    </div>
+        
+    
+
+          </motion.div>
+
+          </section>
+          </div>
   )
 }

@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeContext, ThemeDispatchContext, themeReducer } from './context/theme';
+import Footer from './components/footer';
+
 
 const RootComponent = () => {
   const [themeRed, dispatch] = useReducer(themeReducer, false);
@@ -15,6 +17,8 @@ const RootComponent = () => {
         <ThemeDispatchContext.Provider value={dispatch}>
           <div className={themeRed ? 'theme__dark' : undefined }>
             <App />
+
+            <Footer />
           </div>
         </ThemeDispatchContext.Provider>
       </ThemeContext.Provider>

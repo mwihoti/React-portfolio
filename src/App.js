@@ -5,6 +5,7 @@ import Work from './components/work';
 import Profile from './components/profile';
 import About from './components/about';
 import Contact from './components/contact';
+
 import { ThemeContext } from './context/theme';
 
 function App() {
