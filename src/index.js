@@ -10,13 +10,13 @@ import Footer from './components/footer';
 
 const RootComponent = () => {
 
-  
+  const darkTheme = useTheme();
 
   return (
     <React.StrictMode>
-      <ThemeProvider value={themeRed}>
+      <ThemeProvider value={darkTheme}>
         
-          <div className={themeRed ? 'theme__dark' : undefined }>
+          <div className={darkTheme ? 'theme__dark' : undefined }>
             <App />
 
             <Footer />

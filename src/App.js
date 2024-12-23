@@ -5,15 +5,15 @@ import Work from './components/work';
 import Profile from './components/profile';
 import About from './components/about';
 import Contact from './components/contact';
-
-import { ThemeContext } from './context/theme';
+import { useTheme } from './context/theme';
+import Navbar from './components/navbar';
 
 function App() {
-  const theme = useContext(ThemeContext);  // Access the current theme state
+  const theme = useContext(useTheme);  // Access the current theme state
   
   return (
     <div className={theme ? "dark" : ""}>
-   
+      <Navbar />
       <Profile />
       <About />  
       <Skills />

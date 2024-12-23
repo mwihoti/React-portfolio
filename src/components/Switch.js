@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
-import { ThemeContext, ThemeDispatchContext } from "../context/theme";
+import { useTheme, useThemeUpdate } from "../context/theme";
 
 function Switch() {
-    const dispatch = useContext(ThemeDispatchContext);
-    const theme = useContext(ThemeContext);
+    const dispatch = useContext(useThemeUpdate);
+    const theme = useContext(useTheme);
 
     return (
         <div className='justify-center flex  text-2xl' onClick={() => dispatch({type: "toggle"})} >
