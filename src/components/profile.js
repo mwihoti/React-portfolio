@@ -6,14 +6,14 @@ import Switch from './Switch';
 import resume from '../assets/DANIELEDWARDCV (1).pdf';
 
 
-import me from '../assets/me.jpg'
-
-
 export default function Profile() {
+
+  const darkTheme = useTheme();
+
  
   return (
     <div >
-      <section className='min-h-screen dark:bg-slate-900' >
+      <section className='min-h-screen flex items-center justify-center py-20 dark:bg-slate-900' >
       <nav className='py-10 mb-12 flex justify-center  items-center bg-slate-200 dark:text-white'>
         <div className='flex '>
           
