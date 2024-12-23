@@ -13,7 +13,7 @@ export default function Profile() {
  
   return (
     <div >
-      <section className='min-h-screen flex items-center justify-center py-20 dark:bg-slate-900' >
+      <section className={`min-h-screen flex items-center justify-center py-20 ${darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-white to-gray-100'}`} >
       <nav className='py-10 mb-12 flex justify-center  items-center bg-slate-200 dark:text-white'>
         <div className='flex '>
           
