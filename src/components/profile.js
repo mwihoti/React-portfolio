@@ -4,7 +4,8 @@ import { AiFillGithub } from "react-icons/ai"
 import { GoTriangleDown } from "react-icons/go";
 import Switch from './Switch';
 import resume from '../assets/DANIELEDWARDCV (1).pdf';
-
+import { useTheme } from '../context/theme';
+import me from '../assets/me.jpg';
 
 export default function Profile() {
 
@@ -13,26 +14,8 @@ export default function Profile() {
  
   return (
     <div >
-      <section className={`min-h-screen flex items-center justify-center py-20 ${darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-white to-gray-100'}`} >
-      <nav className='py-10 mb-12 flex justify-center  items-center bg-slate-200 dark:text-white'>
-        <div className='flex '>
-          
- <div className='p-3  '>
-   <ul className='flex space-x-8'>
- <li>
-  <h1 className='text-xl font-bold'>Daniel Mwihoti Portfolio</h1>
-  </li>
-    <li className=''><Switch  /></li>
-    <li>
-      <a className='bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-4 py-2 rounded-md absolute right-4'  href={'#'} target="_blank"> 
-        Resume
-      </a>
-    </li>
-  </ul>
-  </div>
-  </div>
-</nav>
-
+      <section className={`min-h-screen flex  flex-col items-center justify-center py-20 ${darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-white to-gray-100'}`} >
+      
         <div className='text-center p-10 '>
          <h2 className='text-5xl py-2 text-teal-600 font-medium dark:text-teal-400 md:text-6xl'>Daniel Edward Mwihoti </h2>
          <h3 className='text-2xl py-2 md:text-3xl dark:text-white'> Software developer</h3>
