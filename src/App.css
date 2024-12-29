@@ -1,29 +1,21 @@
-body, .App {
-  background-color: #faf8f8; /* Light background color */
-  color: #000000; /* Dark text color */
+/* If you're using Tailwind, remove custom CSS where possible and use built-in utilities. */
+body {
   transition: background-color 0.5s, color 0.5s;
 }
-.theme__dark {
-  background-color: black;
-  color: #ffff; 
-  transition: 0.5s;
-}
- .theme__dark * {
-  color: white !important;
-}
 
+/* Optional overrides for non-Tailwind elements */
+.theme__dark {
+  background-color: #121212;
+  color: #e0e0e0;
+}
 .theme__dark a {
-  color: #bb86fc; /* Light purple for links */
+  color: #bb86fc;
 }
 .theme__dark div[class*="tags"] span {
-  background-color: rgb(153, 0, 255) !important;
+  background-color: #9900ff;
 }
-.theme__dark #showcase article {
-	background-color: rgb(212, 148, 255, 0.187);
-}
-.theme__dark #footer, .theme__dark nav {
-	background-color: rgb(212, 148, 255, 0.187);
-}
-.theme__dark #shadow * {
-	color: $text !important;
+.theme__dark #showcase article,
+.theme__dark #footer,
+.theme__dark nav {
+  background-color: rgba(212, 148, 255, 0.187);
 }

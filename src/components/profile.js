@@ -30,7 +30,7 @@ export default function Profile() {
             alt="Daniel Edward image"
             />
           </motion.div>
-          <h2 className="text-5xl py-2 text-teal-600 font-medium dark:text-teal-400 md:text-6xl">
+          <h2 className="text-5xl py-2 text-gray-900 font-medium dark:text-teal-400 md:text-6xl">
             Daniel Edward Mwihoti
           </h2>
           <h3 className="text-2xl py-2 md:text-3xl dark:text-gray-300">Software Developer</h3>
