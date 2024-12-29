@@ -19,7 +19,22 @@ export default function Profile() {
           darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-white to-gray-100'
         }`}
       >
-        <div className="text-center p-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+        <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative mx-auto w-48 h-48  flex items-center justify-center rounded-full overflow-hidden mb-8"
+            >
+            <img
+            src={me}
+            className='rounded-full' 
+            objectFit="cover"
+            layout="fill"
+            alt="Daniel Edward image"
+            />
+          </motion.div>
           <h2 className="text-5xl py-2 text-teal-600 font-medium dark:text-teal-400 md:text-6xl">
             Daniel Edward Mwihoti
           </h2>
