@@ -1,18 +1,17 @@
 import React from 'react';
-import jsicon from '../assets/jsicon.png';
-import devicon from '../assets/devicon.png';
-import web from '../assets/web3.png';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/theme';
 
 export default function About() {
+  const darkTheme = useTheme();
   return (
     <div>
-        <section className='py-20 px-4' id="about">
+        <section id="about" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-white'}`}>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewPort={{ once: true }}
-          transition={{ duration: 0.5 }}
+         
           className="max-w-4xl mx:auto space-y-8">
         <div className='text-center'>
             <h2 className='text-4xl py-2 font-bold dark:text-white'>About Me</h2>

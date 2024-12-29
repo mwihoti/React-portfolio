@@ -7,6 +7,7 @@ import About from './components/about';
 import Contact from './components/contact';
 import { useTheme } from './context/theme';
 import Navbar from './components/navbar';
+import  Experience  from './components/experience';
 
 function App() {
   const theme = useContext(useTheme);  // Access the current theme state
@@ -15,7 +16,9 @@ function App() {
     <div className={theme ? "dark" : ""}>
       <Navbar />
       <Profile />
+    
       <About />  
+      <Experience />
       <Skills />
       <Work />    
       <Contact />

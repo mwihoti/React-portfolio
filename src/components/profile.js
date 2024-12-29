@@ -1,11 +1,6 @@
 import React from 'react';
-import { BsFillMoonStarsFill } from 'react-icons/bs';
-import { AiFillGithub } from "react-icons/ai";
-import { GoTriangleDown } from "react-icons/go";
-import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import Switch from './Switch';
-import resume from '../assets/DANIELEDWARDCV (1).pdf';
+import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import me from '../assets/me.jpg';
 
