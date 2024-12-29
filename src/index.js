@@ -1,27 +1,19 @@
 import './index.css';
-import React, { useReducer } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, useTheme } from './context/theme';
+import { ThemeProvider } from './context/theme';
 import Footer from './components/footer';
 
-
 const RootComponent = () => {
-
-  const darkTheme = useTheme();
-
   return (
     <React.StrictMode>
-      <ThemeProvider value={darkTheme}>
-        
-          <div className={darkTheme ? 'theme__dark' : undefined }>
-            <App />
-
-            <Footer />
-          </div>
-        
+      <ThemeProvider>
+        <div>
+          <App />
+          <Footer />
+        </div>
       </ThemeProvider>
     </React.StrictMode>
   );

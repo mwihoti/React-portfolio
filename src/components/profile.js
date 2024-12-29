@@ -33,7 +33,7 @@ export default function Profile() {
           <h2 className="text-5xl py-2 text-teal-600 font-medium dark:text-teal-400 md:text-6xl">
             Daniel Edward Mwihoti
           </h2>
-          <h3 className="text-2xl py-2 md:text-3xl dark:text-white">Software Developer</h3>
+          <h3 className="text-2xl py-2 md:text-3xl dark:text-gray-300">Software Developer</h3>
           <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300">
             Solution-oriented and proactive developer skilled in designing scalable web applications
             and creating seamless user experiences.
