@@ -6,7 +6,7 @@ export default function About() {
   const darkTheme = useTheme();
   return (
     
-        <section id="about" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <section id="about" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-gray-100'}`}>
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:pg-8'>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -22,8 +22,9 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0}}
           viewPort={{ once: true }}
-          className='prose prose-lg dark:text-gray-300'>
-              <p>
+          className='prose prose-lg bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8'>
+              <div className='text-gray-600 dark:text-gray-300'>
+              <p >
             As a passionate Software Developer, I specialize in creating scalable web applications
             and seamless user experiences. My expertise spans both front-end and back-end development,
             with a strong foundation in JavaScript, React, Node.js, and various database technologies.
@@ -37,6 +38,7 @@ export default function About() {
             When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
             or sharing my knowledge through tech blogs and community events.
           </p>
+          </div>
 
             </motion.div>
         
