@@ -10,7 +10,7 @@ export default function Skills() {
     },
     {
       title: "Backend Development",
-      skills: ["Node.js", "Express.js", "NestJS", "Python (Flask)", "RESTful APIs", "Microservices", "Solidity", "Web3.js"]
+      skills: ["Node.js", "Express.js", "NestJS", "Deno", "Python (Flask)", "RESTful APIs", "Microservices", "Solidity", "Web3.js"]
     },
     {
       title: "Database & DevOps",
@@ -18,7 +18,7 @@ export default function Skills() {
     },
     {
       title: "Other Technologies",
-      skills: ["Rust", "Web3", "Linux", "Vim", "API Integration"]
+      skills: ["Rust", "Web3", "Linux", "Vim", "API Integration", "Elixir"]
     }
   ];
 
@@ -31,7 +31,7 @@ export default function Skills() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Skills</h2>
+          <h2 className="text-4xl font-bold text-teal-600  dark:text-white">Skills</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -11,7 +11,7 @@ export default function Profile() {
     <div>
       <section
         className={`min-h-screen flex flex-col items-center justify-center py-20 ${
-          darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-white to-gray-100'
+          darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gray-50'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -33,7 +33,7 @@ export default function Profile() {
           <h2 className="text-5xl py-2 text-gray-900 font-medium dark:text-teal-400 md:text-6xl">
             Daniel Edward Mwihoti
           </h2>
-          <h3 className="text-2xl py-2 md:text-3xl dark:text-gray-300">Software Developer</h3>
+          <h3 className="text-2xl text-teal-600  py-2 md:text-3xl dark:text-gray-300">Software Developer</h3>
           <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300">
             Solution-oriented and proactive developer skilled in designing scalable web applications
             and creating seamless user experiences.

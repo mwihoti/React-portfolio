@@ -6,7 +6,7 @@ export default function About() {
   const darkTheme = useTheme();
   return (
     
-        <section id="about" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-white'}`}>
+        <section id="about" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-gray-50'}`}>
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:pg-8'>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

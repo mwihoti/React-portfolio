@@ -28,7 +28,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-white'}`}>
+    <section id="contact" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ export default function Contact() {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Get In Touch</h2>
+          <h2 className="text-4xl font-bold text-teal-600  dark:text-white mb-4">Get In Touch</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Have a question or want to work together? Feel free to reach out!
           </p>
@@ -63,7 +63,7 @@ export default function Contact() {
                 type="text"
                 name="user_name"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
               />
             </div>
             <div>
@@ -74,7 +74,7 @@ export default function Contact() {
                 type="email"
                 name="user_email"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
               />
             </div>
             <div>
@@ -85,7 +85,7 @@ export default function Contact() {
                 name="message"
                 rows="4"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                className="mt-1 p-6 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
               ></textarea>
             </div>
             <motion.button

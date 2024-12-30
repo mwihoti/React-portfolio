@@ -44,7 +44,7 @@ export default function Work() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Projects</h2>
+          <h2 className="text-4xl font-bold text-teal-600  dark:text-white">Projects</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
