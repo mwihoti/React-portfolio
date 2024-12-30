@@ -22,7 +22,7 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0}}
           viewPort={{ once: true }}
-          className='prose prose-lg dark:prose-invert'>
+          className='prose prose-lg dark:text-gray-300'>
               <p>
             As a passionate Software Developer, I specialize in creating scalable web applications
             and seamless user experiences. My expertise spans both front-end and back-end development,
