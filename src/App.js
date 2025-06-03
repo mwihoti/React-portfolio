@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './App.css';
 import Skills from './components/skills';
 import Work from './components/work';

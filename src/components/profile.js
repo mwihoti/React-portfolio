@@ -27,7 +27,7 @@ export default function Profile() {
             className='w-48 h-48 rounded-full object-cover' 
             objectFit="cover"
             layout="fill"
-            alt="Daniel Edward image"
+            alt="Daniel Edwardprof"
             />
           </motion.div>
           <h2 className="text-5xl py-2 text-gray-900 font-medium dark:text-teal-400 md:text-6xl">

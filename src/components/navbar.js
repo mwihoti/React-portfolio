@@ -21,9 +21,9 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             className="flex-shrink-0"
           >
-            <a href="#" className="text-2xl font-bold text-teal-600 dark:text-teal-400">
+            <span className="text-2xl font-bold text-teal-600 dark:text-teal-400">
               DM
-            </a>
+            </span>
           </motion.div>
 
           {/* Desktop Menu */}
@@ -32,7 +32,7 @@ export default function Navbar() {
               {navItems.map((item, index) => (
                 <motion.a
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href="#"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
