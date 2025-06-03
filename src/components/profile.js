@@ -20,11 +20,11 @@ export default function Profile() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="relative mx-auto w-48 h-48  flex items-center justify-center rounded-full overflow-hidden mb-8"
+              className="relative mx-auto w-48 h-48  flex items-center justify-center  overflow-hidden mb-8"
             >
             <img
             src={me}
-            className='rounded-full' 
+            className='w-48 h-48 rounded-full object-cover' 
             objectFit="cover"
             layout="fill"
             alt="Daniel Edward image"
