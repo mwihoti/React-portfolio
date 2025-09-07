@@ -3,6 +3,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import me from '../assets/me.jpg';
+import Typewriter from 'typewriter-effect';
 
 export default function Profile() {
   const darkTheme = useTheme();
@@ -10,42 +11,58 @@ export default function Profile() {
   return (
     <div>
       <section
-        className={`min-h-screen flex flex-col items-center justify-center py-20 space-y-16 ${
-          darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gray-50'
-        }`}
+        className={`min-h-screen flex flex-col items-center justify-center py-20 space-y-16 ${darkTheme ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gray-50'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 space-y-10 sm:px-6 lg:px-8 text-center">
 
-        <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="relative mx-auto w-100 h-100  flex items-center justify-center  overflow-hidden mb-8"
-            >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative mx-auto w-100 h-100  flex items-center justify-center  overflow-hidden mb-8"
+          >
             <img
-            src={me}
-            className='w-60 h-60 rounded-full object-cover' 
-            objectFit="cover"
-            layout="fill"
-            alt="Daniel Edwardprof"
+              src={me}
+              className='w-60 h-60 rounded-full object-cover'
+              objectFit="cover"
+              layout="fill"
+              alt="Daniel Edwardprof"
             />
           </motion.div>
-          <div>
-            <div>
-          <h2 className="text-5xl py-2 text-gray-900 font-medium dark:text-teal-400 md:text-6xl">
-            Daniel Edward Mwihoti
-          </h2>
-          <h3 className="text-2xl text-teal-600  py-2 md:text-3xl dark:text-gray-300">Software Developer</h3>
-         <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300">
-            Passionate about web-fullStack development, Machine Learning, Ai and Web3. Always learning.
-          </p>
-          </div>
-          <div className='border border-black'>
-            < 
+          <div className='flex justify-items-center space-y-8 space-x-48'>
 
+            <div>
+              <h2 className="text-5xl  py-2 text-teal-900 font-medium  md:text-6xl">
+                Daniel Edward Mwihoti
+              </h2>
+              <h3 className="text-2xl font-bold   py-2 md:text-3xl ">Software Developer,</h3>
+              <p className="max-w-2xl font-bold mx-auto text-2xl text-gray-600 dark:text-gray-300">
+                <Typewriter
+                  options={{
+                    strings: [
+                      "Based in Nairobi, Kenya, I'm passionate about web development, Machine Learning, AI and Web3. Always learning."
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 80,
+                    deleteSpeed: 50,
+                  }}
+                />
+              </p>
+            </div>
+
+            <div className='bg-gray-200 border-none  border-black  p-8 space-y-10 rounded-md'>
+               <text className='text font-bold text-lg '> 2+ <span className='text-indigo-500'>years</span> </text>
+               <br/>
+              <label className='text-lg font-bold'>Years of experience</label><br ></br>
+              <text className='text text-lg font-bold  '> 15+ <span className='text-indigo-500'>Projects</span> </text>
+              <br></br>
+              <label className='space-y-3 font-bold text-lg'>Projects Completed</label>
+
+            </div>
           </div>
         </div>
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -56,6 +73,7 @@ export default function Profile() {
           <SocialLink href="https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/" icon={FaLinkedin} />
           <SocialLink href="mailto:danielmwihoti@gmail.com" icon={FaEnvelope} />
         </motion.div>
+                  <h3 className='text-blue-800 text-xl font-bold text'> Let's build something beautiful </h3>
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -63,6 +81,7 @@ export default function Profile() {
           transition={{ delay: 0.7 }}
           className="mt-6"
         >
+
           <a
             href="#contact"
             className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full font-medium hover:bg-teal-700 transition-colors"
