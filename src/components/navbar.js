@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa';
 import { useTheme, useThemeUpdate } from '../context/theme';
-
+import { Link } from 'react-scroll';
 export default function Navbar() {
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
@@ -30,16 +30,24 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
               {navItems.map((item, index) => (
-                <motion.a
+                <motion.div
                   key={item}
-                  href="#"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20}}
+                  animate={{ opacity: 1, y: 0}}
                   transition={{ delay: index * 0.1 }}
-                  className="text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 px-3 py-2 rounded-md text-sm font-medium"
                 >
+                  <Link
+                    to={item.toLowerCase()}
+                    smooth={true}
+                    duration={500}
+                    offset={-70} // To Adjust for fixed navbar height
+                    >
                   {item}
-                </motion.a>
+
+                  </Link>
+
+
+                </motion.div>
               ))}
               <button
                 onClick={toggleTheme}
