@@ -24,19 +24,10 @@ export default function About() {
           viewPort={{ once: true }}
           className='prose prose-lg bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8'>
               <div className='text-gray-600 dark:text-gray-300'>
-              <p >
-            As a passionate Software Developer, I specialize in creating scalable web applications
-            and seamless user experiences. My expertise spans both front-end and back-end development,
-            with a strong foundation in JavaScript, React, Node.js, and various database technologies.
-          </p>
-          <p>
-            I'm constantly improving my skills to stay up-to-date with the latest technologies and best practices.
-            My approach to problem-solving is solution-oriented, and I thrive in collaborative environments
-            where I can contribute to innovative projects.
-          </p>
-          <p>
-            When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-            or sharing my knowledge through tech blogs and community events.
+              <p className='leading-8 text-xl font-bold'>
+         I’m a software developer specializing in full-stack development. I bring ideas and innovations to life through code by building scalable web applications. I help startups grow and achieve their vision. My expertise includes the MERN stack, Next.js, JavaScript, and TypeScript, as well as Python for machine learning, data engineering, and backend development. Recently, I’ve been diving deeper into Web3 and AI.
+
+If you have an idea you’d like to bring to life, or if you’re looking for development services—from a simple landing page to a full SaaS product—I’m available to collaborate.
           </p>
           </div>
 

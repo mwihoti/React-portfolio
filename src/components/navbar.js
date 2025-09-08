@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center space-x-60 justify-evenly h-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -28,7 +28,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-4">
+            <div className=" flex items-center space-x-12">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item}
@@ -107,7 +107,7 @@ export default function Navbar() {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400  block px-3 py-2 rounded-md text-base font-medium"
                   onClick={toggleMenu}
                 >
                   {item}
