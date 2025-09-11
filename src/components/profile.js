@@ -32,13 +32,13 @@ export default function Profile() {
             </div>
         
           </motion.div>
-<div className='flex flex-col lg:flex-row justify-center items-center lg:space-x-48 space-y-8 lg:space-y-0'>
+<div className='flex flex-col p-8 lg:flex-row justify-center items-center lg:space-x-48 space-y-8 lg:space-y-0'>
 
             <div className='floating-animation'>
-              <h2 className="text-5xl  py-2 text-teal-900 font-medium  md:text-6xl">
+              <h2 className="text-5xl  py-2 text-teal-600 font-medium  md:text-6xl">
                 Daniel Edward Mwihoti
               </h2>
-              <h3 className="text-2xl font-bold   py-2 md:text-3xl ">Software Developer,</h3>
+              <h3 className="text-2xl font-bold dark:text-gray-300  py-2 md:text-3xl ">Software Developer,</h3>
               <p className="max-w-2xl font-bold mx-auto text-2xl text-gray-600 dark:text-gray-300 min-h">
                 <Typewriter
                   options={{
@@ -75,7 +75,7 @@ export default function Profile() {
           <SocialLink href="https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/" icon={FaLinkedin} delay={0.2} />
           <SocialLink href="mailto:danielmwihoti@gmail.com" icon={FaEnvelope} delay={0.4} />
         </motion.div>
-                  <h3 className='text-blue-800 text-xl font-bold text'> 
+                  <h3 className='text-blue-800 text-xl font-bold dark:text-gray-300 text'> 
                     
                     <Typewriter 
                     options={{
@@ -84,6 +84,7 @@ export default function Profile() {
                       loop: true,
                       delay: 80,
                       deleteSpeed: 50,
+
                     }}
                     />
                    </h3>
