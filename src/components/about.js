@@ -24,11 +24,12 @@ export default function About() {
           viewPort={{ once: true }}
           className='prose prose-lg w-full min-h  rounded-lg shadow-lg p-8'>
               <div className='text-gray-600 dark:text-gray-300 p-8 rounded  dark:bg-gray-800'>
+              <p className='leading-8 text-xl font-bold mb-4'>
+                I&apos;m a full-stack developer based in Nairobi, Kenya, with 3+ years of experience building scalable web applications, AI-powered tools, and blockchain systems. My work spans the MERN stack, TypeScript, Python, and Rust &mdash; from SaaS products to decentralized protocols.
+              </p>
               <p className='leading-8 text-xl font-bold'>
-         I’m a software developer specializing in full-stack development. I bring ideas and innovations to life through code by building scalable web applications. I help startups grow and achieve their vision. My expertise includes the MERN stack, Next.js, JavaScript, and TypeScript, as well as Python for machine learning, data engineering, and backend development. Recently, I’ve been diving deeper into Web3 and AI.
-
-If you have an idea you’d like to bring to life, or if you’re looking for development services—from a simple landing page to a full SaaS product—I’m available to collaborate.
-          </p>
+                Over the past year I&apos;ve gone deep into Bitcoin development (secp256k1, SegWit, live transaction broadcasting), Starknet gaming with the Dojo framework, and Cardano ecosystem tooling. I&apos;m an open source contributor to IntersectMBO&apos;s lsm-tree Haskell library (production database for Cardano), the Cardano Foundation, and Bitcoin Core. I&apos;m also an active member of CardanoHubNBO &mdash; building on-chain games for the Nairobi blockchain community. If you have an idea to bring to life &mdash; from a landing page to a production DApp &mdash; I&apos;m available to collaborate.
+              </p>
           </div>
 
             </motion.div>

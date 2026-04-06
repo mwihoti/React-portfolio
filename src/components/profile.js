@@ -43,7 +43,11 @@ export default function Profile() {
                 <Typewriter
                   options={{
                     strings: [
-                      "Based in Nairobi, Kenya, I'm passionate about web development, Machine Learning, AI and Web3. Always learning."
+                      "Full-stack developer based in Nairobi, Kenya.",
+                      "Building on Bitcoin, Starknet, and Cardano.",
+                      "Open source contributor to IntersectMBO & Cardano Foundation.",
+                      "Web3 + AI. Always learning, always shipping.",
+                      "3+ years. 20+ projects. Let's build something impactful.",
                     ],
                     autoStart: true,
                     loop: true,
@@ -55,10 +59,10 @@ export default function Profile() {
             </div>
 
             <div className='bg-gray-200 border-none  border-black  p-8 space-y-10 rounded-md floating-animation'>
-               <text className='text font-bold text-lg '> 2+ <span className='text-indigo-500'>years</span> </text>
+               <span className='text font-bold text-lg '> 3+ <span className='text-indigo-500'>years</span> </span>
                <br/>
               <label className='text-lg font-bold'>Years of experience</label><br ></br>
-              <text className='text text-lg font-bold  '> 15+ <span className='text-indigo-500'>Projects</span> </text>
+              <span className='text text-lg font-bold  '> 20+ <span className='text-indigo-500'>Projects</span> </span>
               <br></br>
               <label className='space-y-3 font-bold text-lg'>Projects Completed</label>
 

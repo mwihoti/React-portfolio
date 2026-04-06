@@ -17,8 +17,12 @@ export default function Skills() {
       skills: ["PostgreSQL", "MongoDB", "Redis", "Docker", "CI/CD", "Git/GitHub", "Nginx"]
     },
     {
-      title: "Other Technologies",
-      skills: ["Rust", "Web3", "Linux", "Vim", "API Integration", "Elixir"]
+      title: "Blockchain & Web3",
+      skills: ["Ethereum / EVM", "Solana", "Bitcoin", "Starknet", "Cairo", "Cardano / Plutus", "Lightning Network", "Cosmos / XRPL", "Dojo Framework", "Smart Contracts", "Account Abstraction"]
+    },
+    {
+      title: "Languages & Systems",
+      skills: ["Rust", "Haskell", "Elixir", "C++", "Linux", "Vim", "API Integration"]
     }
   ];
 
@@ -34,7 +38,7 @@ export default function Skills() {
           <h2 className="text-4xl font-bold text-teal-600  dark:text-white">Skills</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}

@@ -6,31 +6,51 @@ export default function Work() {
   const darkTheme = useTheme();
   const projects = [
     {
+      title: "Open Wallet Standard",
+      badge: "OWS Hackathon",
+      description:
+        "Multi-chain AI agent wallet supporting 9 chains (EVM, Solana, Bitcoin, Cosmos, XRPL+). Policy-gated signing tokens — AI agents never hold raw keys. Includes Solana + EVM signature verification and live testnet transactions.",
+      tech: ["TypeScript", "Rust", "React", "Solana", "EVM", "Bitcoin", "Cosmos", "XRPL"],
+      live: "https://open-wallet-standard.onrender.com",
+      github: "https://github.com/mwihoti/open-wallet-standard",
+    },
+    {
+      title: "Bitcoin Wallet Lab",
+      description:
+        "secp256k1 + ECDSA cryptography built from scratch in Rust. Supports P2PKH, Nested SegWit, and Native SegWit. Live tx broadcast with confirmation tracking and a signature malleability demo.",
+      tech: ["Rust", "JavaScript", "secp256k1", "ECDSA", "Bitcoin"],
+      live: "https://wallet-lab.onrender.com",
+      github: "https://github.com/mwihoti/btc",
+    },
+    {
+      title: "Bitcoin Dojo",
+      description:
+        "Guided Bitcoin development learning platform with structured tracks: Cryptography Fundamentals, Addresses & Encoding, and Transactions. Hands-on interactive exercises for developers entering the Bitcoin ecosystem.",
+      tech: ["TypeScript", "React", "Bitcoin"],
+      live: "https://bitcoindojo.dev",
+    },
+    {
+      title: "Memorabilia",
+      description:
+        "Fully on-chain memory card matching game on Starknet, playable as a Telegram Mini App — no wallet or gas fees to start. Features Account Abstraction, gasless transactions, 3 eras, 15 levels, daily challenges, and NFT minting via Cartridge.",
+      tech: ["TypeScript", "Starknet", "Dojo Engine", "Cairo", "Telegram Mini App"],
+      live: "https://memorabilia-game.vercel.app",
+      github: "https://github.com/mwihoti/memorabilia",
+    },
+    {
+      title: "Spotter AI",
+      description:
+        "AI-powered fitness spotter application built with TypeScript.",
+      tech: ["TypeScript", "AI/ML"],
+      github: "https://github.com/mwihoti/Spotter-AI",
+    },
+    {
       title: "AIAdvisory",
       description:
         "Web3 app with AI-powered assistants tailored for Kenya. AgriBot provides crop advice, disease diagnosis, weather insights, and market prices in KES. LegalBot guides users on land rights, legal processes, and document preparation.",
       tech: ["React", "TypeScript", "AI/ML", "Web3.js"],
       live: "https://yhfsc-maaaa-aaaad-aawba-cai.icp1.io/",
       github: "https://github.com/mwihoti/kenyaAdvisoryServices",
-      image: "/projects/aiadvisory.png",
-    },
-    {
-      title: "HomeElectronics",
-      description:
-        "E-commerce web app for electronics with Sanity CMS, dynamic product updates, image carousel, and smart pricing engine (0–15% discounts with real-time savings display).",
-      tech: ["React", "Sanity CMS", "Tailwind CSS"],
-      live: "https://home-of-electronics.vercel.app/",
-      github: "https://github.com/mwihoti/home-electronics",
-      image: "/projects/homeelectronics.png",
-    },
-    {
-      title: "MuscleMind Gym",
-      description:
-        "Fitness platform recommending personalized workouts by body muscle group, helping users achieve fitness goals effectively.",
-      tech: ["React", "Tailwind CSS", "Supabase"],
-      live: "https://gymbuddy-39dwrsr7s-mwihotis-projects.vercel.app/",
-      github: "https://github.com/mwihoti/musclemind-gym",
-      image: "/projects/musclemind.png",
     },
     {
       title: "RaffleGame",
@@ -39,7 +59,6 @@ export default function Work() {
       tech: ["Solidity", "React", "Civic", "Web3.js"],
       live: "https://human-rafflewith-nft.vercel.app/",
       github: "https://github.com/mwihoti/humanRafflewithCivic",
-      image: "/projects/rafflegame.png",
     },
     {
       title: "MathWhiz",
@@ -47,7 +66,6 @@ export default function Work() {
         "AI-powered math learning app for students aged 13–17. Provides adaptive practice, generates guided questions when mistakes occur, and saves progress to the database.",
       tech: ["React", "AI/ML", "PostgreSQL"],
       github: "https://github.com/mwihoti/educationapp",
-      image: "/projects/mathwhiz.png",
     },
     {
       title: "GestureAI",
@@ -55,7 +73,6 @@ export default function Work() {
         "Real-time gesture recognition and sign language interpretation app using TensorFlow.js and Gemini AI.",
       tech: ["TensorFlow.js", "Gemini AI", "React"],
       github: "https://github.com/mwihoti/gesture-ai--gemini",
-      image: "/projects/gestureai.png",
     },
     {
       title: "Meeting Insights Generator",
@@ -64,7 +81,6 @@ export default function Work() {
       tech: ["React", "Tailwind CSS", "Speech Recognition", "AI/ML"],
       live: "https://meeting-insights-generator.vercel.app/",
       github: "https://github.com/mwihoti/meeting-insights-generator",
-      image: "/projects/meetinginsights.png",
     },
     {
       title: "Guess Game Fullstack DApp",
@@ -73,24 +89,14 @@ export default function Work() {
       tech: ["Solidity", "TypeScript", "React", "Hardhat", "Web3.js"],
       live: "https://arbitrum-guess-game.vercel.app/",
       github: "https://github.com/mwihoti/arbitrum-guess-game",
-      image: "/projects/guessgame.png",
-    },
-    {
-      title: "RemoteJob Platform",
-      description:
-        "Job platform with secure role-based access, optimized database queries, and smooth UX for recruiters and job seekers.",
-      tech: ["React", "Tailwind CSS", "Prisma", "WorkOS"],
-     // live: "https://remote-jobs-peach.vercel.app/",
-      github: "https://github.com/mwihoti/remote-jobs",
-      image: "/projects/remotejob.png",
     },
     {
       title: "MemoryGame",
+      badge: "StackUp Hackathon Top 10",
       description:
         "Award-winning interactive memory game built with Rust and Slint library. Ranked top 10 in StackUp Hackathon 2024.",
       tech: ["Rust", "Slint library"],
       github: "https://github.com/mwihoti/MemoryGame",
-      image: "/projects/memorygame.png",
     },
   ];
 
@@ -110,8 +116,7 @@ export default function Work() {
             Projects
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            A selection of my recent work in AI, Web3, fullstack, and
-            data-driven applications.
+            A selection of my recent work in AI, Web3, Bitcoin, Starknet, and full-stack applications.
           </p>
         </motion.div>
 
@@ -135,6 +140,11 @@ export default function Work() {
                 </div>
               )} */}
               <div className="p-6">
+                {project.badge && (
+                  <span className="inline-block mb-2 px-2 py-0.5 text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200 rounded-full">
+                    {project.badge}
+                  </span>
+                )}
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {project.title}
                 </h3>

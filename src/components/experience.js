@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaGithub } from 'react-icons/fa';
 import { useTheme } from '../context/theme';
 
 
@@ -7,7 +8,64 @@ export default function Experience() {
   const darkTheme = useTheme();
 
   const experiences = [
-      { 
+    {
+      title: "Open Source Contributor",
+      company: "IntersectMBO / lsm-tree",
+      period: "February – April 2026",
+      type: "opensource",
+      description: [
+        "Contributed to IntersectMBO's lsm-tree — a production-grade LSM database library used by Cardano, written in Haskell.",
+        "PR #818 merged: refactored Internal.Arena with modern Haskell record extensions (DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot) replacing RecordWildCards.",
+        "PR received 25 review comments from core maintainers (jorisdral, dcoutts, mheinzel); recognised as the approach going forward for the full codebase.",
+        "Follow-up PR refactored the Run module (+309 −271 lines), continuing technical-debt reduction."
+      ]
+    },
+    {
+      title: "Open Source Contributor",
+      company: "Cardano Foundation",
+      period: "January – December 2025",
+      type: "opensource",
+      description: [
+        "PR merged to cardano-foundation/cardano-org: added Kenya-specific CEX list (Binance, Yellow Card, BingX, OKX) for users looking to buy ADA.",
+        "Contributed Docker containerisation for the cardano-org documentation platform (+2,523 lines), enabling reproducible local development."
+      ]
+    },
+    {
+      title: "Open Source Contributor",
+      company: "Bitcoin Core",
+      period: "January 2026",
+      type: "opensource",
+      description: [
+        "Contributed to the Bitcoin Core test suite, extending C++ test coverage for consensus-critical code paths."
+      ]
+    },
+    {
+      title: "Community Builder & Game Developer",
+      company: "CardanoHubNBO, Nairobi",
+      period: "December 2025 – Present",
+      description: [
+        "Joined the CardanoHubNBO organisation, building on-chain games for monthly Nairobi community meetups.",
+        "Participated in the Memorabilia GameJam at Blockchain Centre NBO, shipping an on-chain Starknet game playable via Telegram.",
+        "Represented the community at Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit."
+      ]
+    },
+    {
+      title: "Hackathon Participant — Base East Africa Batch 2",
+      company: "Base / Coinbase",
+      period: "2025",
+      description: [
+        "Submitted an MVP as part of a 4-person team for the Base East Africa accelerator programme, building on the Base L2 network."
+      ]
+    },
+    {
+      title: "Hackathon Participant — Hedera Africa Hackathon",
+      company: "Hedera",
+      period: "October 2025",
+      description: [
+        "Built echain — a scalable DLT product on the Hedera network — with a 4-person team targeting African market use cases."
+      ]
+    },
+      {
     title: "Full-Stack Developer",
     company: "Freelancer  - Remote",
     period: "2024 - Present",
@@ -92,6 +150,11 @@ export default function Experience() {
               className='bg-white dark:text-gray-300  dark:bg-gray-800 p-8 rounded-lg shadow-lg'>
                 <h3 className='text-2xl text-teal-600 font-bold'>{exp.title}</h3>
                 <p className='text-lg text-gray-600 dark:text-gray-400 mt-2'>{exp.company}</p>
+                {exp.type === "opensource" && (
+                  <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300 rounded-full">
+                    <FaGithub className="h-3 w-3" /> Open Source Contribution
+                  </span>
+                )}
                 <p className='text-lg text-gray-500 dark:text-gray-500 mt-2'>{exp.period}</p>
                 <ul className='mt-4 space-y-2'>
                   {exp.description.map((item, i) => (
