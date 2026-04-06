@@ -232,7 +232,7 @@ export default function Work() {
                 className="group relative bg-gray-50 dark:bg-gray-800/60 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700/50 card-glow"
               >
                 {/* Hover overlay showing the problem statement */}
-                <div className="absolute inset-0 bg-gray-900/95 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 rounded-2xl">
+                <div className="absolute inset-0 bg-gray-900/90 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 rounded-2xl pointer-events-none">
                   <p className="text-teal-400 text-center font-medium leading-relaxed">
                     {project.problem}
                   </p>
