@@ -45,6 +45,14 @@ export default function Work() {
       github: "https://github.com/mwihoti/Spotter-AI",
     },
     {
+      title: "MuscleMind",
+      badge: "Startup",
+      description:
+        "Full-stack gym management platform built for Muscle Beach Gym in Kahawa West, Nairobi. Features membership tiers (Basic/Premium/Elite in KSh), M-Pesa payments, class scheduling, expert trainers, and community testimonials. Currently in active use.",
+      tech: ["Next.js", "Tailwind CSS", "Supabase"],
+      live: "https://gymbuddy-s.vercel.app",
+    },
+    {
       title: "AIAdvisory",
       description:
         "Web3 app with AI-powered assistants tailored for Kenya. AgriBot provides crop advice, disease diagnosis, weather insights, and market prices in KES. LegalBot guides users on land rights, legal processes, and document preparation.",

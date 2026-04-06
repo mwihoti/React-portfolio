@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import { delay, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import me from '../assets/me.jpg';
 import Typewriter from 'typewriter-effect';
