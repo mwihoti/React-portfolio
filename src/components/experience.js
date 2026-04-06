@@ -60,6 +60,17 @@ const experiences = [
     ],
   },
   {
+    title: 'Community Member — CodeOrange Devs',
+    company: 'CodeOrange / Bitcoin Dojo',
+    period: '2025 – Present',
+    type: 'community',
+    description: [
+      'Active member of CodeOrange, a developer community focused on Bitcoin and open-source learning.',
+      'Built Bitcoin Wallet Lab (wallet-lab.onrender.com) as a visual answer to a Bitcoin Dojo weekly question: "what actually happens when you send Bitcoin?" — featured and highlighted by the community.',
+      'Collaborating with CodeOrange and Bitcoin Dojo to study Bitcoin development and ship educational tooling in public.',
+    ],
+  },
+  {
     title: 'Cardano Africa Tech Summit — Community Ambassador',
     company: 'Blockchain Centre NBO / Cardano',
     period: '2025',
