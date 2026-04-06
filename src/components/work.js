@@ -19,12 +19,12 @@ const projects = [
   },
   {
     title: 'Bitcoin Wallet Lab',
-    problem: 'Understand Bitcoin cryptography by building secp256k1 + ECDSA from scratch in Rust.',
+    problem: 'Show exactly how Bitcoin works at every layer — from key generation to signed, broadcast transactions on testnet.',
     description:
-      'secp256k1 + ECDSA cryptography built from scratch in Rust. Supports P2PKH, Nested SegWit, and Native SegWit. Live tx broadcast with confirmation tracking and a signature malleability demo.',
-    tech: ['Rust', 'JavaScript', 'secp256k1', 'ECDSA', 'Bitcoin'],
+      'Educational Bitcoin wallet on testnet4 built on what I learned from Bitcoin Dojo. Generate all three address types (P2PKH, Nested SegWit, Native SegWit) from a single key, receive testnet coins, build and sign a real transaction, then broadcast and watch it confirm on-chain. secp256k1 + ECDSA + RFC 6979 implemented from scratch in a vendored bitcoin_dojo crate. Includes signature malleability demo.',
+    tech: ['Rust', 'Axum', 'Tokio', 'secp256k1', 'ECDSA', 'Docker'],
     live: 'https://wallet-lab.onrender.com',
-    github: 'https://github.com/mwihoti/btc',
+    github: 'https://github.com/mwihoti/wallet_lab',
     category: ['Bitcoin'],
   },
   {
@@ -38,12 +38,21 @@ const projects = [
   },
   {
     title: 'Memorabilia',
-    problem: 'Bring fully on-chain gaming to non-crypto users via a familiar Telegram interface.',
+    problem: 'Build a fully on-chain game for the Dojo Game Night hackathon, accessible via Telegram without crypto knowledge.',
     description:
-      'Fully on-chain memory card matching game on Starknet, playable as a Telegram Mini App — no wallet or gas fees to start. Features Account Abstraction, gasless transactions, 3 eras, 15 levels, daily challenges, and NFT minting via Cartridge.',
+      'Fully on-chain memory card matching game on Starknet, built for the Dojo Game Night hackathon. Playable as a Telegram Mini App — no wallet or gas fees to start. Features Account Abstraction, gasless transactions, 3 eras, 15 levels, daily challenges, and NFT minting via Cartridge.',
     tech: ['TypeScript', 'Starknet', 'Dojo Engine', 'Cairo', 'Telegram Mini App'],
     live: 'https://memorabilia-game.vercel.app',
     github: 'https://github.com/mwihoti/memorabilia',
+    category: ['Web3', 'Game'],
+  },
+  {
+    title: 'Cardano Quest',
+    problem: 'Onboard new members to Cardano through an interactive riddle-quest game at community meetups.',
+    description:
+      'Interactive riddle-quest game built for Blockchain Centre NBO and CardanoHubNBO monthly community meetups in Nairobi. Engages and educates new members on the Cardano ecosystem through gameplay.',
+    tech: ['TypeScript', 'React', 'Cardano'],
+    live: 'https://riddlerequest26.cardanohubnbo.com',
     category: ['Web3', 'Game'],
   },
   {

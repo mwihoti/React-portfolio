@@ -4,16 +4,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from './context/theme';
-import Footer from './components/footer';
 
 const RootComponent = () => {
   return (
     <React.StrictMode>
       <ThemeProvider>
-        <div>
-          <App />
-          <Footer />
-        </div>
+        <App />
       </ThemeProvider>
     </React.StrictMode>
   );

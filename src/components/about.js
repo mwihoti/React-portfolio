@@ -20,14 +20,14 @@ const stackTimeline = [
   },
   {
     year: '2025',
-    techs: ['Bitcoin', 'Haskell', 'Cardano', 'Data Eng.', 'Starknet', 'Lightning'],
+    techs: ['JavaScript', 'Python', 'Fullstack', 'Data Eng.', 'ML', 'Deployment'],
     color: 'text-orange-400',
     border: 'border-orange-500/40',
     bg: 'bg-orange-500/10',
   },
   {
     year: '2026',
-    techs: ['Cairo', 'Cosmos', 'Solana', 'XRPL', 'AI Agents', 'LSM-tree'],
+    techs: ['Bitcoin', 'Rust', 'Cardano', 'Haskell', 'Starknet', 'AI Agents', 'LSM-tree'],
     color: 'text-teal-400',
     border: 'border-teal-500/40',
     bg: 'bg-teal-500/10',

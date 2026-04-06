@@ -28,11 +28,24 @@ const experiences = [
   },
   {
     title: 'Open Source Contributor',
-    company: 'Bitcoin Core',
+    company: 'rust-bitcoin / stx-labs/explorer',
     period: 'January 2026',
     type: 'opensource',
     description: [
-      'Contributed to the Bitcoin Core test suite, extending C++ test coverage for consensus-critical code paths.',
+      'Contributed to rust-bitcoin, the foundational Rust library for Bitcoin development used across the ecosystem.',
+      'Contributed to stx-labs/explorer, a Bitcoin/Stacks blockchain explorer.',
+    ],
+  },
+  {
+    title: 'Bitcoin Lightning Network Attack Contest — Warnet: Wrath of Nalo',
+    company: 'Boss Challenge / Bitcoin Dev Project',
+    period: 'February 2026',
+    type: 'community',
+    description: [
+      'Competed in a live Bitcoin Lightning Network attack simulation on Signet as part of Team Libra.',
+      'Executed channel jamming attacks via hold invoices against designated LND target nodes.',
+      'Performed DoS exploits on vulnerable LND versions: gossip timestamp filter DoS (v18.2-beta) and onion bomb (v16.4-beta).',
+      'Deployed and commanded 3 armada nodes on live Signet using Warnet CLI and lncli.',
     ],
   },
   {
@@ -42,8 +55,18 @@ const experiences = [
     type: 'community',
     description: [
       'Joined the CardanoHubNBO organisation, building on-chain games for monthly Nairobi community meetups.',
-      'Participated in the Memorabilia GameJam at Blockchain Centre NBO, shipping an on-chain Starknet game playable via Telegram.',
-      'Represented the community at Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit.',
+      'Built Cardano Quest — an interactive riddle-quest game for Blockchain Centre NBO community events.',
+      'Participated in the Memorabilia Dojo Game Night hackathon, shipping an on-chain Starknet game playable via Telegram.',
+    ],
+  },
+  {
+    title: 'Cardano Africa Tech Summit — Community Ambassador',
+    company: 'Blockchain Centre NBO / Cardano',
+    period: '2025',
+    type: 'community',
+    description: [
+      'Represented Blockchain Centre NBO as ambassador at the Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit.',
+      'Contributed to growing the Cardano developer community in East Africa, connecting with ecosystem builders shaping the ecosystem.',
     ],
   },
   {
