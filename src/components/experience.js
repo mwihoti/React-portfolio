@@ -1,178 +1,234 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaBriefcase, FaUsers } from 'react-icons/fa';
 import { useTheme } from '../context/theme';
 
+const experiences = [
+  {
+    title: 'Open Source Contributor',
+    company: 'IntersectMBO / lsm-tree',
+    period: 'February – April 2026',
+    type: 'opensource',
+    description: [
+      'Contributed to IntersectMBO\'s lsm-tree — a production-grade LSM database library used by Cardano, written in Haskell.',
+      'PR #818 merged: refactored Internal.Arena with modern Haskell record extensions (DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot) replacing RecordWildCards.',
+      'PR received 25 review comments from core maintainers (jorisdral, dcoutts, mheinzel); recognised as the approach going forward for the full codebase.',
+      'Follow-up PR refactored the Run module (+309 −271 lines), continuing technical-debt reduction.',
+    ],
+  },
+  {
+    title: 'Open Source Contributor',
+    company: 'Cardano Foundation',
+    period: 'January – December 2025',
+    type: 'opensource',
+    description: [
+      'PR merged to cardano-foundation/cardano-org: added Kenya-specific CEX list (Binance, Yellow Card, BingX, OKX) for users looking to buy ADA.',
+      'Contributed Docker containerisation for the cardano-org documentation platform (+2,523 lines), enabling reproducible local development.',
+    ],
+  },
+  {
+    title: 'Open Source Contributor',
+    company: 'Bitcoin Core',
+    period: 'January 2026',
+    type: 'opensource',
+    description: [
+      'Contributed to the Bitcoin Core test suite, extending C++ test coverage for consensus-critical code paths.',
+    ],
+  },
+  {
+    title: 'Community Builder & Game Developer',
+    company: 'CardanoHubNBO, Nairobi',
+    period: 'December 2025 – Present',
+    type: 'community',
+    description: [
+      'Joined the CardanoHubNBO organisation, building on-chain games for monthly Nairobi community meetups.',
+      'Participated in the Memorabilia GameJam at Blockchain Centre NBO, shipping an on-chain Starknet game playable via Telegram.',
+      'Represented the community at Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit.',
+    ],
+  },
+  {
+    title: 'Hackathon Participant — Base East Africa Batch 2',
+    company: 'Base / Coinbase',
+    period: '2025',
+    type: 'community',
+    description: [
+      'Submitted an MVP as part of a 4-person team for the Base East Africa accelerator programme, building on the Base L2 network.',
+    ],
+  },
+  {
+    title: 'Hackathon Participant — Hedera Africa Hackathon',
+    company: 'Hedera',
+    period: 'October 2025',
+    type: 'community',
+    description: [
+      'Built echain — a scalable DLT product on the Hedera network — with a 4-person team targeting African market use cases.',
+    ],
+  },
+  {
+    title: 'Full-Stack Developer',
+    company: 'Freelancer — Remote',
+    period: '2024 – Present',
+    type: 'work',
+    description: [
+      'Designed, developed, and deployed a Guess Game DApp on Arbitrum Sepolia with on-chain gameplay mechanics.',
+      'Created a Memory Game using Rust and the Slint library, ranking in the top 10 at the StackUp August 2024 Hackathon.',
+      'Architected a PYUSD dApp with integrated blockchain explorer and marketplace, leveraging GCP Blockchain Node Engine.',
+      'Developed HumanRaffle — a decentralized raffle platform with Civic Auth verification, on-chain ETH payments, and NFT ticketing.',
+      'Built the Kenyan AI Advisory Project on ICP using Motoko, TypeScript, React, and llama3 LLM agents.',
+    ],
+  },
+  {
+    title: 'Data Analyst & Engineer',
+    company: 'FaithTech — Remote',
+    period: 'August – September 2025',
+    type: 'work',
+    description: [
+      'Built a robust ETL pipeline to standardize messy survey data from multiple CSVs into clean, analysis-ready datasets.',
+      'Implemented regex-based mapping to convert unstructured technology responses into a structured Yes/No matrix for 40+ tools.',
+      'Delivered consolidated outputs including CSVs, Excel reports, and LaTeX-generated PDFs for reporting and decision-making.',
+    ],
+  },
+  {
+    title: 'Backend Developer Intern',
+    company: 'HNG',
+    period: 'April 2024 – August 2024',
+    type: 'work',
+    description: [
+      'Contributed to scalable backend systems using Node.js, Express.js, and PostgreSQL.',
+      'Optimized APIs for performance and reliability in an Agile team environment.',
+      'Reached Stage 5 certification, showcasing advanced technical skills.',
+    ],
+  },
+  {
+    title: 'Fullstack Developer',
+    company: 'KejaSpace',
+    period: 'May 2024 – July 2024',
+    type: 'work',
+    description: [
+      'Designed and developed responsive web applications using React.js and Node.js.',
+      'Implemented secure role-based access control to strengthen authentication and authorization.',
+      'Redesigned the real estate platform UI with Tailwind CSS, improving navigation and usability.',
+    ],
+  },
+  {
+    title: 'Business Systems Administrator Intern',
+    company: 'KTDA, Nairobi, Kenya',
+    period: 'May 2023 – September 2023',
+    type: 'work',
+    description: [
+      'Installed and configured the Pesa-Ulipo app on KTDA Wizarpos for seamless financial integration.',
+      'Debugged and resolved issues in Microsoft Dynamics NAV, improving system performance.',
+      'Utilized SQL to analyze large datasets and generate actionable insights.',
+    ],
+  },
+];
+
+function TypeIcon({ type }) {
+  if (type === 'opensource') {
+    return <FaGithub className="h-4 w-4 text-teal-400" />;
+  }
+  if (type === 'community') {
+    return <FaUsers className="h-4 w-4 text-purple-400" />;
+  }
+  return <FaBriefcase className="h-4 w-4 text-blue-400" />;
+}
+
+function TypeBadge({ type }) {
+  if (type === 'opensource') {
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-teal-900/40 text-teal-300 border border-teal-700/40 rounded-full">
+        <FaGithub className="h-2.5 w-2.5" /> Open Source
+      </span>
+    );
+  }
+  if (type === 'community') {
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-purple-900/40 text-purple-300 border border-purple-700/40 rounded-full">
+        <FaUsers className="h-2.5 w-2.5" /> Community
+      </span>
+    );
+  }
+  return null;
+}
 
 export default function Experience() {
   const darkTheme = useTheme();
 
-  const experiences = [
-    {
-      title: "Open Source Contributor",
-      company: "IntersectMBO / lsm-tree",
-      period: "February – April 2026",
-      type: "opensource",
-      description: [
-        "Contributed to IntersectMBO's lsm-tree — a production-grade LSM database library used by Cardano, written in Haskell.",
-        "PR #818 merged: refactored Internal.Arena with modern Haskell record extensions (DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot) replacing RecordWildCards.",
-        "PR received 25 review comments from core maintainers (jorisdral, dcoutts, mheinzel); recognised as the approach going forward for the full codebase.",
-        "Follow-up PR refactored the Run module (+309 −271 lines), continuing technical-debt reduction."
-      ]
-    },
-    {
-      title: "Open Source Contributor",
-      company: "Cardano Foundation",
-      period: "January – December 2025",
-      type: "opensource",
-      description: [
-        "PR merged to cardano-foundation/cardano-org: added Kenya-specific CEX list (Binance, Yellow Card, BingX, OKX) for users looking to buy ADA.",
-        "Contributed Docker containerisation for the cardano-org documentation platform (+2,523 lines), enabling reproducible local development."
-      ]
-    },
-    {
-      title: "Open Source Contributor",
-      company: "Bitcoin Core",
-      period: "January 2026",
-      type: "opensource",
-      description: [
-        "Contributed to the Bitcoin Core test suite, extending C++ test coverage for consensus-critical code paths."
-      ]
-    },
-    {
-      title: "Community Builder & Game Developer",
-      company: "CardanoHubNBO, Nairobi",
-      period: "December 2025 – Present",
-      description: [
-        "Joined the CardanoHubNBO organisation, building on-chain games for monthly Nairobi community meetups.",
-        "Participated in the Memorabilia GameJam at Blockchain Centre NBO, shipping an on-chain Starknet game playable via Telegram.",
-        "Represented the community at Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit."
-      ]
-    },
-    {
-      title: "Hackathon Participant — Base East Africa Batch 2",
-      company: "Base / Coinbase",
-      period: "2025",
-      description: [
-        "Submitted an MVP as part of a 4-person team for the Base East Africa accelerator programme, building on the Base L2 network."
-      ]
-    },
-    {
-      title: "Hackathon Participant — Hedera Africa Hackathon",
-      company: "Hedera",
-      period: "October 2025",
-      description: [
-        "Built echain — a scalable DLT product on the Hedera network — with a 4-person team targeting African market use cases."
-      ]
-    },
-      {
-    title: "Full-Stack Developer",
-    company: "Freelancer  - Remote",
-    period: "2024 - Present",
-    description: [
-      "Designed, developed, and deployed a Guess Game DApp on Arbitrum Sepolia with on-chain gameplay mechanics to boost user engagement",
-      "Created a Memory Game using Rust and the Slint library, ranking in the top 10 at the StackUp August 2024 Hackathon for innovation and code quality",
-      "Architected and built a PYUSD dApp with an integrated blockchain explorer and marketplace for PYUSD on Ethereum, leveraging GCP’s Blockchain Node Engine for enterprise-grade performance",
-      "Developed HumanRaffle, a decentralized raffle platform with Civic Auth verification, on-chain ETH payments, NFT ticketing, dynamic prize pools, and a responsive UI (Next.js 14, Tailwind, shadcn/ui, wagmi, Framer Motion)",
-      "Built the Kenyan AI Advisory Project on the Internet Computer (ICP) using Motoko, TypeScript, React, and ICP canisters, deploying AI-powered chatbots for agriculture and legal aid integrated with llama3 LLM agents",
-          "Created WorldView Blog, a platform for movies, global news, and football updates, built with React and Hashnode to deliver engaging content and smooth user experience"
-
-    ]
-  },
-  { 
-  title: "Data Analyst & Engineer ",
-  company: "Remote - FaithTech",
-  period: "August - September 2025",
-  description: [
-    "Developed a comprehensive data analysis and visualization to understand participant demographics, technology access, and course preferences using pandas and matplotlib",
-    "Created demographic insights with pie charts, bar charts, KDE plots, and multi-panel dashboards to guide program planning, diversity tracking, and curriculum design",
-    "Built a robust ETL pipeline to standardize messy survey data from multiple CSVs into clean, analysis-ready datasets",
-    "Implemented regex-based mapping to convert unstructured technology responses into a structured Yes/No matrix for 40+ tools (e.g., Python, Zoom, Microsoft 365)",
-    "Standardized demographics (church denominations, education levels, location data) across datasets and automated merging via email identifiers",
-    "Delivered consolidated outputs including CSVs, Excel reports, and LaTeX-generated PDFs for reporting and decision-making",
-    "Enabled advanced analytics preparation including clustering, statistical profiling, and exploratory data analysis for participant segments"
-  ]
-},
-
-    { 
-      title: "Backend Developer Intern",
-      company: "HNG",
-      period: "April 2024 - August 2024",
-      description: [
-        "Contributed to scalable backend systems using Node.js, Express.js, and PostgreSQL",
-        "Optimized APIs for performance and reliability in an Agile team environment",
-        "Reached Stage 5 certification, showcasing advanced technical skills"
-      ]
-    },
-  {
-    title: "Fullstack Developer",
-    company: "KejaSpace",
-    period: "May 2024 - July 2024",
-    description: [
-      "Designed and developed responsive web applications using React.js and Node.js, enhancing system efficiency and user satisfaction",
-      "Implemented secure role-based access control to strengthen authentication and authorization",
-      "Redesigned the real estate platform UI with React.js and Tailwind CSS, improving navigation and usability",
-      "Improved mobile responsiveness, boosting user engagement across devices",
-      "Collaborated with backend teams to optimize API endpoints and improve data accuracy"
-    ]
-  },
-  {
-    title: "Business Systems Administrator Intern",
-    company: "KTDA, Nairobi, Kenya",
-    period: "May 2023 - September 2023",
-    description: [
-      "Installed and configured the Pesa-Ulipo app on KTDA Wizarpos for seamless financial integration",
-      "Assisted in network configuration and maintenance, ensuring system reliability",
-      "Debugged and resolved issues in Microsoft Dynamics NAV, improving system performance",
-      "Utilized SQL to analyze large datasets, identify trends, and generate actionable insights that supported decision-making and improved operational efficiency"
-      ]
-    }
-  ];
-
   return (
-    <section id="experience" className={`py-20 ${darkTheme ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:pg-8'>
-          <motion.div
+    <section
+      id="experience"
+      className={`py-20 ${darkTheme ? 'bg-[#0d1117]' : 'bg-gray-50'}`}
+    >
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className='text-center mb-16'>
-            <h2 className='text-4xl text-teal-600 mb-4 font-bold dark:text-white'>Experience</h2>
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-teal-600 dark:text-teal-400 glow-teal">
+            Experience
+          </h2>
+        </motion.div>
 
-          </motion.div>
-          <div className='space-y-12'>
-            {experiences.map((exp, index) => (
-              <motion.div
-              initial={{opacity: 0, x: -20}}
-              whileInView={{opacity: 1, x: 0}}
-              viewport={{once: true}}
-              transition={{delay: index * 0.2}}
-              className='bg-white dark:text-gray-300  dark:bg-gray-800 p-8 rounded-lg shadow-lg'>
-                <h3 className='text-2xl text-teal-600 font-bold'>{exp.title}</h3>
-                <p className='text-lg text-gray-600 dark:text-gray-400 mt-2'>{exp.company}</p>
-                {exp.type === "opensource" && (
-                  <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300 rounded-full">
-                    <FaGithub className="h-3 w-3" /> Open Source Contribution
-                  </span>
-                )}
-                <p className='text-lg text-gray-500 dark:text-gray-500 mt-2'>{exp.period}</p>
-                <ul className='mt-4 space-y-2'>
+        {/* Vertical timeline */}
+        <div className="relative">
+          {/* The branch line */}
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-teal-500/60 via-teal-500/30 to-transparent" />
+
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08, duration: 0.45 }}
+              className="relative flex gap-8 mb-8 last:mb-0"
+            >
+              {/* Node on the branch line */}
+              <div className="relative flex-shrink-0 w-12 flex justify-center">
+                <div
+                  className={`relative z-10 w-9 h-9 rounded-full flex items-center justify-center border-2 ${
+                    exp.type === 'opensource'
+                      ? 'border-teal-500 bg-teal-900/40'
+                      : exp.type === 'community'
+                      ? 'border-purple-500 bg-purple-900/40'
+                      : 'border-blue-500 bg-blue-900/40'
+                  }`}
+                >
+                  <TypeIcon type={exp.type} />
+                </div>
+              </div>
+
+              {/* Card */}
+              <div className="flex-1 bg-white dark:bg-gray-800/60 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-md card-glow mb-2">
+                <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
+                  <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400">
+                    {exp.title}
+                  </h3>
+                  <TypeBadge type={exp.type} />
+                </div>
+                <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                  {exp.company}
+                </p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 mb-3">
+                  {exp.period}
+                </p>
+                <ul className="space-y-1.5">
                   {exp.description.map((item, i) => (
-                    <li key={i} className='flex items-start'>
-                      <span className='h-6 flex items-center'>
-                        <span className='relative w-3 h-3  rounded-full bg-teal-500 dark:teal-400 mr-3 ' />
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="mt-1.5 w-2 h-2 rounded-full bg-teal-500/60 flex-shrink-0" />
+                      <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                        {item}
                       </span>
-                      <span className="text-gray-600 dark:text-gray-300">{item}</span>
-
                     </li>
                   ))}
                 </ul>
-
-              </motion.div>
-            )) }
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-
-      </section>
-  )
+      </div>
+    </section>
+  );
 }

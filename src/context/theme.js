@@ -12,11 +12,13 @@ export function useThemeUpdate() {
 }
 
 export function ThemeProvider({ children }) {
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(true);
 
   useEffect(() => {
-    const isDark = localStorage.getItem('darkTheme') === 'true';
-    setDarkTheme(isDark);
+    const stored = localStorage.getItem('darkTheme');
+    if (stored !== null) {
+      setDarkTheme(stored === 'true');
+    }
   }, []);
 
   function toggleTheme() {
