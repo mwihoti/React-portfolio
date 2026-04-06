@@ -56,6 +56,25 @@ const projects = [
     category: ['Web3', 'Game'],
   },
   {
+    title: 'Daily Habit Hub',
+    problem: 'Build exercise habits through daily accountability, community support, and on-chain proof of progress on Avalanche.',
+    description:
+      'Modern fitness tracking app combining social accountability with Web3 rewards. Daily check-ins across gym, running, cycling, yoga and more. Visual streak tracking, community feed, professional coaching connections, and $HABIT token rewards + "Proof of Progress" NFT minting on the Avalanche network.',
+    tech: ['Next.js', 'Supabase', 'Avalanche', 'Wagmi', 'RainbowKit', 'TanStack Query', 'shadcn/ui'],
+    live: 'https://daily-habit-hub.vercel.app',
+    github: 'https://github.com/mwihoti/daily-habit-hub',
+    category: ['Web3', 'Fullstack'],
+  },
+  {
+    title: 'Computer Vision — Traffic & Attendance',
+    problem: 'Real-time vehicle speed, traffic jam detection, and person tracking at the edge with zero cloud latency.',
+    description:
+      'Edge-native CV system for real-time traffic sensing and multi-class object counting. Dual-stack architecture: Python (Ultralytics + DeepFace for gender analysis) for prototyping, and Rust (ort/ONNX Runtime + OpenCV) for high-performance edge inference. Homography-based pixel-to-meter calibration for science-grade speed data. Designed to run on NVIDIA Jetson.',
+    tech: ['Python', 'Rust', 'YOLO', 'ONNX Runtime', 'OpenCV', 'DeepFace'],
+    github: 'https://github.com/mwihoti/computer_vision',
+    category: ['AI'],
+  },
+  {
     title: 'Spotter AI',
     problem: 'Real-time AI coaching for gym-goers without a personal trainer.',
     description: 'AI-powered fitness spotter application built with TypeScript.',
