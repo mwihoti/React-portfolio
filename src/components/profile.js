@@ -131,8 +131,8 @@ export default function Profile() {
                 options={{
                   strings: [
                     'Full-stack developer based in Nairobi, Kenya.',
-                    'Building on Bitcoin, Starknet, and Cardano.',
-                    'Open source contributor to IntersectMBO & Cardano Foundation.',
+                    'Building on Bitcoin, web, AI, and Cardano.',
+                    'Open source contributor to IntersectMBO, Bitcoin & Cardano Foundation.',
                     'Web3 + AI. Always learning, always shipping.',
                     "3+ years. 20+ projects. Let's build something impactful.",
                   ],

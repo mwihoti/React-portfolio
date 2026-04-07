@@ -11,9 +11,7 @@ const experiences = [
     type: 'opensource',
     description: [
       'Contributed to IntersectMBO\'s lsm-tree — a production-grade LSM database library used by Cardano, written in Haskell.',
-      'PR #818 merged: refactored Internal.Arena with modern Haskell record extensions (DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot) replacing RecordWildCards.',
-      'PR received 25 review comments from core maintainers (jorisdral, dcoutts, mheinzel); recognised as the approach going forward for the full codebase.',
-      'Follow-up PR refactored the Run module (+309 −271 lines), continuing technical-debt reduction.',
+      'PR #818 merged: refactored Internal.Arena with modern Haskell record extensions (DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot) replacing RecordWildCards.'
     ],
   },
   {
@@ -23,7 +21,7 @@ const experiences = [
     type: 'opensource',
     description: [
       'PR merged to cardano-foundation/cardano-org: added Kenya-specific CEX list (Binance, Yellow Card, BingX, OKX) for users looking to buy ADA.',
-      'Contributed Docker containerisation for the cardano-org documentation platform (+2,523 lines), enabling reproducible local development.',
+      'Contributed Docker containerisation for the cardano-org documentation platform, enabling reproducible local development.',
     ],
   },
   {
@@ -76,7 +74,7 @@ const experiences = [
     period: '2025',
     type: 'community',
     description: [
-      'Represented Blockchain Centre NBO as ambassador at the Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit.',
+      'contributed at the Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit as Blockchain Centre NBO as ambassador .',
       'Contributed to growing the Cardano developer community in East Africa, connecting with ecosystem builders shaping the ecosystem.',
     ],
   },

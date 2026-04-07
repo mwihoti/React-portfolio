@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./node_modules/.bin/react-scripts build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m 'Fix project card links blocked by hover overlay:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
