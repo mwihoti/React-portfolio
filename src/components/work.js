@@ -37,15 +37,6 @@ const projects = [
     category: ['Bitcoin'],
   },
   {
-    title: 'Bitcoin Dojo',
-    problem: 'Make Bitcoin development accessible through structured, hands-on learning tracks.',
-    description:
-      'Guided Bitcoin development learning platform with structured tracks: Cryptography Fundamentals, Addresses & Encoding, and Transactions. Hands-on exercises for developers entering the Bitcoin ecosystem.',
-    tech: ['TypeScript', 'React', 'Bitcoin'],
-    live: 'https://bitcoindojo.dev',
-    category: ['Bitcoin'],
-  },
-  {
     title: 'Memorabilia',
     problem: 'Build a fully on-chain game for the Dojo Game Night hackathon, accessible via Telegram without crypto knowledge.',
     description:

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaBriefcase, FaUsers } from 'react-icons/fa';
+import { FaGithub, FaBriefcase, FaUsers, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTheme } from '../context/theme';
 
 const experiences = [
@@ -55,6 +55,18 @@ const experiences = [
       'Joined the CardanoHubNBO organisation, building on-chain games for monthly Nairobi community meetups.',
       'Built Cardano Quest — an interactive riddle-quest game for Blockchain Centre NBO community events.',
       'Participated in the Memorabilia Dojo Game Night hackathon, shipping an on-chain Starknet game playable via Telegram.',
+    ],
+  },
+  {
+    title: 'Bitcoin Dojo — Learning Platform',
+    company: 'Bitcoin Dojo',
+    period: '2025 – Present',
+    type: 'community',
+    link: 'https://bitcoindojo.dev',
+    description: [
+      'Completed structured Bitcoin development tracks: Cryptography Fundamentals, Addresses & Encoding, and Transactions.',
+      'Hands-on exercises covering modular arithmetic, finite fields, secp256k1, ECDSA, address encoding (Base58, SEC, DER), and transaction serialization.',
+      'Applied learnings to build Bitcoin Wallet Lab — a live testnet wallet implementing secp256k1 + ECDSA from scratch in Rust.',
     ],
   },
   {
@@ -256,6 +268,17 @@ export default function Experience() {
                     </li>
                   ))}
                 </ul>
+                {exp.link && (
+                  <a
+                    href={exp.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-4 text-xs font-medium text-teal-500 hover:text-teal-400 transition-colors"
+                  >
+                    <FaExternalLinkAlt className="h-3 w-3" />
+                    {exp.link.replace('https://', '')}
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
