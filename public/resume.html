@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Edward Mwihoti — Resume</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.45;
+      color: #1a1a2e;
+      background: #fff;
+      padding: 0;
+    }
+
+    a { color: #0e7490; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Page container ── */
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 36px 42px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 2.5px solid #0e7490;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #0e7490;
+    }
+
+    header .subtitle {
+      font-size: 11pt;
+      color: #374151;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+      margin-top: 8px;
+      font-size: 9.5pt;
+      color: #4b5563;
+    }
+
+    .contact-row span::before {
+      content: '▸ ';
+      color: #0e7490;
+    }
+
+    /* ── Sections ── */
+    section { margin-bottom: 16px; }
+
+    section h2 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #0e7490;
+      border-bottom: 1px solid #d1fae5;
+      padding-bottom: 3px;
+      margin-bottom: 10px;
+    }
+
+    /* ── Summary ── */
+    .summary p {
+      font-size: 10.5pt;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    /* ── Entry (experience / education) ── */
+    .entry { margin-bottom: 12px; }
+    .entry:last-child { margin-bottom: 0; }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .entry-title {
+      font-weight: 700;
+      font-size: 10.5pt;
+      color: #111827;
+    }
+
+    .entry-period {
+      font-size: 9pt;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+
+    .entry-org {
+      font-size: 9.5pt;
+      color: #0e7490;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+
+    .entry-org .location {
+      color: #6b7280;
+      font-weight: 400;
+    }
+
+    .entry ul {
+      margin-top: 5px;
+      padding-left: 16px;
+    }
+
+    .entry ul li {
+      font-size: 10pt;
+      color: #374151;
+      line-height: 1.5;
+      margin-bottom: 2px;
+    }
+
+    .entry ul li::marker { color: #0e7490; }
+
+    /* ── Open Source ── */
+    .os-entry { margin-bottom: 10px; }
+    .os-entry:last-child { margin-bottom: 0; }
+
+    .os-title {
+      font-weight: 700;
+      font-size: 10pt;
+      color: #111827;
+    }
+
+    .os-title .pr-tag {
+      display: inline-block;
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 8pt;
+      font-weight: 600;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .os-entry p {
+      font-size: 10pt;
+      color: #374151;
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    /* ── Projects ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+    }
+
+    .project-item { }
+
+    .project-name {
+      font-weight: 700;
+      font-size: 10pt;
+      color: #111827;
+    }
+
+    .project-name .badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 7.5pt;
+      font-weight: 600;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+
+    .project-tech {
+      font-size: 8.5pt;
+      color: #6b7280;
+      margin-top: 1px;
+    }
+
+    .project-desc {
+      font-size: 9.5pt;
+      color: #374151;
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px 14px;
+    }
+
+    .skill-row {
+      font-size: 9.5pt;
+      color: #374151;
+    }
+
+    .skill-label {
+      font-weight: 700;
+      color: #111827;
+    }
+
+    /* ── Community ── */
+    .community-list { }
+    .community-list li {
+      font-size: 10pt;
+      color: #374151;
+      line-height: 1.5;
+      margin-bottom: 4px;
+      padding-left: 14px;
+      position: relative;
+    }
+    .community-list li::before {
+      content: '▸';
+      color: #0e7490;
+      position: absolute;
+      left: 0;
+    }
+
+    /* ── Education ── */
+    .edu-entry { margin-bottom: 8px; }
+
+    /* ── Print styles ── */
+    @media print {
+      body { font-size: 10pt; }
+      .page { padding: 20px 28px; }
+      @page { margin: 0.5in 0.6in; size: letter; }
+      a { color: #0e7490; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════════════════ HEADER ════════════════ -->
+  <header>
+    <h1>Daniel Edward Mwihoti</h1>
+    <div class="subtitle">Full-Stack Developer &amp; Bitcoin / Blockchain Engineer — Nairobi, Kenya</div>
+    <div class="contact-row">
+      <span><a href="mailto:danielmwihoti@gmail.com">danielmwihoti@gmail.com</a></span>
+      <span><a href="https://github.com/mwihoti">github.com/mwihoti</a></span>
+      <span><a href="https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/">linkedin.com/in/daniel-mwihoti</a></span>
+      <span><a href="https://mwihoti-portfolio.vercel.app">mwihoti-portfolio.vercel.app</a></span>
+      <span>Open to remote worldwide</span>
+    </div>
+  </header>
+
+  <!-- ════════════════ SUMMARY ════════════════ -->
+  <section class="summary">
+    <h2>Summary</h2>
+    <p>
+      Full-stack developer with 3+ years of experience shipping production web apps, AI-powered tools, and
+      decentralised protocols. Deep focus on Bitcoin development (secp256k1, SegWit, live transaction
+      broadcasting, Lightning Network) and Rust systems programming. Open source contributor to
+      IntersectMBO/lsm-tree (Haskell), the Cardano Foundation, and rust-bitcoin. Active across East
+      Africa's Web3 and Bitcoin builder community — organiser, hackathon participant, and community ambassador.
+      Comfortable from embedded edge systems (YOLO / ONNX / Jetson) to consumer DApps on EVM, Solana,
+      Starknet, and Cardano.
+    </p>
+  </section>
+
+  <!-- ════════════════ OPEN SOURCE ════════════════ -->
+  <section>
+    <h2>Open Source Contributions</h2>
+
+    <div class="os-entry">
+      <div class="os-title">
+        IntersectMBO / lsm-tree &mdash; Haskell
+        <span class="pr-tag">PR #818 Merged</span>
+      </div>
+      <p>
+        Refactored <code>Internal.Arena</code> with modern Haskell record extensions
+        (<code>DuplicateRecordFields</code>, <code>NoFieldSelectors</code>, <code>OverloadedRecordDot</code>),
+        replacing the legacy <code>RecordWildCards</code> style. Production-grade LSM database library
+        used by the Cardano node.
+      </p>
+    </div>
+
+    <div class="os-entry">
+      <div class="os-title">Cardano Foundation / cardano-org</div>
+      <p>
+        Added Kenya-specific CEX list (Binance, Yellow Card, BingX, OKX) for ADA buyers; contributed
+        Docker containerisation for the documentation platform enabling reproducible local development.
+      </p>
+    </div>
+
+    <div class="os-entry">
+      <div class="os-title">rust-bitcoin &amp; stx-labs/explorer</div>
+      <p>
+        Contributed to rust-bitcoin — the foundational Rust library for Bitcoin development — and to
+        stx-labs/explorer, a Bitcoin/Stacks blockchain explorer.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════ WORK EXPERIENCE ════════════════ -->
+  <section>
+    <h2>Work Experience</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Full-Stack Developer</div>
+        <div class="entry-period">2024 – Present</div>
+      </div>
+      <div class="entry-org">Freelance <span class="location">— Remote</span></div>
+      <ul>
+        <li>Built <strong>Open Wallet Standard</strong>: multi-chain AI agent wallet supporting 9 networks (EVM, Solana, Bitcoin, Cosmos, XRPL) with policy-gated signing tokens — AI agents never hold raw keys.</li>
+        <li>Built <strong>Bitcoin Wallet Lab</strong>: educational testnet4 wallet with secp256k1 + ECDSA + RFC 6979 implemented from scratch in Rust; supports P2PKH, Nested SegWit, and Native SegWit address generation.</li>
+        <li>Architected <strong>PYUSD DApp</strong> with integrated blockchain explorer and marketplace on GCP Blockchain Node Engine.</li>
+        <li>Developed <strong>HumanRaffle</strong> — decentralised raffle with Civic Auth, on-chain ETH payments, and NFT ticketing.</li>
+        <li>Shipped <strong>Guess Game DApp</strong> on Arbitrum Sepolia with on-chain gameplay mechanics (Solidity + Hardhat).</li>
+        <li>Built <strong>Kenyan AI Advisory</strong> on ICP using Motoko, TypeScript, React, and llama3 LLM agents — serving AgriBot and LegalBot for Kenyan farmers and citizens.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Data Analyst &amp; Engineer</div>
+        <div class="entry-period">Aug – Sep 2025</div>
+      </div>
+      <div class="entry-org">FaithTech <span class="location">— Remote</span></div>
+      <ul>
+        <li>Built a robust ETL pipeline to standardize messy survey data from multiple CSVs into clean, analysis-ready datasets.</li>
+        <li>Implemented regex-based mapping converting unstructured technology responses into a structured Yes/No matrix for 40+ tools.</li>
+        <li>Delivered consolidated outputs — CSVs, Excel reports, and LaTeX-generated PDFs — for reporting and decision-making.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Backend Developer Intern</div>
+        <div class="entry-period">Apr – Aug 2024</div>
+      </div>
+      <div class="entry-org">HNG <span class="location">— Remote</span></div>
+      <ul>
+        <li>Contributed to scalable backend systems using Node.js, Express.js, and PostgreSQL in an Agile team environment.</li>
+        <li>Optimised APIs for performance and reliability; reached Stage 5 certification.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Fullstack Developer</div>
+        <div class="entry-period">May – Jul 2024</div>
+      </div>
+      <div class="entry-org">KejaSpace <span class="location">— Nairobi, Kenya</span></div>
+      <ul>
+        <li>Designed and developed responsive web applications using React.js and Node.js.</li>
+        <li>Implemented secure role-based access control; redesigned the real estate platform UI with Tailwind CSS.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Business Systems Administrator Intern</div>
+        <div class="entry-period">May – Sep 2023</div>
+      </div>
+      <div class="entry-org">Kenya Tea Development Agency (KTDA) <span class="location">— Nairobi, Kenya</span></div>
+      <ul>
+        <li>Configured the Pesa-Ulipo app on KTDA Wizarpos for financial integration.</li>
+        <li>Debugged Microsoft Dynamics NAV issues; used SQL to analyse large datasets and generate actionable insights.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ════════════════ PROJECTS ════════════════ -->
+  <section>
+    <h2>Key Projects</h2>
+    <div class="project-grid">
+
+      <div class="project-item">
+        <div class="project-name">Bitcoin Wallet Lab</div>
+        <div class="project-tech">Rust · Axum · Tokio · secp256k1 · Docker</div>
+        <div class="project-desc">
+          Testnet4 educational wallet — secp256k1 + ECDSA + RFC 6979 from scratch in Rust.
+          All three address types, live testnet broadcast, signature malleability demo.
+          <a href="https://wallet-lab.onrender.com">wallet-lab.onrender.com</a>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-name">Open Wallet Standard <span class="badge">OWS Hackathon</span></div>
+        <div class="project-tech">TypeScript · Rust · React · 9 chains</div>
+        <div class="project-desc">
+          Multi-chain AI agent wallet with policy-gated signing. Agents never hold raw keys.
+          Solana + EVM sig verification on live testnet.
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-name">Memorabilia — On-chain Game</div>
+        <div class="project-tech">TypeScript · Starknet · Dojo Engine · Cairo · Telegram Mini App</div>
+        <div class="project-desc">
+          Fully on-chain memory card game built for Dojo Game Night hackathon. Gasless via Account
+          Abstraction, 3 eras, 15 levels, NFT minting, playable as a Telegram Mini App.
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-name">Daily Habit Hub</div>
+        <div class="project-tech">Next.js · Supabase · Avalanche · Wagmi · RainbowKit</div>
+        <div class="project-desc">
+          Fitness tracking app with Web3 rewards — $HABIT token + "Proof of Progress" NFT
+          minting on Avalanche; daily streaks, community feed, M-Pesa-ready.
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-name">Computer Vision — Traffic &amp; Attendance</div>
+        <div class="project-tech">Python · Rust · YOLO · ONNX Runtime · OpenCV · DeepFace</div>
+        <div class="project-desc">
+          Edge-native CV system for real-time vehicle speed, traffic jam detection, and person
+          tracking. Homography pixel-to-meter calibration; designed for NVIDIA Jetson.
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-name">MemoryGame <span class="badge">StackUp Top 10</span></div>
+        <div class="project-tech">Rust · Slint</div>
+        <div class="project-desc">
+          Award-winning interactive memory game; ranked top 10 at StackUp August 2024 Hackathon.
+          Demonstrates Rust GUI capabilities via the Slint UI framework.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════ COMMUNITY & EVENTS ════════════════ -->
+  <section>
+    <h2>Community &amp; Competitions</h2>
+    <ul class="community-list">
+      <li>
+        <strong>Warnet: Wrath of Nalo — Bitcoin Lightning Attack Contest</strong> (Feb 2026, Team Libra):
+        executed channel jamming via hold invoices, gossip timestamp filter DoS (LND v18.2-beta), and
+        onion bomb exploit (v16.4-beta) on live Signet using Warnet CLI and lncli.
+      </li>
+      <li>
+        <strong>CardanoHubNBO — Community Builder &amp; Game Developer</strong> (Dec 2025 – Present):
+        built <em>Cardano Quest</em> — an interactive riddle-quest game for Nairobi monthly community meetups.
+      </li>
+      <li>
+        <strong>CodeOrange Devs — Active Member</strong>: Bitcoin Wallet Lab featured by the community as
+        the visual answer to "what actually happens when you send Bitcoin?";
+        collaborating on educational Bitcoin tooling in public.
+      </li>
+      <li>
+        <strong>Cardano Africa Tech Summit — Blockchain Centre NBO Ambassador</strong> (2025):
+        represented the Nairobi Blockchain Centre, connecting East African ecosystem builders.
+      </li>
+      <li>
+        <strong>Hedera Africa Hackathon</strong> (Oct 2025): built <em>echain</em> — a scalable DLT product
+        on Hedera targeting African market use cases with a 4-person team.
+      </li>
+      <li>
+        <strong>Base East Africa Batch 2 Hackathon</strong> (2025): shipped MVP on the Base L2 network as part
+        of a 4-person team.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ════════════════ SKILLS ════════════════ -->
+  <section>
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-label">Languages:</span>
+        TypeScript, JavaScript, Rust, Python, Haskell, Solidity, Cairo, SQL, Motoko
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Frontend:</span>
+        React, Next.js, Tailwind CSS, Framer Motion, shadcn/ui, Slint
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Backend:</span>
+        Node.js, Express, Axum (Rust), Tokio, NestJS, PostgreSQL, MongoDB, Redis
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Blockchain / Web3:</span>
+        Bitcoin (secp256k1, SegWit, PSBT, Lightning), Cardano, Starknet / Dojo Engine,
+        EVM (Arbitrum, Avalanche, Base), Solana, XRPL, ICP, Wagmi, Hardhat, Web3.js
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">AI / ML / CV:</span>
+        YOLO, ONNX Runtime, OpenCV, DeepFace, TensorFlow.js, Gemini AI, llama3
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">DevOps / Infra:</span>
+        Docker, Git, Linux, Nginx, GCP Blockchain Node Engine, Vercel, Render, Supabase
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ EDUCATION ════════════════ -->
+  <section>
+    <h2>Education</h2>
+
+    <div class="entry edu-entry">
+      <div class="entry-header">
+        <div class="entry-title">BSc Business Information Technology</div>
+        <div class="entry-period">2020 – 2024</div>
+      </div>
+      <div class="entry-org">KCA University <span class="location">— Nairobi, Kenya</span></div>
+    </div>
+
+    <div class="entry edu-entry">
+      <div class="entry-header">
+        <div class="entry-title">Software Engineering Programme</div>
+        <div class="entry-period">2023 – 2024</div>
+      </div>
+      <div class="entry-org">ALX Africa <span class="location">— Remote</span></div>
+    </div>
+
+    <div class="entry edu-entry">
+      <div class="entry-header">
+        <div class="entry-title">Bitcoin Development Tracks</div>
+        <div class="entry-period">2025 – Present</div>
+      </div>
+      <div class="entry-org">Bitcoin Dojo — <span class="location">Cryptography Fundamentals, Addresses &amp; Encoding, Transactions &amp; Scripting</span></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
