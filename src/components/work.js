@@ -18,6 +18,15 @@ const projects = [
     category: ['Web3', 'AI', 'Bitcoin'],
   },
   {
+    title: 'Bitcoin Dojo — Cryptography Fundamentals',
+    problem: 'Understand the full cryptographic stack powering Bitcoin by implementing it from scratch in Rust.',
+    description:
+      'Hands-on implementation of elliptic curve cryptography from first principles, built layer by layer: SHA-256 hashing, finite field arithmetic, scalar operations mod curve order n, elliptic curve point addition & double-and-add scalar multiplication, secp256k1 parameters, private/public key generation (Q = d * G), and ECDSA sign/verify. The cryptography that powers every Bitcoin transaction — written in Rust.',
+    tech: ['Rust', 'secp256k1', 'ECDSA', 'ECC', 'SHA-256'],
+    github: 'https://github.com/mwihoti/bitcoin_dojo-btcdeveloper-',
+    category: ['Bitcoin'],
+  },
+  {
     title: 'Bitcoin Wallet Lab',
     problem: 'Show exactly how Bitcoin works at every layer — from key generation to signed, broadcast transactions on testnet.',
     description:
