@@ -37,10 +37,20 @@ const projects = [
     category: ['Bitcoin'],
   },
   {
+    title: 'LiteCert — Blockchain Certificate Verification',
+    problem: 'Give institutions a tamper-proof way to issue and instantly verify credentials without a centralised authority.',
+    description:
+      'Certificate verification platform anchored on the Cardano blockchain using Mesh SDK. Institutions issue digital credentials with unique identifiers (e.g. CAR_JOH_01); employers verify instantly via on-chain transaction hash. Privacy-first: certificate data is hashed before blockchain submission.',
+    tech: ['TypeScript', 'React', 'Cardano', 'Mesh SDK', 'Plutus'],
+    live: 'https://certified-chain.vercel.app',
+    github: 'https://github.com/mwihoti/certified-chain',
+    category: ['Web3'],
+  },
+  {
     title: 'Memorabilia',
     problem: 'Build a fully on-chain game for the Dojo Game Night hackathon, accessible via Telegram without crypto knowledge.',
     description:
-      'Fully on-chain memory card matching game on Starknet, built for the Dojo Game Night hackathon. Playable as a Telegram Mini App — no wallet or gas fees to start. Features Account Abstraction, gasless transactions, 3 eras, 15 levels, daily challenges, and NFT minting via Cartridge.',
+      'Fully on-chain memory card matching game on Starknet, built for the Dojo Game Night hackathon. Playable as a Telegram Mini App (@enter_memorabilia_musem_bot) — no wallet or gas fees to start. Features Account Abstraction, gasless transactions, 3 eras, 15 levels, daily challenges, and NFT minting via Cartridge.',
     tech: ['TypeScript', 'Starknet', 'Dojo Engine', 'Cairo', 'Telegram Mini App'],
     live: 'https://memorabilia-game.vercel.app',
     github: 'https://github.com/mwihoti/memorabilia',
