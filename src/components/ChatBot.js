@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaPaperPlane, FaUser } from 'react-icons/fa';
+import { Groq } from 'groq-sdk';
+
 const SYSTEM_PROMPT = `You are Daniel Mwihoti's personal portfolio assistant. Your ONLY job is to answer questions about Daniel Mwihoti — his skills, projects, experience, open source work, background, and how to contact him.
 
 GUARDRAIL: If a question is NOT about Daniel Mwihoti, politely decline and redirect. Say something like: "I'm here to answer questions about Daniel Mwihoti. Is there something about his skills, projects, or experience I can help you with?"
@@ -31,49 +33,50 @@ AI/CV: YOLO, ONNX Runtime, OpenCV, DeepFace, TensorFlow.js, Gemini AI, LLaMA3, O
 DevOps: Docker, Git, Linux, Nginx, Vercel, Render, GCP, CI/CD
 
 OPEN SOURCE CONTRIBUTIONS:
-1. IntersectMBO/lsm-tree — PR #818 merged: refactored Internal.Arena with DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot Haskell extensions. This is a production-grade LSM database used by the Cardano node.
-2. Cardano Foundation/cardano-org — Added Kenya-specific CEX list (Binance, Yellow Card, BingX, OKX); contributed Docker containerisation for the documentation platform.
-3. rust-bitcoin — Contributed to the foundational Rust library for Bitcoin development.
+1. IntersectMBO/lsm-tree — PR #818 merged: refactored Internal.Arena with DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot Haskell extensions. Production-grade LSM database used by the Cardano node.
+2. Cardano Foundation/cardano-org — Added Kenya-specific CEX list; Docker containerisation for docs platform.
+3. rust-bitcoin — Contributed to the foundational Rust Bitcoin library.
 4. stx-labs/explorer — Contributed to a Bitcoin/Stacks blockchain explorer.
 
 KEY PROJECTS:
-1. LiteCert — Blockchain certificate verification on Cardano using Plutus + Mesh SDK. Tamper-proof credentials with unique identifiers and on-chain tx hashes. Live: certified-chain.vercel.app
-2. Bitcoin Wallet Lab — Educational testnet4 Bitcoin wallet. secp256k1 + ECDSA + RFC 6979 from scratch in Rust. All 3 address types. Live: wallet-lab.onrender.com
-3. Open Wallet Standard — Multi-chain AI agent wallet (9 networks: EVM, Solana, Bitcoin, Cosmos, XRPL). Policy-gated signing — AI agents never hold raw keys. Live: open-wallet-standard.onrender.com
-4. Memorabilia — Fully on-chain Starknet memory game. Zero gas fees via Account Abstraction. Playable on Telegram (@enter_memorabilia_musem_bot). Live: memorabilia-game.vercel.app
-5. Daily Habit Hub — Fitness app with Avalanche Web3 rewards, $HABIT tokens, NFT minting. Live: daily-habit-hub.vercel.app
-6. Computer Vision System — Dual Python+Rust YOLO system for traffic + attendance. ONNX Runtime on NVIDIA Jetson. GitHub: github.com/mwihoti/computer_vision
-7. Cardano Quest — On-chain riddle-quest game for CardanoHubNBO Nairobi meetups. Live: riddlerequest26.cardanohubnbo.com
-8. MuscleMind — Gym management platform for Muscle Beach Gym, Nairobi. M-Pesa payments, membership tiers. Live: gymbuddy-s.vercel.app
-9. Bitcoin Dojo Cryptography — secp256k1, ECDSA, finite fields, SHA-256 from scratch in Rust.
-10. AIAdvisory — AI advisory on ICP with LLaMA3 agents (AgriBot, LegalBot) for Kenyan farmers and citizens.
+1. LiteCert — Blockchain certificate verification on Cardano (Plutus + Mesh SDK). Live: certified-chain.vercel.app
+2. Bitcoin Wallet Lab — secp256k1 + ECDSA + RFC 6979 from scratch in Rust. Testnet4 wallet. Live: wallet-lab.onrender.com
+3. Open Wallet Standard — Multi-chain AI agent wallet (9 networks). Policy-gated signing. Live: open-wallet-standard.onrender.com
+4. Memorabilia — On-chain Starknet game, gasless via AA, Telegram Mini App (@enter_memorabilia_musem_bot). Live: memorabilia-game.vercel.app
+5. Daily Habit Hub — Fitness + Avalanche Web3 rewards. Live: daily-habit-hub.vercel.app
+6. Computer Vision — Dual Python+Rust YOLO system, ONNX Runtime, NVIDIA Jetson edge deployment.
+7. Cardano Quest — On-chain riddle game for CardanoHubNBO meetups. Live: riddlerequest26.cardanohubnbo.com
+8. MuscleMind — Gym management with M-Pesa, Nairobi. Live: gymbuddy-s.vercel.app
+9. AIAdvisory — LLaMA3 agents (AgriBot, LegalBot) on ICP for Kenyan farmers and citizens.
+10. Bitcoin Dojo Cryptography — secp256k1, ECDSA, finite fields from scratch in Rust.
 
 WORK EXPERIENCE:
-- Blockchain Ambassador, Blockchain Centre NBO (Oct 2025 – Present): Tech & Research dept (Cardano DApps, Next.js), Events & Legal dept (technical assistance, video filming). Represented Blockchain Centre at Cardano Africa Tech Summit.
-- Full-Stack Developer, Freelance (2024 – Present): Shipped 10+ projects across Web3, AI, and full-stack.
+- Blockchain Ambassador, Blockchain Centre NBO (Oct 2025–Present): Tech & Research (Cardano DApps, Next.js) + Events & Legal (technical support, video filming). Cardano Africa Tech Summit ambassador.
+- Full-Stack Developer, Freelance (2024–Present): 10+ projects across Web3, AI, full-stack.
 - Data Analyst & Engineer, FaithTech (Aug–Sep 2025): ETL pipelines, regex CSV processing, LaTeX PDF reports.
 - Backend Developer Intern, HNG (Apr–Aug 2024): Node.js, Express, PostgreSQL. Stage 5 certified.
-- Fullstack Developer, KejaSpace (May–Jul 2024): React, Node.js, role-based access control, Tailwind CSS redesign.
-- Business Systems Administrator Intern, KTDA (May–Sep 2023): Microsoft Dynamics NAV, SQL, Pesa-Ulipo app setup.
+- Fullstack Developer, KejaSpace (May–Jul 2024): React, Node.js, RBAC, Tailwind redesign.
+- Business Systems Administrator Intern, KTDA (May–Sep 2023): MS Dynamics NAV, SQL.
 
 COMMUNITY & COMPETITIONS:
-- Warnet: Wrath of Nalo (Feb 2026): Live Bitcoin Lightning Network attack simulation on Signet. Team Libra. Executed channel jamming, gossip timestamp filter DoS, onion bomb exploit on LND.
-- CardanoHubNBO (Dec 2025–Present): Built Cardano Quest for monthly Nairobi community meetups.
-- CodeOrange Devs (2025–Present): Bitcoin Wallet Lab featured by community. Collaborating on Bitcoin educational tooling.
-- Cardano Africa Tech Summit Ambassador (2025): Represented Blockchain Centre NBO.
-- Hedera Africa Hackathon (Oct 2025): Built echain — DLT product on Hedera.
+- Warnet: Wrath of Nalo (Feb 2026): Live Lightning Network attack simulation on Signet. Team Libra. Channel jamming, LND DoS exploits.
+- CardanoHubNBO (Dec 2025–Present): Built Cardano Quest for Nairobi community meetups.
+- CodeOrange Devs (2025–Present): Bitcoin Wallet Lab featured by community.
+- Hedera Africa Hackathon (Oct 2025): Built echain on Hedera.
 - Base East Africa Batch 2 Hackathon (2025): MVP on Base L2.
 
 EDUCATION:
 - BSc Business Information Technology, KCA University (2019–2023)
 - Software Engineering, ALX Africa (2023–2024)
-- Bitcoin Development tracks, Bitcoin Dojo (2025–Present): Cryptography Fundamentals, Addresses & Encoding, Transactions
+- Bitcoin Dojo tracks (2025–Present): Cryptography, Addresses & Encoding, Transactions
 
 AVAILABILITY:
-Daniel is open to: freelance contracts, remote work, open source collaboration, blockchain projects, AI/ML projects, full-stack development. Contact: danielmwihoti@gmail.com`;
+Open to freelance contracts, remote work worldwide, open source collaboration, blockchain and AI projects. Email: danielmwihoti@gmail.com`;
 
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODEL = 'llama3-70b-8192';
+const groq = new Groq({
+  apiKey: process.env.REACT_APP_GROQ_API_KEY,
+  dangerouslyAllowBrowser: true,
+});
 
 function Message({ msg }) {
   const isUser = msg.role === 'user';
@@ -87,13 +90,16 @@ function Message({ msg }) {
         {isUser ? <FaUser className="w-3 h-3 text-white" /> : <FaRobot className="w-3 h-3 text-teal-400" />}
       </div>
       <div
-        className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
+        className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${
           isUser
             ? 'bg-teal-600 text-white rounded-tr-none'
             : 'bg-gray-700/80 text-gray-200 rounded-tl-none'
         }`}
       >
         {msg.content}
+        {msg.streaming && (
+          <span className="inline-block w-1 h-3.5 bg-teal-400 ml-0.5 animate-pulse align-middle" />
+        )}
       </div>
     </div>
   );
@@ -152,44 +158,42 @@ export default function ChatBot() {
     setInput('');
     setLoading(true);
 
+    // Add empty streaming message placeholder
+    const streamingMsg = { role: 'assistant', content: '', streaming: true };
+    setMessages([...history, streamingMsg]);
+
     try {
-      const res = await fetch(GROQ_API_URL, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.REACT_APP_GROQ_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: GROQ_MODEL,
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...history.map((m) => ({ role: m.role, content: m.content })),
-          ],
-          max_tokens: 512,
-          temperature: 0.6,
-        }),
+      const stream = await groq.chat.completions.create({
+        model: 'openai/gpt-oss-120b',
+        temperature: 1,
+        max_completion_tokens: 8192,
+        top_p: 1,
+        stream: true,
+        reasoning_effort: 'medium',
+        stop: null,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...history.map((m) => ({ role: m.role, content: m.content })),
+        ],
       });
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        console.error('Groq API error:', res.status, err);
-        throw new Error(err?.error?.message || `HTTP ${res.status}`);
+      let fullContent = '';
+
+      for await (const chunk of stream) {
+        const delta = chunk.choices[0]?.delta?.content || '';
+        fullContent += delta;
+        setMessages([...history, { role: 'assistant', content: fullContent, streaming: true }]);
       }
 
-      const data = await res.json();
-      const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't get a response.";
-      setMessages([...history, { role: 'assistant', content: reply }]);
+      // Finalise — remove streaming cursor
+      setMessages([...history, { role: 'assistant', content: fullContent, streaming: false }]);
     } catch (err) {
       console.error('ChatBot error:', err);
-      setMessages([
-        ...history,
-        {
-          role: 'assistant',
-          content: !process.env.REACT_APP_GROQ_API_KEY
-            ? 'The chatbot is not configured yet. Please contact Daniel at danielmwihoti@gmail.com'
-            : 'Something went wrong. Please try again or email danielmwihoti@gmail.com directly.',
-        },
-      ]);
+      const detail = err?.error?.message || err?.message || err?.status || JSON.stringify(err);
+      const errMsg = !process.env.REACT_APP_GROQ_API_KEY
+        ? 'Chatbot not configured. Please contact Daniel at danielmwihoti@gmail.com'
+        : `Error: ${detail}. Try emailing danielmwihoti@gmail.com`;
+      setMessages([...history, { role: 'assistant', content: errMsg, streaming: false }]);
     } finally {
       setLoading(false);
     }
@@ -245,7 +249,7 @@ export default function ChatBot() {
                 <div className="text-sm font-semibold text-white">Ask about Daniel</div>
                 <div className="text-xs text-teal-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse inline-block" />
-                  Powered by Groq · LLaMA3
+                  Powered by Groq · GPT-OSS 120B
                 </div>
               </div>
             </div>
@@ -255,7 +259,7 @@ export default function ChatBot() {
               {messages.map((msg, i) => (
                 <Message key={i} msg={msg} />
               ))}
-              {loading && <TypingIndicator />}
+              {loading && messages[messages.length - 1]?.content === '' && <TypingIndicator />}
               <div ref={bottomRef} />
             </div>
 
