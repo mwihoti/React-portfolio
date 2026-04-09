@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaPaperPlane, FaUser } from 'react-icons/fa';
 import { Groq } from 'groq-sdk';
+import ReactMarkdown from 'react-markdown';
 
 const SYSTEM_PROMPT = `You are Daniel Mwihoti's personal portfolio assistant. Your ONLY job is to answer questions about Daniel Mwihoti — his skills, projects, experience, open source work, background, and how to contact him.
 
@@ -78,6 +79,19 @@ const groq = new Groq({
   dangerouslyAllowBrowser: true,
 });
 
+const markdownComponents = {
+  p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+  strong: ({ children }) => <strong className="font-semibold text-teal-300">{children}</strong>,
+  ol: ({ children }) => <ol className="list-decimal list-outside ml-4 mb-2 space-y-1">{children}</ol>,
+  ul: ({ children }) => <ul className="list-disc list-outside ml-4 mb-2 space-y-1">{children}</ul>,
+  li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+  a: ({ href, children }) => (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-teal-400 underline hover:text-teal-300">
+      {children}
+    </a>
+  ),
+};
+
 function Message({ msg }) {
   const isUser = msg.role === 'user';
   return (
@@ -90,13 +104,17 @@ function Message({ msg }) {
         {isUser ? <FaUser className="w-3 h-3 text-white" /> : <FaRobot className="w-3 h-3 text-teal-400" />}
       </div>
       <div
-        className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${
+        className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
           isUser
             ? 'bg-teal-600 text-white rounded-tr-none'
             : 'bg-gray-700/80 text-gray-200 rounded-tl-none'
         }`}
       >
-        {msg.content}
+        {isUser ? (
+          msg.content
+        ) : (
+          <ReactMarkdown components={markdownComponents}>{msg.content}</ReactMarkdown>
+        )}
         {msg.streaming && (
           <span className="inline-block w-1 h-3.5 bg-teal-400 ml-0.5 animate-pulse align-middle" />
         )}
