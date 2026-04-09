@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaPaperPlane, FaUser } from 'react-icons/fa';
-import Groq from 'groq-sdk';
-
 const SYSTEM_PROMPT = `You are Daniel Mwihoti's personal portfolio assistant. Your ONLY job is to answer questions about Daniel Mwihoti — his skills, projects, experience, open source work, background, and how to contact him.
 
 GUARDRAIL: If a question is NOT about Daniel Mwihoti, politely decline and redirect. Say something like: "I'm here to answer questions about Daniel Mwihoti. Is there something about his skills, projects, or experience I can help you with?"
@@ -74,10 +72,8 @@ EDUCATION:
 AVAILABILITY:
 Daniel is open to: freelance contracts, remote work, open source collaboration, blockchain projects, AI/ML projects, full-stack development. Contact: danielmwihoti@gmail.com`;
 
-const client = new Groq({
-  apiKey: process.env.REACT_APP_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_MODEL = 'llama3-70b-8192';
 
 function Message({ msg }) {
   const isUser = msg.role === 'user';
@@ -157,22 +153,42 @@ export default function ChatBot() {
     setLoading(true);
 
     try {
-      const completion = await client.chat.completions.create({
-        model: 'llama3-70b-8192',
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...history.map((m) => ({ role: m.role, content: m.content })),
-        ],
-        max_tokens: 512,
-        temperature: 0.6,
+      const res = await fetch(GROQ_API_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.REACT_APP_GROQ_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: GROQ_MODEL,
+          messages: [
+            { role: 'system', content: SYSTEM_PROMPT },
+            ...history.map((m) => ({ role: m.role, content: m.content })),
+          ],
+          max_tokens: 512,
+          temperature: 0.6,
+        }),
       });
 
-      const reply = completion.choices[0]?.message?.content || "Sorry, I couldn't get a response.";
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.error('Groq API error:', res.status, err);
+        throw new Error(err?.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't get a response.";
       setMessages([...history, { role: 'assistant', content: reply }]);
-    } catch {
+    } catch (err) {
+      console.error('ChatBot error:', err);
       setMessages([
         ...history,
-        { role: 'assistant', content: 'Something went wrong. Please try again or email danielmwihoti@gmail.com directly.' },
+        {
+          role: 'assistant',
+          content: !process.env.REACT_APP_GROQ_API_KEY
+            ? 'The chatbot is not configured yet. Please contact Daniel at danielmwihoti@gmail.com'
+            : 'Something went wrong. Please try again or email danielmwihoti@gmail.com directly.',
+        },
       ]);
     } finally {
       setLoading(false);
