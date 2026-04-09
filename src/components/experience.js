@@ -47,6 +47,18 @@ const experiences = [
     ],
   },
   {
+    title: 'Blockchain Ambassador',
+    company: 'Blockchain Centre NBO',
+    period: 'October 2025 – Present',
+    type: 'work',
+    description: [
+      'Worked across Tech & Research and Events & Legal departments as both a builder and community support.',
+      'Tech & Research: built Cardano DApps (Plutus, Mesh SDK) and Next.js projects; conducted research across blockchain ecosystems.',
+      'Events & Legal: provided technical assistance at community events; handled video filming and documentation for Blockchain Centre NBO activities.',
+      'Represented Blockchain Centre NBO as ambassador at the Cardano Africa Tech Summit and Cardano Corner Africa Tech Summit.',
+    ],
+  },
+  {
     title: 'Community Builder & Game Developer',
     company: 'CardanoHubNBO, Nairobi',
     period: 'December 2025 – Present',
