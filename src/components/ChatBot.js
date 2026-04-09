@@ -164,12 +164,11 @@ export default function ChatBot() {
 
     try {
       const stream = await groq.chat.completions.create({
-        model: 'openai/gpt-oss-120b',
+        model: 'llama-3.3-70b-versatile',
         temperature: 1,
-        max_completion_tokens: 8192,
+        max_tokens: 800,
         top_p: 1,
         stream: true,
-        reasoning_effort: 'medium',
         stop: null,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
@@ -249,7 +248,7 @@ export default function ChatBot() {
                 <div className="text-sm font-semibold text-white">Ask about Daniel</div>
                 <div className="text-xs text-teal-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse inline-block" />
-                  Powered by Groq · GPT-OSS 120B
+                  Powered by Groq · LLaMA 3.3 70B
                 </div>
               </div>
             </div>
