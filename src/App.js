@@ -10,6 +10,7 @@ import { useTheme } from './context/theme';
 import Navbar from './components/navbar';
 import Experience from './components/experience';
 import CustomCursor from './components/CustomCursor';
+import ChatBot from './components/ChatBot';
 
 function App() {
   const darkTheme = useTheme();
@@ -17,6 +18,7 @@ function App() {
   return (
     <>
       <CustomCursor />
+      <ChatBot />
       <div className={darkTheme ? 'dark' : ''}>
         <div className="bg-white dark:bg-[#0a0a0f] transition-colors duration-300">
           <Navbar />
