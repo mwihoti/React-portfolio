@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import {
@@ -29,7 +31,7 @@ function SkillItem({ skill }) {
       {skill.Icon ? (
         <skill.Icon style={{ color: skill.color }} className="h-6 w-6" />
       ) : (
-        <span className="h-6 w-6 flex items-center justify-center text-teal-400 text-sm font-bold">
+        <span aria-hidden="true" className="h-6 w-6 flex items-center justify-center text-teal-400 text-sm font-bold">
           &#x2022;
         </span>
       )}

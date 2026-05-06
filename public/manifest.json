@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mwihoti",
+  "name": "Daniel Mwihoti — Software, AI & Blockchain Developer",
+  "description": "Portfolio of Daniel Mwihoti — software, AI, and blockchain developer based in Nairobi, Kenya.",
   "icons": [
     {
       "src": "favicon.ico",

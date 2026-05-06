@@ -1,11 +1,13 @@
+'use client';
+
 import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
-import me from '../assets/me.jpg';
 import Typewriter from 'typewriter-effect';
-import './floatingElements.css';
 import ParticleBackground from './ParticleBackground';
+
+const me = '/me.jpg';
 
 function TerminalCard() {
   return (
@@ -116,16 +118,16 @@ export default function Profile() {
         {/* Name + typewriter + terminal card */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-10 px-4">
           <div className="text-center lg:text-left">
-            <h2
+            <h1
               className={`text-5xl py-2 font-medium md:text-6xl glow-teal ${
                 darkTheme ? 'text-teal-400' : 'text-teal-600'
               }`}
             >
               Daniel Edward Mwihoti
-            </h2>
-            <h3 className="text-2xl font-bold dark:text-gray-300 py-2 md:text-3xl">
+            </h1>
+            <h2 className="text-2xl font-bold dark:text-gray-300 py-2 md:text-3xl">
               Software Developer
-            </h3>
+            </h2>
             <div className="max-w-xl font-semibold text-xl text-gray-600 dark:text-gray-300 min-h-[2rem]">
               <Typewriter
                 options={{

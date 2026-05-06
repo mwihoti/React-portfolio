@@ -1,0 +1,36 @@
+'use client';
+
+import Skills from '../src/components/skills';
+import Work from '../src/components/work';
+import Profile from '../src/components/profile';
+import About from '../src/components/about';
+import Contact from '../src/components/contact';
+import Footer from '../src/components/footer';
+import Navbar from '../src/components/navbar';
+import Experience from '../src/components/experience';
+import CustomCursor from '../src/components/CustomCursor';
+import ChatBot from '../src/components/ChatBot';
+import { useTheme } from '../src/context/theme';
+
+export default function Home() {
+  const darkTheme = useTheme();
+
+  return (
+    <>
+      <CustomCursor />
+      <ChatBot />
+      <div className={darkTheme ? 'dark' : ''}>
+        <div className="bg-white dark:bg-[#0a0a0f] transition-colors duration-300">
+          <Navbar />
+          <Profile />
+          <About />
+          <Experience />
+          <Skills />
+          <Work />
+          <Contact />
+          <Footer />
+        </div>
+      </div>
+    </>
+  );
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaPaperPlane, FaUser } from 'react-icons/fa';
@@ -75,7 +77,7 @@ AVAILABILITY:
 Open to freelance contracts, remote work worldwide, open source collaboration, blockchain and AI projects. Email: danielmwihoti@gmail.com`;
 
 const groq = new Groq({
-  apiKey: process.env.REACT_APP_GROQ_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
   dangerouslyAllowBrowser: true,
 });
 
@@ -207,7 +209,7 @@ export default function ChatBot() {
     } catch (err) {
       console.error('ChatBot error:', err);
       const detail = err?.error?.message || err?.message || err?.status || JSON.stringify(err);
-      const errMsg = !process.env.REACT_APP_GROQ_API_KEY
+      const errMsg = !process.env.NEXT_PUBLIC_GROQ_API_KEY
         ? 'Chatbot not configured. Please contact Daniel at danielmwihoti@gmail.com'
         : `Error: ${detail}. Try emailing danielmwihoti@gmail.com`;
       setMessages([...history, { role: 'assistant', content: errMsg, streaming: false }]);

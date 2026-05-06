@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaStar, FaCodeBranch } from 'react-icons/fa';
 import { useTheme } from '../context/theme';
