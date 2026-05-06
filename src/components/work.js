@@ -20,15 +20,6 @@ const projects = [
     category: ['Web3', 'AI', 'Bitcoin'],
   },
   {
-    title: 'Bitcoin Dojo — Cryptography Fundamentals',
-    problem: 'Understand the full cryptographic stack powering Bitcoin by implementing it from scratch in Rust.',
-    description:
-      'Hands-on implementation of elliptic curve cryptography from first principles, built layer by layer: SHA-256 hashing, finite field arithmetic, scalar operations mod curve order n, elliptic curve point addition & double-and-add scalar multiplication, secp256k1 parameters, private/public key generation (Q = d * G), and ECDSA sign/verify. The cryptography that powers every Bitcoin transaction — written in Rust.',
-    tech: ['Rust', 'secp256k1', 'ECDSA', 'ECC', 'SHA-256'],
-    github: 'https://github.com/mwihoti/bitcoin_dojo-btcdeveloper-',
-    category: ['Bitcoin'],
-  },
-  {
     title: 'Bitcoin Wallet Lab',
     problem: 'Show exactly how Bitcoin works at every layer — from key generation to signed, broadcast transactions on testnet.',
     description:
@@ -59,15 +50,6 @@ const projects = [
     category: ['Web3', 'Game'],
   },
   {
-    title: 'Cardano Quest',
-    problem: 'Onboard new members to Cardano through an interactive riddle-quest game at community meetups.',
-    description:
-      'Interactive riddle-quest game built for Blockchain Centre NBO and CardanoHubNBO monthly community meetups in Nairobi. Engages and educates new members on the Cardano ecosystem through gameplay.',
-    tech: ['TypeScript', 'React', 'Cardano'],
-    live: 'https://riddlerequest26.cardanohubnbo.com',
-    category: ['Web3', 'Game'],
-  },
-  {
     title: 'Daily Habit Hub',
     problem: 'Build exercise habits through daily accountability, community support, and on-chain proof of progress on Avalanche.',
     description:
@@ -85,92 +67,6 @@ const projects = [
     tech: ['Python', 'Rust', 'YOLO', 'ONNX Runtime', 'OpenCV', 'DeepFace'],
     github: 'https://github.com/mwihoti/computer_vision',
     category: ['AI'],
-  },
-  {
-    title: 'Spotter AI',
-    problem: 'Real-time AI coaching for gym-goers without a personal trainer.',
-    description: 'AI-powered fitness spotter application built with TypeScript.',
-    tech: ['TypeScript', 'AI/ML'],
-    github: 'https://github.com/mwihoti/Spotter-AI',
-    category: ['AI'],
-  },
-  {
-    title: 'MuscleMind',
-    badge: 'Startup',
-    problem: 'Manage gym memberships, class bookings, and M-Pesa payments for local gyms in Kenya.',
-    description:
-      'Full-stack gym management platform built for Muscle Beach Gym in Kahawa West, Nairobi. Features membership tiers (Basic/Premium/Elite in KSh), M-Pesa payments, class scheduling, expert trainers, and community testimonials.',
-    tech: ['Next.js', 'Tailwind CSS', 'Supabase'],
-    live: 'https://gymbuddy-s.vercel.app',
-    category: ['Fullstack'],
-  },
-  {
-    title: 'AIAdvisory',
-    problem: 'Give Kenyan farmers and citizens access to AI-powered agricultural and legal guidance.',
-    description:
-      'Web3 app with AI-powered assistants tailored for Kenya. AgriBot provides crop advice, disease diagnosis, weather insights, and market prices in KES. LegalBot guides users on land rights, legal processes, and document preparation.',
-    tech: ['React', 'TypeScript', 'AI/ML', 'Web3.js'],
-    live: 'https://yhfsc-maaaa-aaaad-aawba-cai.icp1.io/',
-    github: 'https://github.com/mwihoti/kenyaAdvisoryServices',
-    category: ['AI', 'Web3'],
-  },
-  {
-    title: 'RaffleGame',
-    problem: 'Run provably fair decentralized raffles with NFT tickets and Civic identity verification.',
-    description:
-      'Decentralized raffle platform with Civic authentication and embedded wallet. Ensures transparent winning mechanisms for users.',
-    tech: ['Solidity', 'React', 'Civic', 'Web3.js'],
-    live: 'https://human-rafflewith-nft.vercel.app/',
-    github: 'https://github.com/mwihoti/humanRafflewithCivic',
-    category: ['Web3'],
-  },
-  {
-    title: 'MathWhiz',
-    problem: 'Adaptive AI tutoring that generates guided questions when students make mistakes.',
-    description:
-      'AI-powered math learning app for students aged 13-17. Provides adaptive practice, generates guided questions when mistakes occur, and saves progress to the database.',
-    tech: ['React', 'AI/ML', 'PostgreSQL'],
-    github: 'https://github.com/mwihoti/educationapp',
-    category: ['AI'],
-  },
-  {
-    title: 'GestureAI',
-    problem: 'Make sign language communication accessible via real-time camera-based recognition.',
-    description:
-      'Real-time gesture recognition and sign language interpretation app using TensorFlow.js and Gemini AI.',
-    tech: ['TensorFlow.js', 'Gemini AI', 'React'],
-    github: 'https://github.com/mwihoti/gesture-ai--gemini',
-    category: ['AI'],
-  },
-  {
-    title: 'Meeting Insights Generator',
-    problem: 'Turn raw meeting recordings into structured AI summaries and action items.',
-    description:
-      'App that records meetings, transcribes them, and generates AI-powered summaries and insights.',
-    tech: ['React', 'Tailwind CSS', 'Speech Recognition', 'AI/ML'],
-    live: 'https://meeting-insights-generator.vercel.app/',
-    github: 'https://github.com/mwihoti/meeting-insights-generator',
-    category: ['AI', 'Fullstack'],
-  },
-  {
-    title: 'Guess Game Fullstack DApp',
-    problem: 'On-chain gaming where every bet and outcome is transparent and verifiable.',
-    description:
-      'Deployed on Arbitrum Sepolia, this decentralized guessing game integrates smart contracts and Web3.js for on-chain gameplay.',
-    tech: ['Solidity', 'TypeScript', 'React', 'Hardhat', 'Web3.js'],
-    live: 'https://arbitrum-guess-game.vercel.app/',
-    github: 'https://github.com/mwihoti/arbitrum-guess-game',
-    category: ['Web3', 'Fullstack'],
-  },
-  {
-    title: 'MemoryGame',
-    badge: 'StackUp Hackathon Top 10',
-    problem: 'Demonstrate Rust GUI capabilities via a polished game built with the Slint UI framework.',
-    description:
-      'Award-winning interactive memory game built with Rust and Slint library. Ranked top 10 in StackUp Hackathon 2024.',
-    tech: ['Rust', 'Slint'],
-    github: 'https://github.com/mwihoti/MemoryGame',
-    category: ['Game'],
   },
 ];
 
@@ -199,7 +95,7 @@ export default function Work() {
             Projects
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            A selection of my recent work in AI, Web3, Bitcoin, Starknet, and full-stack applications.
+            Selected work in Bitcoin, Cardano, Starknet, AI, and full-stack.
           </p>
         </motion.div>
 
@@ -301,6 +197,23 @@ export default function Work() {
             ))}
           </motion.div>
         </AnimatePresence>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <a
+            href="https://github.com/mwihoti?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium border border-teal-500/40 text-teal-500 dark:text-teal-400 hover:bg-teal-500/10 transition-colors"
+          >
+            <FaGithub className="h-4 w-4" aria-hidden="true" />
+            More projects on GitHub
+          </a>
+        </motion.div>
       </div>
     </section>
   );

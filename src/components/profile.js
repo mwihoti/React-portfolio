@@ -4,66 +4,21 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
-import Typewriter from 'typewriter-effect';
 import ParticleBackground from './ParticleBackground';
 
 const me = '/me.jpg';
 
-function TerminalCard() {
+function SocialLink({ href, icon: Icon, label }) {
   return (
-    <div className="terminal-card w-full max-w-xs text-left flex-shrink-0">
-      <div className="terminal-header">
-        <span className="w-3 h-3 rounded-full bg-red-500 inline-block" />
-        <span className="w-3 h-3 rounded-full bg-yellow-500 inline-block" />
-        <span className="w-3 h-3 rounded-full bg-green-500 inline-block" />
-        <span className="ml-2 text-xs text-gray-500">daniel@nairobi: ~</span>
-      </div>
-      <div className="terminal-body space-y-0.5">
-        <div>
-          <span className="text-teal-400">❯ </span>
-          <span className="text-gray-400">whoami</span>
-        </div>
-        <div className="text-white pl-2">Full-stack Developer, Nairobi</div>
-        <div className="mt-1">
-          <span className="text-teal-400">❯ </span>
-          <span className="text-gray-400">cat stats.txt</span>
-        </div>
-        <div className="text-green-400 pl-2">3+ years experience</div>
-        <div className="text-green-400 pl-2">20+ projects shipped</div>
-        <div className="mt-1">
-          <span className="text-teal-400">❯ </span>
-          <span className="text-gray-400">git log --merged</span>
-        </div>
-        <div className="text-yellow-400 pl-2 text-xs">&#x2713; IntersectMBO/lsm-tree #818</div>
-        <div className="text-yellow-400 pl-2 text-xs">&#x2713; cardano-foundation/cardano-org</div>
-        <div className="text-yellow-400 pl-2 text-xs">&#x2713; bitcoin-core/bitcoin</div>
-        <div className="mt-1">
-          <span className="text-teal-400">❯ </span>
-          <span className="blink-cursor text-teal-400">&#x2588;</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SocialLink({ href, delay, icon: Icon }) {
-  return (
-    <motion.a
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: [0, -10, 0] }}
-      transition={{
-        opacity: { delay, duration: 0.5 },
-        y: { delay: delay + 0.5, duration: 2, repeat: Infinity, ease: 'easeInOut' },
-      }}
-      whileHover={{ scale: 1.2, y: -15, transition: { duration: 0.2 } }}
-      whileTap={{ scale: 0.9 }}
-      className="text-gray-600 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400"
+      aria-label={label}
+      className="text-gray-600 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400 transition-colors"
     >
-      <Icon className="h-8 w-8" />
-    </motion.a>
+      <Icon className="h-7 w-7" />
+    </a>
   );
 }
 
@@ -84,120 +39,67 @@ export default function Profile() {
         />
       )}
 
-      {/* Currently building badge */}
-      <motion.div
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="relative z-10"
-      >
-        <a
-          href="https://github.com/mwihoti/danpersonalagent"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-900/50 border border-teal-500/30 text-teal-400 text-sm hover:bg-teal-900/70 transition-colors"
-        >
-          <span className="animate-pulse">&#x26A1;</span>
-          <span>Building: Personal AI Agent</span>
-        </a>
-      </motion.div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        {/* Avatar */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="flex justify-center mb-6"
+          className="flex justify-center mb-8"
         >
           <div className="avatar">
             <img src={me} alt="Daniel Mwihoti" />
           </div>
         </motion.div>
 
-        {/* Name + typewriter + terminal card */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-10 px-4">
-          <div className="text-center lg:text-left">
-            <h1
-              className={`text-5xl py-2 font-medium md:text-6xl glow-teal ${
-                darkTheme ? 'text-teal-400' : 'text-teal-600'
-              }`}
-            >
-              Daniel Edward Mwihoti
-            </h1>
-            <h2 className="text-2xl font-bold dark:text-gray-300 py-2 md:text-3xl">
-              Software Developer
-            </h2>
-            <div className="max-w-xl font-semibold text-xl text-gray-600 dark:text-gray-300 min-h-[2rem]">
-              <Typewriter
-                options={{
-                  strings: [
-                    'Full-stack developer based in Nairobi, Kenya.',
-                    'Building on Bitcoin, web, AI, and Cardano.',
-                    'Open source contributor to IntersectMBO, Bitcoin & Cardano Foundation.',
-                    'Web3 + AI. Always learning, always shipping.',
-                    "3+ years. 20+ projects. Let's build something impactful.",
-                  ],
-                  autoStart: true,
-                  loop: true,
-                  delay: 50,
-                  deleteSpeed: 30,
-                }}
-              />
-            </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            <TerminalCard />
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Social links */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="flex justify-center space-x-6 relative z-10"
-      >
-        <SocialLink href="https://github.com/mwihoti" icon={FaGithub} delay={0} />
-        <SocialLink
-          href="https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/"
-          icon={FaLinkedin}
-          delay={0.2}
-        />
-        <SocialLink href="mailto:danielmwihoti@gmail.com" icon={FaEnvelope} delay={0.4} />
-      </motion.div>
-
-      <div className="text-teal-400 text-xl font-bold relative z-10 min-h-[2rem]">
-        <Typewriter
-          options={{
-            strings: ["Let's build something that lasts.", 'Open to collaborations.'],
-            autoStart: true,
-            loop: true,
-            delay: 80,
-            deleteSpeed: 50,
-          }}
-        />
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-        className="relative z-10"
-      >
-        <a
-          href="#contact"
-          className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full font-medium hover:bg-teal-500 transition-colors shadow-lg hover:shadow-teal-500/25"
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className={`text-5xl md:text-6xl font-bold pb-3 glow-teal ${
+            darkTheme ? 'text-teal-400' : 'text-teal-600'
+          }`}
         >
-          Get In Touch
-        </a>
-      </motion.div>
+          Daniel Edward Mwihoti
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
+        >
+          I build Bitcoin, Cardano, and AI infrastructure in Rust.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex justify-center gap-6 mt-8"
+        >
+          <SocialLink href="https://github.com/mwihoti" icon={FaGithub} label="GitHub" />
+          <SocialLink
+            href="https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/"
+            icon={FaLinkedin}
+            label="LinkedIn"
+          />
+          <SocialLink href="mailto:danielmwihoti@gmail.com" icon={FaEnvelope} label="Email" />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-10"
+        >
+          <a
+            href="#contact"
+            className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full font-medium hover:bg-teal-500 transition-colors shadow-lg hover:shadow-teal-500/25"
+          >
+            Get In Touch
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 }

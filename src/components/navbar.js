@@ -51,12 +51,22 @@ export default function Navbar() {
                   smooth={true}
                   duration={500}
                   offset={-70}
-                  className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm"
+                  className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm cursor-pointer"
                 >
                   {item}
                 </Link>
               </motion.div>
             ))}
+
+            <motion.a
+              href="/writing"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navItems.length * 0.1 }}
+              className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm"
+            >
+              Writing
+            </motion.a>
 
             {/* Copy email */}
             <motion.button
@@ -153,6 +163,13 @@ export default function Navbar() {
                   {item}
                 </a>
               ))}
+              <a
+                href="/writing"
+                className="block px-3 py-2 rounded-md text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 font-medium transition-colors"
+                onClick={toggleMenu}
+              >
+                Writing
+              </a>
             </div>
           </motion.div>
         )}

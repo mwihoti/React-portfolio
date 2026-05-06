@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import ContributionGraph from './ContributionGraph';
+import TerminalCard from './TerminalCard';
 
 const stackTimeline = [
   {
@@ -63,9 +64,8 @@ export default function About() {
           </h2>
         </motion.div>
 
-        {/* Split layout: bio left, stack timeline right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
-          {/* Bio */}
+        {/* Bio + terminal */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10 items-start">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -74,66 +74,73 @@ export default function About() {
             className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
           >
             <p className="leading-8 text-lg text-gray-700 dark:text-gray-300 mb-5">
-              I&apos;m a full-stack developer based in Nairobi, Kenya, with 3+ years of
-              experience building scalable web applications, AI-powered tools, and
-              blockchain systems. My work spans the MERN stack, TypeScript, Python, and
-              Rust &mdash; from SaaS products to decentralized protocols.
+              I&apos;m a Bitcoin, Cardano, and Rust engineer based in Nairobi, Kenya. I
+              build cryptography and consensus systems &mdash; secp256k1 wallets, Plutus
+              smart contracts, on-chain games, and AI-augmented developer tooling.
             </p>
             <p className="leading-8 text-lg text-gray-700 dark:text-gray-300">
-              Over the past year I&apos;ve gone deep into Bitcoin development (secp256k1,
-              SegWit, live transaction broadcasting), Starknet gaming with the Dojo
-              framework, and Cardano ecosystem tooling. I&apos;m an open source contributor to
-              IntersectMBO&apos;s lsm-tree Haskell library, the Cardano Foundation, and Bitcoin
-              Core. If you have an idea to bring to life &mdash; from a landing page to a
-              production DApp &mdash; I&apos;m available to collaborate.
+              I&apos;m an open-source contributor to IntersectMBO&apos;s lsm-tree (Haskell,
+              used by the Cardano node), the Cardano Foundation, and rust-bitcoin. I also
+              ship full-stack &mdash; Next.js, Supabase, Postgres &mdash; when the project
+              calls for it. Open to remote contracts and collaborations.
             </p>
           </motion.div>
 
-          {/* Stack timeline */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
+            className="flex justify-center"
           >
-            <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400 mb-6">
-              Tech Evolution
-            </h3>
-            <div className="relative">
-              <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gray-700" />
-              {stackTimeline.map((row, i) => (
-                <motion.div
-                  key={row.year}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 }}
-                  className="relative flex gap-5 mb-6 last:mb-0"
-                >
-                  <div
-                    className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold border-2 ${row.border} ${row.bg} ${row.color} flex-shrink-0`}
-                  >
-                    {row.year.slice(2)}
-                  </div>
-                  <div className="pt-1">
-                    <span className={`text-sm font-semibold ${row.color}`}>{row.year}</span>
-                    <div className="flex flex-wrap gap-1.5 mt-1.5">
-                      {row.techs.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded border border-gray-200 dark:border-gray-700"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <TerminalCard />
           </motion.div>
         </div>
+
+        {/* Tech Evolution timeline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow mb-10"
+        >
+          <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400 mb-6">
+            Tech Evolution
+          </h3>
+          <div className="relative">
+            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gray-700" />
+            {stackTimeline.map((row, i) => (
+              <motion.div
+                key={row.year}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                className="relative flex gap-5 mb-6 last:mb-0"
+              >
+                <div
+                  className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold border-2 ${row.border} ${row.bg} ${row.color} flex-shrink-0`}
+                >
+                  {row.year.slice(2)}
+                </div>
+                <div className="pt-1">
+                  <span className={`text-sm font-semibold ${row.color}`}>{row.year}</span>
+                  <div className="flex flex-wrap gap-1.5 mt-1.5">
+                    {row.techs.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded border border-gray-200 dark:border-gray-700"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Stat counters */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">

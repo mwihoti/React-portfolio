@@ -8,7 +8,6 @@ import Contact from '../src/components/contact';
 import Footer from '../src/components/footer';
 import Navbar from '../src/components/navbar';
 import Experience from '../src/components/experience';
-import CustomCursor from '../src/components/CustomCursor';
 import ChatBot from '../src/components/ChatBot';
 import WhyHireMe from '../src/components/WhyHireMe';
 import { useTheme } from '../src/context/theme';
@@ -18,7 +17,6 @@ export default function Home() {
 
   return (
     <>
-      <CustomCursor />
       <ChatBot />
       <div className={darkTheme ? 'dark' : ''}>
         <div className="bg-white dark:bg-[#0a0a0f] transition-colors duration-300">
