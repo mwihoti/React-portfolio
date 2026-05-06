@@ -7,6 +7,27 @@ import { useTheme } from '../context/theme';
 
 const experiences = [
   {
+    title: 'Author — Claude Code Setup Guide',
+    company: 'Open source · Self-published',
+    period: 'May 2026',
+    type: 'community',
+    link: 'https://github.com/mwihoti/claudecodesetup',
+    description: [
+      'Wrote and published an open-source guide showing developers how to use Claude Code for free.',
+      'Shared the guide on LinkedIn (linkedin.com/feed/update/urn:li:activity:7457146497004965890) for the broader developer community.',
+    ],
+  },
+  {
+    title: 'Personal AI Agent — danpersonalagent',
+    company: 'Personal Project',
+    period: '2026 – Present',
+    type: 'community',
+    link: 'https://github.com/mwihoti/danpersonalagent',
+    description: [
+      'Building a personal AI agent for autonomous task delegation, research, and workflow automation.',
+    ],
+  },
+  {
     title: 'Open Source Contributor',
     company: 'IntersectMBO / lsm-tree',
     period: 'February – April 2026',

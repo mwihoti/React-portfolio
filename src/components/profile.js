@@ -92,13 +92,13 @@ export default function Profile() {
         className="relative z-10"
       >
         <a
-          href="https://gymbuddy-s.vercel.app"
+          href="https://github.com/mwihoti/danpersonalagent"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-900/50 border border-teal-500/30 text-teal-400 text-sm hover:bg-teal-900/70 transition-colors"
         >
           <span className="animate-pulse">&#x26A1;</span>
-          <span>Building: MuscleMind</span>
+          <span>Building: Personal AI Agent</span>
         </a>
       </motion.div>
 

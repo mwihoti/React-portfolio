@@ -10,6 +10,7 @@ import Navbar from '../src/components/navbar';
 import Experience from '../src/components/experience';
 import CustomCursor from '../src/components/CustomCursor';
 import ChatBot from '../src/components/ChatBot';
+import WhyHireMe from '../src/components/WhyHireMe';
 import { useTheme } from '../src/context/theme';
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
           <Experience />
           <Skills />
           <Work />
+          <WhyHireMe />
           <Contact />
           <Footer />
         </div>
