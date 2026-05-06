@@ -41,6 +41,29 @@ export default function Profile() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
         <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="flex justify-center mb-6"
+        >
+          <a
+            href="https://github.com/mwihoti/danpersonalagent"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold tracking-wider uppercase border-2 bg-gradient-to-r from-teal-200 to-cyan-200 border-teal-600 text-teal-900 shadow-[3px_3px_0_0_rgba(15,118,110,0.9)] hover:shadow-[5px_5px_0_0_rgba(15,118,110,0.9)] hover:-translate-x-0.5 hover:-translate-y-0.5 dark:from-teal-900/60 dark:to-cyan-900/60 dark:border-teal-400 dark:text-teal-200 dark:shadow-[3px_3px_0_0_rgba(45,212,191,0.5)] dark:hover:shadow-[5px_5px_0_0_rgba(45,212,191,0.7)] glow-teal transition-all duration-200"
+          >
+            <span aria-hidden="true" className="animate-pulse text-base">&#x26A1;</span>
+            <span className="relative">
+              Currently Building
+              <span aria-hidden="true" className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-teal-600 dark:bg-teal-400 origin-left scale-x-0 group-hover:scale-x-100 transition-transform" />
+            </span>
+            <span className="text-teal-700 dark:text-teal-300">/</span>
+            <span className="font-extrabold">Personal AI Agent</span>
+            <span aria-hidden="true" className="ml-1 group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
@@ -66,9 +89,11 @@ export default function Profile() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
         >
-          I build Bitcoin, Cardano, and AI infrastructure in Rust.
+          I build Bitcoin, Cardano, and AI systems &mdash; in Rust, Python,
+          Next.js/React, and TypeScript. Fullstack, backend, and open-source
+          contributions.
         </motion.p>
 
         <motion.div

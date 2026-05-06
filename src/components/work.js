@@ -9,6 +9,17 @@ const FILTERS = ['All', 'Bitcoin', 'Web3', 'AI', 'Fullstack', 'Game'];
 
 const projects = [
   {
+    title: 'StackMate',
+    badge: 'Building',
+    problem: 'Stacks builders and founders need a trusted way to find co-builders, with partnerships verifiable on-chain rather than just word-of-mouth.',
+    description:
+      'Builder-partner marketplace on Bitcoin L2 (Stacks). Project owners post partner requests; builders browse, apply with a pitch, and get accepted — every key action (registration, application, acceptance, mutual endorsement) is anchored on-chain via four Clarity smart contracts on Stacks mainnet (Nakamoto epoch 3.4). Off-chain Postgres handles search and metadata; on-chain principals form the verifiable reputation trail.',
+    tech: ['Next.js 16', 'React 19', 'TypeScript', 'Clarity', 'Stacks', '@stacks/connect', 'Neon Postgres', 'Drizzle ORM', 'Tailwind v4'],
+    live: 'https://stack-mate.vercel.app',
+    github: 'https://github.com/mwihoti/StackMate',
+    category: ['Bitcoin', 'Web3', 'Fullstack'],
+  },
+  {
     title: 'Open Wallet Standard',
     badge: 'OWS Hackathon',
     problem: 'AI agents need to sign blockchain transactions without ever exposing raw private keys.',
