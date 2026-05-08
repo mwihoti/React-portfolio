@@ -12,7 +12,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Hire', 'Contact'];
+  const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Bots', 'Hire', 'Contact'];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 

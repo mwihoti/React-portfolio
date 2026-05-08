@@ -2,6 +2,7 @@
 
 import Skills from '../src/components/skills';
 import Work from '../src/components/work';
+import Bots from '../src/components/bots';
 import Profile from '../src/components/profile';
 import About from '../src/components/about';
 import Contact from '../src/components/contact';
@@ -26,6 +27,7 @@ export default function Home() {
           <Experience />
           <Skills />
           <Work />
+          <Bots />
           <WhyHireMe />
           <Contact />
           <Footer />

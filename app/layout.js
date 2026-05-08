@@ -114,6 +114,36 @@ const personSchema = {
     'https://x.com/notstupiddev',
     'https://x.com/mwihotii',
     'https://daily-habit-hub.vercel.app/',
+    'https://t.me/enter_memorabilia_musem_bot',
+    'https://t.me/danmwisecondbrainbot',
+  ],
+};
+
+const author = { '@type': 'Person', name: 'Daniel Edward Mwihoti', url: SITE_URL };
+
+const botsGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Memorabilia (Telegram Mini App)',
+      applicationCategory: 'GameApplication',
+      operatingSystem: 'Telegram',
+      url: 'https://t.me/enter_memorabilia_musem_bot',
+      description:
+        'Telegram Mini App for the Memorabilia memory-card game on Starknet. Account Abstraction handles wallet creation; gameplay is gasless.',
+      author,
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Second Brain Bot',
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Telegram',
+      url: 'https://t.me/danmwisecondbrainbot',
+      description:
+        'Personal AI second-brain on Telegram. Capture links, voice notes, and ideas; recall later in natural language.',
+      author,
+    },
   ],
 };
 
@@ -127,6 +157,10 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(botsGraph) }}
         />
       </body>
     </html>

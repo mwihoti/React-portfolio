@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaRobot, FaTimes, FaPaperPlane, FaUser } from 'react-icons/fa';
-import { Groq } from 'groq-sdk';
-import ReactMarkdown from 'react-markdown';
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaRobot, FaTimes, FaPaperPlane, FaUser } from "react-icons/fa";
+import { Groq } from "groq-sdk";
+import ReactMarkdown from "react-markdown";
 
 const SYSTEM_PROMPT = `You are Daniel Mwihoti's personal portfolio assistant. Your ONLY job is to answer questions about Daniel Mwihoti — his skills, projects, experience, open source work, background, and how to contact him.
 
@@ -46,6 +46,10 @@ KEY PROJECTS:
 2. Bitcoin Wallet Lab — secp256k1 + ECDSA + RFC 6979 from scratch in Rust. Testnet4 wallet. Live: wallet-lab.onrender.com
 3. Open Wallet Standard — Multi-chain AI agent wallet (9 networks). Policy-gated signing. Live: open-wallet-standard.onrender.com
 4. Memorabilia — On-chain Starknet game, gasless via AA, Telegram Mini App (@enter_memorabilia_musem_bot). Live: memorabilia-game.vercel.app
+
+TELEGRAM BOTS (all live and public):
+- @enter_memorabilia_musem_bot — Mini App entry point for the Memorabilia Starknet game (no wallet/gas needed to play).
+- @danmwisecondbrainbot — Personal AI second-brain. Forward links/voice notes/ideas; recall later in natural language via LLM + vector store.
 5. Daily Habit Hub — Fitness + Avalanche Web3 rewards. Live: daily-habit-hub.vercel.app
 6. Computer Vision — Dual Python+Rust YOLO system, ONNX Runtime, NVIDIA Jetson edge deployment.
 7. Cardano Quest — On-chain riddle game for CardanoHubNBO meetups. Live: riddlerequest26.cardanohubnbo.com
@@ -83,39 +87,60 @@ const groq = new Groq({
 
 const markdownComponents = {
   p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-  strong: ({ children }) => <strong className="font-semibold text-teal-300">{children}</strong>,
-  ol: ({ children }) => <ol className="list-decimal list-outside ml-4 mb-2 space-y-1">{children}</ol>,
-  ul: ({ children }) => <ul className="list-disc list-outside ml-4 mb-2 space-y-1">{children}</ul>,
+  strong: ({ children }) => (
+    <strong className="font-semibold text-teal-300">{children}</strong>
+  ),
+  ol: ({ children }) => (
+    <ol className="list-decimal list-outside ml-4 mb-2 space-y-1">
+      {children}
+    </ol>
+  ),
+  ul: ({ children }) => (
+    <ul className="list-disc list-outside ml-4 mb-2 space-y-1">{children}</ul>
+  ),
   li: ({ children }) => <li className="leading-relaxed">{children}</li>,
   a: ({ href, children }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="text-teal-400 underline hover:text-teal-300">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-teal-400 underline hover:text-teal-300"
+    >
       {children}
     </a>
   ),
 };
 
 function Message({ msg }) {
-  const isUser = msg.role === 'user';
+  const isUser = msg.role === "user";
   return (
-    <div className={`flex gap-2 mb-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+    <div
+      className={`flex gap-2 mb-3 ${isUser ? "flex-row-reverse" : "flex-row"}`}
+    >
       <div
         className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs ${
-          isUser ? 'bg-teal-600' : 'bg-gray-700'
+          isUser ? "bg-teal-600" : "bg-gray-700"
         }`}
       >
-        {isUser ? <FaUser className="w-3 h-3 text-white" /> : <FaRobot className="w-3 h-3 text-teal-400" />}
+        {isUser ? (
+          <FaUser className="w-3 h-3 text-white" />
+        ) : (
+          <FaRobot className="w-3 h-3 text-teal-400" />
+        )}
       </div>
       <div
         className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
           isUser
-            ? 'bg-teal-600 text-white rounded-tr-none'
-            : 'bg-gray-700/80 text-gray-200 rounded-tl-none'
+            ? "bg-teal-600 text-white rounded-tr-none"
+            : "bg-gray-700/80 text-gray-200 rounded-tl-none"
         }`}
       >
         {isUser ? (
           msg.content
         ) : (
-          <ReactMarkdown components={markdownComponents}>{msg.content}</ReactMarkdown>
+          <ReactMarkdown components={markdownComponents}>
+            {msg.content}
+          </ReactMarkdown>
         )}
         {msg.streaming && (
           <span className="inline-block w-1 h-3.5 bg-teal-400 ml-0.5 animate-pulse align-middle" />
@@ -132,9 +157,18 @@ function TypingIndicator() {
         <FaRobot className="w-3 h-3 text-teal-400" />
       </div>
       <div className="bg-gray-700/80 rounded-xl rounded-tl-none px-3 py-2 flex gap-1 items-center">
-        <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-        <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-        <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+        <span
+          className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce"
+          style={{ animationDelay: "0ms" }}
+        />
+        <span
+          className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce"
+          style={{ animationDelay: "150ms" }}
+        />
+        <span
+          className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce"
+          style={{ animationDelay: "300ms" }}
+        />
       </div>
     </div>
   );
@@ -142,26 +176,27 @@ function TypingIndicator() {
 
 const SUGGESTED = [
   "What are Daniel's main skills?",
-  'Tell me about his Bitcoin work',
-  'What projects has he built?',
-  'Is he available for hire?',
+  "Tell me about his Bitcoin work",
+  "What projects has he built?",
+  "Is he available for hire?",
 ];
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
-      role: 'assistant',
-      content: "Hi! I'm Daniel's portfolio assistant. Ask me anything about his skills, projects, experience, or how to get in touch.",
+      role: "assistant",
+      content:
+        "Hi! I'm Daniel's portfolio assistant. Ask me anything about his skills, projects, experience, or how to get in touch.",
     },
   ]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
   useEffect(() => {
@@ -172,54 +207,67 @@ export default function ChatBot() {
     const userText = text || input.trim();
     if (!userText || loading) return;
 
-    const userMsg = { role: 'user', content: userText };
+    const userMsg = { role: "user", content: userText };
     const history = [...messages, userMsg];
     setMessages(history);
-    setInput('');
+    setInput("");
     setLoading(true);
 
     // Add empty streaming message placeholder
-    const streamingMsg = { role: 'assistant', content: '', streaming: true };
+    const streamingMsg = { role: "assistant", content: "", streaming: true };
     setMessages([...history, streamingMsg]);
 
     try {
       const stream = await groq.chat.completions.create({
-        model: 'llama-3.3-70b-versatile',
+        model: "llama-3.3-70b-versatile",
         temperature: 1,
         max_tokens: 800,
         top_p: 1,
         stream: true,
         stop: null,
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          { role: "system", content: SYSTEM_PROMPT },
           ...history.map((m) => ({ role: m.role, content: m.content })),
         ],
       });
 
-      let fullContent = '';
+      let fullContent = "";
 
       for await (const chunk of stream) {
-        const delta = chunk.choices[0]?.delta?.content || '';
+        const delta = chunk.choices[0]?.delta?.content || "";
         fullContent += delta;
-        setMessages([...history, { role: 'assistant', content: fullContent, streaming: true }]);
+        setMessages([
+          ...history,
+          { role: "assistant", content: fullContent, streaming: true },
+        ]);
       }
 
       // Finalise — remove streaming cursor
-      setMessages([...history, { role: 'assistant', content: fullContent, streaming: false }]);
+      setMessages([
+        ...history,
+        { role: "assistant", content: fullContent, streaming: false },
+      ]);
     } catch (err) {
-      console.error('ChatBot error:', err);
-      const detail = err?.error?.message || err?.message || err?.status || JSON.stringify(err);
+      console.error("ChatBot error:", err);
+      const detail =
+        err?.error?.message ||
+        err?.message ||
+        err?.status ||
+        JSON.stringify(err);
       const errMsg = !process.env.NEXT_PUBLIC_GROQ_API_KEY
-        ? 'Chatbot not configured. Please contact Daniel at danielmwihoti@gmail.com'
+        ? "Chatbot not configured. Please contact Daniel at danielmwihoti@gmail.com"
         : `Error: ${detail}. Try emailing danielmwihoti@gmail.com`;
-      setMessages([...history, { role: 'assistant', content: errMsg, streaming: false }]);
+      setMessages([
+        ...history,
+        { role: "assistant", content: errMsg, streaming: false },
+      ]);
     } finally {
       setLoading(false);
     }
   };
 
   const handleKey = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       send();
     }
@@ -237,11 +285,21 @@ export default function ChatBot() {
       >
         <AnimatePresence mode="wait">
           {open ? (
-            <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
+            <motion.span
+              key="close"
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+            >
               <FaTimes className="w-5 h-5 text-white" />
             </motion.span>
           ) : (
-            <motion.span key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
+            <motion.span
+              key="open"
+              initial={{ rotate: 90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: -90, opacity: 0 }}
+            >
               <FaRobot className="w-6 h-6 text-white" />
             </motion.span>
           )}
@@ -257,7 +315,7 @@ export default function ChatBot() {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-gray-700/50"
-            style={{ maxHeight: '70vh' }}
+            style={{ maxHeight: "70vh" }}
           >
             {/* Header */}
             <div className="bg-gray-900 px-4 py-3 flex items-center gap-3 border-b border-gray-700/50">
@@ -265,7 +323,9 @@ export default function ChatBot() {
                 <FaRobot className="w-4 h-4 text-teal-400" />
               </div>
               <div>
-                <div className="text-sm font-semibold text-white">Ask about Daniel</div>
+                <div className="text-sm font-semibold text-white">
+                  Ask about Daniel
+                </div>
                 <div className="text-xs text-teal-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse inline-block" />
                   Powered by Groq · LLaMA 3.3 70B
@@ -274,11 +334,16 @@ export default function ChatBot() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto bg-gray-800/95 p-4" style={{ minHeight: 0 }}>
+            <div
+              className="flex-1 overflow-y-auto bg-gray-800/95 p-4"
+              style={{ minHeight: 0 }}
+            >
               {messages.map((msg, i) => (
                 <Message key={i} msg={msg} />
               ))}
-              {loading && messages[messages.length - 1]?.content === '' && <TypingIndicator />}
+              {loading && messages[messages.length - 1]?.content === "" && (
+                <TypingIndicator />
+              )}
               <div ref={bottomRef} />
             </div>
 
