@@ -109,6 +109,7 @@ const personSchema = {
   },
   nationality: 'Kenyan',
   sameAs: [
+    'https://mwihoti-portfolio.vercel.app',
     'https://github.com/mwihoti',
     'https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/',
     'https://x.com/notstupiddev',
