@@ -5,7 +5,7 @@ import '../src/index.css';
 import '../src/App.css';
 import '../src/components/floatingElements.css';
 
-const SITE_URL = 'https://mwihoti-portfolio.vercel.app';
+const SITE_URL = 'https://danieled-portfolio.vercel.app';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
