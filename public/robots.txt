@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://danieled-portfolio.vercel.app/sitemap.xml
+Sitemap: https://mwihoti-portfolio.vercel.app/sitemap.xml
