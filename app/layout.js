@@ -6,14 +6,21 @@ import '../src/App.css';
 import '../src/components/floatingElements.css';
 
 const SITE_URL = 'https://mwihoti-portfolio.vercel.app' ||  'https://danieled-portfolio.vercel.app';
+const SITE_TITLE = 'Daniel Mwihoti - Bitcoin, Cardano, AI and Rust Developer in Nairobi';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Daniel Mwihoti — Software, AI & Blockchain Developer',
+  title: SITE_TITLE,
   description:
-    'Daniel Mwihoti — software, AI, and blockchain developer based in Nairobi, Kenya. Building with Rust, Python, Next.js, Elixir, and ML. Open-source contributor available for remote work.',
+    'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya. Building blockchain systems, AI agents, smart contracts, and full-stack products.',
   keywords: [
+    'Daniel Mwihoti - Bitcoin, Cardano, AI and Rust Developer in Nairobi',
     'Daniel Mwihoti',
+    'Daniel Edward Mwihoti',
+    'Bitcoin developer',
+    'Cardano developer',
+    'AI and Rust developer',
+    'Rust blockchain developer',
     'software developer',
     'blockchain developer',
     'AI developer',
@@ -42,9 +49,9 @@ export const metadata = {
     type: 'website',
     url: SITE_URL,
     siteName: 'Daniel Mwihoti — Portfolio',
-    title: 'Daniel Mwihoti — Software, AI & Blockchain Developer',
+    title: SITE_TITLE,
     description:
-      'Software, AI, and blockchain developer based in Nairobi, Kenya. Rust, Python, Next.js, Elixir, ML. Open-source contributor available for remote work.',
+      'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya. Building blockchain systems, AI agents, smart contracts, and full-stack products.',
     locale: 'en_US',
     images: [
       {
@@ -52,7 +59,7 @@ export const metadata = {
         width: 1200,
         height: 630,
         type: 'image/jpeg',
-        alt: 'Daniel Mwihoti — Software, AI & Blockchain Developer',
+        alt: SITE_TITLE,
       },
     ],
   },
@@ -60,9 +67,9 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@notstupiddev',
     creator: '@notstupiddev',
-    title: 'Daniel Mwihoti — Software, AI & Blockchain Developer',
+    title: SITE_TITLE,
     description:
-      'Software, AI, and blockchain developer based in Nairobi, Kenya. Rust, Python, Next.js, Elixir, ML.',
+      'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya.',
     images: ['/og-image.jpg'],
   },
   icons: {
@@ -88,9 +95,9 @@ const personSchema = {
   alternateName: ['Daniel Mwihoti', 'Mwihoti'],
   url: SITE_URL,
   image: `${SITE_URL}/me.jpg`,
-  jobTitle: 'Software, AI & Blockchain Developer',
+  jobTitle: 'Bitcoin, Cardano, AI and Rust Developer in Nairobi',
   description:
-    'Software, AI, and blockchain developer specializing in Rust, Python, Next.js, Elixir, and machine learning. Open-source contributor.',
+    'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya, specializing in blockchain systems, AI agents, smart contracts, and open-source software.',
   knowsAbout: [
     'Rust',
     'Python',
