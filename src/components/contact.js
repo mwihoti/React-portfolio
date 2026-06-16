@@ -69,8 +69,14 @@ export default function Contact() {
       .then(() => {
         setStatus("success");
         form.current.reset();
+        // Clear success message after 5 seconds
+        setTimeout(() => setStatus(null), 5000);
+        setTimeout(() => form.current.reset(), 500);
       })
-      .catch(() => setStatus("error"));
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        setStatus("error");
+      });
   };
 
   const inputClass =
