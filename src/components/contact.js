@@ -37,8 +37,8 @@ const contactLinks = [
   {
     icon: FaCalendarAlt,
     label: "Schedule Call",
-    value: "cal.com/danmwihoti",
-    href: "https://cal.com/danmwihoti",
+    value: "cal.com/daniel-mwihoti-5cceb2",
+    href: "https://cal.com/daniel-mwihoti-5cceb2",
     color: "hover:text-purple-400",
   },
 ];
@@ -204,7 +204,7 @@ export default function Contact() {
                 }}
               >
                 <iframe
-                  src="https://cal.com/danmwihoti?embed=true&embedType=inline"
+                  src="https://cal.com/daniel-mwihoti-5cceb2?embed=true&embedType=inline"
                   width="100%"
                   height="630"
                   frameBorder="0"
