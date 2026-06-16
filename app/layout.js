@@ -5,22 +5,26 @@ import '../src/index.css';
 import '../src/App.css';
 import '../src/components/floatingElements.css';
 
-const SITE_URL = 'https://mwihoti-portfolio.vercel.app' ||  'https://danieled-portfolio.vercel.app';
-const SITE_TITLE = 'Daniel Mwihoti - Bitcoin, Cardano, AI and Rust Developer in Nairobi';
+const SITE_URL = 'https://danieled-portfolio.vercel.app';
+const SITE_TITLE = 'Daniel Mwihoti - Global Bitcoin, Cardano, AI and Rust Developer';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description:
-    'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya. Building blockchain systems, AI agents, smart contracts, and full-stack products.',
+    'Daniel Mwihoti is a global Bitcoin, Cardano, AI and Rust developer building blockchain systems, AI agents, smart contracts, and full-stack products for remote teams worldwide.',
   keywords: [
-    'Daniel Mwihoti - Bitcoin, Cardano, AI and Rust Developer in Nairobi',
+    'Daniel Mwihoti - Global Bitcoin, Cardano, AI and Rust Developer',
     'Daniel Mwihoti',
     'Mwihoti',
     'Mwihoti developer',
     'Mwihoti Bitcoin developer',
     'Mwihoti Cardano developer',
-    'Mwihoti AI and Rust developer Nairobi',
+    'Mwihoti AI and Rust developer',
+    'global blockchain developer',
+    'remote blockchain developer',
+    'remote AI developer',
+    'remote Rust developer',
     'Daniel Edward Mwihoti',
     'Bitcoin developer',
     'Cardano developer',
@@ -56,7 +60,7 @@ export const metadata = {
     siteName: 'Daniel Mwihoti — Portfolio',
     title: SITE_TITLE,
     description:
-      'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya. Building blockchain systems, AI agents, smart contracts, and full-stack products.',
+      'Daniel Mwihoti is a global Bitcoin, Cardano, AI and Rust developer building blockchain systems, AI agents, smart contracts, and full-stack products for remote teams worldwide.',
     locale: 'en_US',
     images: [
       {
@@ -74,7 +78,7 @@ export const metadata = {
     creator: '@notstupiddev',
     title: SITE_TITLE,
     description:
-      'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya.',
+      'Daniel Mwihoti is a global Bitcoin, Cardano, AI and Rust developer for remote teams worldwide.',
     images: ['/og-image.jpg'],
   },
   icons: {
@@ -103,12 +107,14 @@ const personSchema = {
     'Mwihoti Developer',
     'Mwihoti Bitcoin Developer',
     'Mwihoti AI and Rust Developer',
+    'Global Bitcoin Developer',
+    'Remote Blockchain Developer',
   ],
   url: SITE_URL,
   image: `${SITE_URL}/me.jpg`,
-  jobTitle: 'Bitcoin, Cardano, AI and Rust Developer in Nairobi',
+  jobTitle: 'Global Bitcoin, Cardano, AI and Rust Developer',
   description:
-    'Daniel Mwihoti is a Bitcoin, Cardano, AI and Rust developer in Nairobi, Kenya, specializing in blockchain systems, AI agents, smart contracts, and open-source software.',
+    'Daniel Mwihoti is a global Bitcoin, Cardano, AI and Rust developer specializing in blockchain systems, AI agents, smart contracts, and open-source software for remote teams worldwide.',
   knowsAbout: [
     'Rust',
     'Python',
@@ -127,6 +133,7 @@ const personSchema = {
   },
   nationality: 'Kenyan',
   sameAs: [
+    'https://danieled-portfolio.vercel.app',
     'https://mwihoti-portfolio.vercel.app',
     'https://github.com/mwihoti',
     'https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/',
