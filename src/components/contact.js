@@ -61,8 +61,8 @@ export default function Contact() {
     e.preventDefault();
     emailjs
       .sendForm(
-        "service_09mdgfl",
-        "template_hxitikd",
+        "service_sx21psz",
+        "template_d3c28hq",
         form.current,
         "I59mHqfMF093XbTav",
       )
@@ -237,7 +237,7 @@ export default function Contact() {
                       </label>
                       <input
                         type="text"
-                        name="user_name"
+                        name="from_name"
                         required
                         placeholder="Your name"
                         className={inputClass}
@@ -249,7 +249,7 @@ export default function Contact() {
                       </label>
                       <input
                         type="email"
-                        name="user_email"
+                        name="to_name"
                         required
                         placeholder="you@email.com"
                         className={inputClass}
