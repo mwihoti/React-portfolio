@@ -74,7 +74,7 @@ export default function Profile() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="mb-6 flex justify-center lg:justify-start"
+              className="mb-6 flex justify-center"
             >
               <div className="avatar">
                 <img src={me} alt="Daniel Mwihoti" />
@@ -107,9 +107,9 @@ export default function Profile() {
               transition={{ duration: 0.5, delay: 0.22 }}
               className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed"
             >
-              I help crypto startups and technical teams turn complex Rust,
-              smart contract, wallet, and AI agent ideas into reliable
-              production software.
+              I help businesses, institutions, and startups turn applications
+              into production systems with different technologies exploring AI,
+              crypto, and automations.
             </motion.p>
 
             <motion.div
