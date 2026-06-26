@@ -88,6 +88,18 @@ export default function About() {
               feature, reach out. I&apos;m a team player who can help move the work
               forward and I&apos;m open to learning along the way.
             </p>
+            <p className="mt-5 leading-8 text-lg text-gray-700 dark:text-gray-300">
+              I&apos;m currently learning{' '}
+              <a
+                href="https://github.com/lnbook/lnbook/tree/develop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-teal-600 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+              >
+                Mastering the Lightning Network
+              </a>
+              .
+            </p>
           </motion.div>
 
           <motion.div
