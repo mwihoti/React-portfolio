@@ -74,16 +74,19 @@ export default function About() {
             className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
           >
             <p className="leading-8 text-lg text-gray-700 dark:text-gray-300 mb-5">
-              I&apos;m a Nairobi-based engineer who likes the hard parts of blockchain:
-              keys, wallets, consensus, smart contracts, and the product systems around
-              them. I started with cryptography puzzles and now turn that curiosity into
-              shipped Bitcoin, Cardano, Rust, and AI tools.
+              I&apos;m a Nairobi-based engineer who likes trying different things and
+              doing hard things. My interests range from web development, backend,
+              and full-stack systems to AI automation, running smart contracts,
+              and blockchain development.
             </p>
             <p className="leading-8 text-lg text-gray-700 dark:text-gray-300">
-              Teams usually bring me in when the work needs both low-level care and
-              product speed. I can reason through secp256k1 signatures, Plutus contracts,
-              Haskell storage internals, and Rust services, then still ship the Next.js,
-              Postgres, and deployment layer that makes the product usable.
+              It all began as curiosity as an information technology student and
+              grew into building software systems, open-source contributions, AI
+              automation, n8n workflows, AWS cloud tools, and blockchain products.
+              If you want products shipped with Bitcoin, Cardano, Rust, Python,
+              React, Next.js, and AI tools, or you have a product that needs a new
+              feature, reach out. I&apos;m a team player who can help move the work
+              forward and I&apos;m open to learning along the way.
             </p>
           </motion.div>
 
