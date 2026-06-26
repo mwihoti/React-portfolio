@@ -43,7 +43,8 @@ function SkillItem({ skill }) {
 
 const skillCategories = [
   {
-    title: 'Frontend',
+    title: 'Product Interfaces',
+    summary: 'Clean, fast web apps for dashboards, wallets, marketplaces, and crypto workflows.',
     header: 'text-blue-400',
     border: 'border-blue-500/20',
     skills: [
@@ -56,7 +57,8 @@ const skillCategories = [
     ],
   },
   {
-    title: 'Backend',
+    title: 'Backend Systems',
+    summary: 'APIs, databases, queues, and service layers that stay reliable under real users.',
     header: 'text-green-400',
     border: 'border-green-500/20',
     skills: [
@@ -69,7 +71,8 @@ const skillCategories = [
     ],
   },
   {
-    title: 'DevOps',
+    title: 'Delivery & Infrastructure',
+    summary: 'Practical deployment, observability, and tooling for teams that need to move.',
     header: 'text-orange-400',
     border: 'border-orange-500/20',
     skills: [
@@ -83,6 +86,7 @@ const skillCategories = [
   },
   {
     title: 'Blockchain & Web3',
+    summary: 'Wallet flows, smart contracts, signing logic, and on-chain product architecture.',
     header: 'text-purple-400',
     border: 'border-purple-500/20',
     skills: [
@@ -100,6 +104,7 @@ const skillCategories = [
   },
   {
     title: 'Languages & Systems',
+    summary: 'Rust, Haskell, and lower-level engineering for performance-sensitive code.',
     header: 'text-teal-400',
     border: 'border-teal-500/20',
     skills: [
@@ -129,8 +134,11 @@ export default function Skills() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-teal-600 dark:text-teal-400 glow-teal">
-            Skills
+            How I Help
           </h2>
+          <p className="mt-3 text-gray-600 dark:text-gray-400">
+            The stack matters because it reduces delivery risk, not because it fills a badge wall.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -146,6 +154,9 @@ export default function Skills() {
               <h3 className={`text-lg font-bold ${category.header} mb-4`}>
                 {category.title}
               </h3>
+              <p className="mb-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                {category.summary}
+              </p>
               <div className="grid grid-cols-3 gap-2">
                 {category.skills.map((skill) => (
                   <SkillItem key={skill.name} skill={skill} />

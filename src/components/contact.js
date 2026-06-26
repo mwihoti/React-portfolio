@@ -95,10 +95,11 @@ export default function Contact() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold text-teal-600 dark:text-teal-400 glow-teal">
-            Get In Touch
+            Let&apos;s Build the Next Move
           </h2>
           <p className="mt-3 text-gray-500 dark:text-gray-400">
-            Open to collaborations, contracts, and interesting ideas.
+            Questions, architecture reviews, wallet ideas, smart contract builds, or AI agent
+            automation: send the signal and I&apos;ll help you find the next step.
           </p>
         </motion.div>
 
@@ -113,12 +114,11 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                Let&apos;s build something together
+                Choose the fastest route
               </h3>
               <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-8">
-                Whether it&apos;s a DApp, a Bitcoin tool, a fullstack product,
-                or an open source collaboration &mdash; I&apos;m available. Drop
-                a message or reach out directly.
+                Book a quick call for live project scoping, send a direct email for a written
+                brief, or check the code trail before you reach out.
               </p>
 
               <div className="space-y-4">
@@ -174,7 +174,7 @@ export default function Contact() {
                 }`}
               >
                 <FaCalendarAlt className="inline mr-2 h-4 w-4" />
-                Book a Call
+                Schedule a Quick Call
               </button>
               <button
                 onClick={() => setUseCalcom(false)}
@@ -185,7 +185,7 @@ export default function Contact() {
                 }`}
               >
                 <FaPaperPlane className="inline mr-2 h-4 w-4" />
-                Send Message
+                Email the Brief
               </button>
             </div>
 
@@ -265,7 +265,7 @@ export default function Contact() {
                       name="message"
                       rows="6"
                       required
-                      placeholder="Tell me about your project or idea..."
+                      placeholder="What are you building, what is blocked, and what outcome do you need?"
                       className={inputClass}
                     />
                   </div>
@@ -277,7 +277,7 @@ export default function Contact() {
                     className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-semibold text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-colors shadow-lg shadow-teal-500/10"
                   >
                     <FaPaperPlane className="h-4 w-4" />
-                    Send Message
+                    Send the Brief
                   </motion.button>
                 </form>
               </>

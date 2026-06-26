@@ -74,15 +74,16 @@ export default function About() {
             className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
           >
             <p className="leading-8 text-lg text-gray-700 dark:text-gray-300 mb-5">
-              I&apos;m a Bitcoin, Cardano, and Rust engineer based in Nairobi, Kenya. I
-              build cryptography and consensus systems &mdash; secp256k1 wallets, Plutus
-              smart contracts, on-chain games, and AI-augmented developer tooling.
+              I&apos;m a Nairobi-based engineer who likes the hard parts of blockchain:
+              keys, wallets, consensus, smart contracts, and the product systems around
+              them. I started with cryptography puzzles and now turn that curiosity into
+              shipped Bitcoin, Cardano, Rust, and AI tools.
             </p>
             <p className="leading-8 text-lg text-gray-700 dark:text-gray-300">
-              I&apos;m an open-source contributor to IntersectMBO&apos;s lsm-tree (Haskell,
-              used by the Cardano node), the Cardano Foundation, and rust-bitcoin. I also
-              ship full-stack &mdash; Next.js, Supabase, Postgres &mdash; when the project
-              calls for it. Open to remote contracts and collaborations.
+              Teams usually bring me in when the work needs both low-level care and
+              product speed. I can reason through secp256k1 signatures, Plutus contracts,
+              Haskell storage internals, and Rust services, then still ship the Next.js,
+              Postgres, and deployment layer that makes the product usable.
             </p>
           </motion.div>
 

@@ -12,7 +12,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Bots', 'Hire', 'Contact'];
+  const navItems = ['About', 'Projects', 'Hire', 'Contact'];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -38,7 +38,7 @@ export default function Navbar() {
           </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-7">
             {navItems.map((item, index) => (
               <motion.div
                 key={item}
@@ -59,20 +59,19 @@ export default function Navbar() {
             ))}
 
             <motion.a
-              href="/writing"
+              href="#contact"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: navItems.length * 0.1 }}
-              className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm"
+              className="inline-flex items-center justify-center rounded-full bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 hover:bg-teal-500 transition-colors"
             >
-              Writing
+              Book a Call
             </motion.a>
 
-            {/* Copy email */}
             <motion.button
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navItems.length * 0.1 }}
+              transition={{ delay: (navItems.length + 1) * 0.1 }}
               onClick={copyEmail}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-teal-500 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
               title="Copy email address"
@@ -164,11 +163,11 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="/writing"
-                className="block px-3 py-2 rounded-md text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 font-medium transition-colors"
+                href="#contact"
+                className="mt-2 block rounded-md bg-teal-600 px-3 py-2 text-center font-semibold text-white hover:bg-teal-500 transition-colors"
                 onClick={toggleMenu}
               >
-                Writing
+                Book a Call
               </a>
             </div>
           </motion.div>
