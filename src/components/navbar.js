@@ -27,25 +27,16 @@ export default function Navbar() {
     <nav className="fixed w-full z-50 bg-white/80 dark:bg-[#0a0a0f]/90 backdrop-blur-md border-b border-transparent dark:border-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 dark:text-gray-300">
         <div className="flex items-center justify-between h-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex-shrink-0"
-          >
+          <div className="flex-shrink-0">
             <span className="text-2xl font-bold text-teal-600 dark:text-teal-400 glow-teal">
               DM
             </span>
-          </motion.div>
+          </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-7">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
+            {navItems.map((item) => (
+              <div key={item}>
                 <Link
                   to={item.toLowerCase()}
                   smooth={true}
@@ -55,23 +46,17 @@ export default function Navbar() {
                 >
                   {item}
                 </Link>
-              </motion.div>
+              </div>
             ))}
 
-            <motion.a
+            <a
               href="#contact"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navItems.length * 0.1 }}
               className="inline-flex items-center justify-center rounded-full bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 hover:bg-teal-500 transition-colors"
             >
               Book a Call
-            </motion.a>
+            </a>
 
-            <motion.button
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: (navItems.length + 1) * 0.1 }}
+            <button
               onClick={copyEmail}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-teal-500 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
               title="Copy email address"
@@ -87,7 +72,7 @@ export default function Navbar() {
                   <span>Copy email</span>
                 </>
               )}
-            </motion.button>
+            </button>
 
             <button
               onClick={toggleTheme}

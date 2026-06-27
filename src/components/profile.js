@@ -1,7 +1,14 @@
 'use client';
 
 import React from 'react';
-import { FaArrowRight, FaCalendarAlt, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import {
+  FaArrowRight,
+  FaCalendarAlt,
+  FaCheckCircle,
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+} from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import ParticleBackground from './ParticleBackground';
@@ -28,6 +35,11 @@ export default function Profile() {
     { value: '20+', label: 'Products shipped' },
     { value: '5+', label: 'Open-source PRs merged' },
     { value: '4', label: 'Blockchain communities' },
+  ];
+  const valuePoints = [
+    'Map the riskiest product decision first',
+    'Choose the right stack for speed and security',
+    'Leave with a clear build or feature plan',
   ];
 
   return (
@@ -98,7 +110,8 @@ export default function Profile() {
                 darkTheme ? 'text-teal-400' : 'text-teal-600'
               }`}
             >
-              Building secure Bitcoin, Cardano, and AI products that ship.
+              Building blockchain and AI products that don&apos;t just work.
+              They move forward.
             </motion.h1>
 
             <motion.p
@@ -107,9 +120,9 @@ export default function Profile() {
               transition={{ duration: 0.5, delay: 0.22 }}
               className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed"
             >
-              I help businesses, institutions, and startups turn applications
-              into production systems with different technologies exploring AI,
-              crypto, and automations.
+              I help businesses, institutions, and startups turn product ideas
+              into shipped applications using web, cloud, AI automation,
+              crypto, and full-stack engineering.
             </motion.p>
 
             <motion.div
@@ -119,19 +132,18 @@ export default function Profile() {
               className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
             >
               <a
-                href="#contact"
+                href="https://cal.com/daniel-mwihoti-5cceb2"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-teal-600 text-white px-7 py-3 rounded-full font-semibold hover:bg-teal-500 transition-colors shadow-lg hover:shadow-teal-500/25"
               >
                 Book Your Free Blockchain Discovery Call
                 <FaArrowRight className="h-4 w-4" />
               </a>
-              <a
-                href="#projects"
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 px-7 py-3 font-semibold text-gray-700 dark:text-gray-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
-              >
-                See My Work
-              </a>
             </motion.div>
+            <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400 lg:text-left">
+              No obligation, just a 15-minute call to map the next practical move.
+            </p>
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -182,56 +194,35 @@ export default function Profile() {
               </span>
               <div>
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-                  Need a product application?
+                  Build the right thing first
                 </h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Send the basics. I&apos;ll reply with the cleanest next step.
+                  For founders and teams turning rough ideas into usable products.
                 </p>
               </div>
             </div>
 
-            <form
-              className="mt-6 space-y-4"
-              action="mailto:danielmwihoti@gmail.com"
-              method="post"
-              encType="text/plain"
-            >
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="Your email"
-                className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500/30 dark:border-gray-700/60 dark:bg-gray-950/70 dark:text-white"
-              />
-              <select
-                name="project_type"
-                className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500/30 dark:border-gray-700/60 dark:bg-gray-950/70 dark:text-white"
-                defaultValue=""
-                required
-              >
-                <option value="" disabled>
-                  What are you building?
-                </option>
-                <option>Bitcoin wallet or protocol tool</option>
-                <option>Cardano smart contract product</option>
-                <option>AI agent or automation system</option>
-                <option>Full-stack crypto application</option>
-              </select>
-              <button
-                type="submit"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-teal-600 px-5 py-3 font-semibold text-white shadow-lg shadow-teal-500/15 hover:bg-teal-500 transition-colors"
-              >
-                Start the Conversation
-                <FaArrowRight className="h-4 w-4" />
-              </button>
-            </form>
+            <div className="mt-6 space-y-3">
+              {valuePoints.map((point) => (
+                <div
+                  key={point}
+                  className="flex items-start gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700/60 dark:bg-gray-950/50"
+                >
+                  <FaCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-teal-600 dark:text-teal-400" />
+                  <span className="text-sm leading-6 text-gray-700 dark:text-gray-300">
+                    {point}
+                  </span>
+                </div>
+              ))}
+            </div>
 
             <div className="mt-5 grid grid-cols-1 gap-2 text-sm text-gray-600 dark:text-gray-300">
-              <a href="https://cal.com/daniel-mwihoti-5cceb2" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-gray-200 px-4 py-3 hover:border-teal-500 hover:text-teal-600 dark:border-gray-700 dark:hover:text-teal-400 transition-colors">
-                Schedule a quick call
+              <a href="https://cal.com/daniel-mwihoti-5cceb2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg bg-teal-600 px-4 py-3 font-semibold text-white hover:bg-teal-500 transition-colors">
+                Book the 15-minute call
+                <FaArrowRight className="h-4 w-4" />
               </a>
-              <a href="mailto:danielmwihoti@gmail.com" className="rounded-lg border border-gray-200 px-4 py-3 hover:border-teal-500 hover:text-teal-600 dark:border-gray-700 dark:hover:text-teal-400 transition-colors">
-                Email me directly
+              <a href="#projects" className="rounded-lg border border-gray-200 px-4 py-3 text-center hover:border-teal-500 hover:text-teal-600 dark:border-gray-700 dark:hover:text-teal-400 transition-colors">
+                View selected projects
               </a>
             </div>
           </motion.div>
