@@ -5,19 +5,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaMoon, FaSun, FaBars, FaTimes, FaCopy, FaCheck } from 'react-icons/fa';
 import { useTheme, useThemeUpdate } from '../context/theme';
 import { Link } from 'react-scroll';
+import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
+import { EMAIL } from '../data/site';
 
 export default function Navbar() {
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  // Scroll links only work on the homepage; elsewhere fall back to /#anchor
+  const onHome = usePathname() === '/';
 
-  const navItems = ['About', 'Projects', 'Hire', 'Contact'];
+  const navItems = ['About', 'Experience', 'Projects', 'Hire', 'Contact'];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const copyEmail = () => {
-    navigator.clipboard.writeText('danielmwihoti@gmail.com').then(() => {
+    navigator.clipboard.writeText(EMAIL).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }).catch(() => {});
@@ -37,20 +42,38 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-7">
             {navItems.map((item) => (
               <div key={item}>
-                <Link
-                  to={item.toLowerCase()}
-                  smooth={true}
-                  duration={500}
-                  offset={-70}
-                  className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm cursor-pointer"
-                >
-                  {item}
-                </Link>
+                {onHome ? (
+                  <Link
+                    to={item.toLowerCase()}
+                    smooth={true}
+                    duration={500}
+                    offset={-70}
+                    spy={true}
+                    activeClass="!text-teal-600 dark:!text-teal-400"
+                    className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm cursor-pointer"
+                  >
+                    {item}
+                  </Link>
+                ) : (
+                  <NextLink
+                    href={`/#${item.toLowerCase()}`}
+                    className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm"
+                  >
+                    {item}
+                  </NextLink>
+                )}
               </div>
             ))}
 
+            <NextLink
+              href="/writing"
+              className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors font-medium text-sm"
+            >
+              Writing
+            </NextLink>
+
             <a
-              href="#contact"
+              href={onHome ? '#contact' : '/#contact'}
               className="inline-flex items-center justify-center rounded-full bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 hover:bg-teal-500 transition-colors"
             >
               Book a Call
@@ -60,6 +83,7 @@ export default function Navbar() {
               onClick={copyEmail}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-teal-500 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
               title="Copy email address"
+              aria-label="Copy email address"
             >
               {copied ? (
                 <>
@@ -93,6 +117,7 @@ export default function Navbar() {
               onClick={copyEmail}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               title="Copy email"
+              aria-label="Copy email address"
             >
               {copied ? (
                 <FaCheck className="h-4 w-4 text-green-400" />
@@ -114,6 +139,8 @@ export default function Navbar() {
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 focus:outline-none"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
@@ -130,6 +157,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -140,15 +168,22 @@ export default function Navbar() {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={onHome ? `#${item.toLowerCase()}` : `/#${item.toLowerCase()}`}
                   className="block px-3 py-2 rounded-md text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 font-medium transition-colors"
                   onClick={toggleMenu}
                 >
                   {item}
                 </a>
               ))}
+              <NextLink
+                href="/writing"
+                className="block px-3 py-2 rounded-md text-gray-700 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 font-medium transition-colors"
+                onClick={toggleMenu}
+              >
+                Writing
+              </NextLink>
               <a
-                href="#contact"
+                href={onHome ? '#contact' : '/#contact'}
                 className="mt-2 block rounded-md bg-teal-600 px-3 py-2 text-center font-semibold text-white hover:bg-teal-500 transition-colors"
                 onClick={toggleMenu}
               >

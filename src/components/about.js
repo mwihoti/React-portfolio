@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import ContributionGraph from './ContributionGraph';
 import TerminalCard from './TerminalCard';
+import GitHubStats from './GitHubStats';
 
 const stackTimeline = [
   {
@@ -41,7 +42,7 @@ const openSourceStats = [
   { value: '5+', label: 'PRs Merged' },
   { value: '3', label: 'OS Orgs' },
   { value: '20+', label: 'Projects' },
-  { value: '4', label: 'Communities' },
+  { value: '5', label: 'Communities' },
 ];
 
 export default function About() {
@@ -73,20 +74,13 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
           >
-            <p className="leading-8 text-lg text-gray-700 dark:text-gray-300 mb-5">
-              I&apos;m a Nairobi-based engineer who likes trying different things and
-              doing hard things. My interests range from web development, backend,
-              and full-stack systems to AI automation, running smart contracts,
-              and blockchain development.
-            </p>
             <p className="leading-8 text-lg text-gray-700 dark:text-gray-300">
-              It all began as curiosity as an information technology student and
-              grew into building software systems, open-source contributions, AI
-              automation, n8n workflows, AWS cloud tools, and blockchain products.
-              If you want products shipped with Bitcoin, Cardano, Rust, Python,
-              React, Next.js, and AI tools, or you have a product that needs a new
-              feature, reach out. I&apos;m a team player who can help move the work
-              forward and I&apos;m open to learning along the way.
+              I&apos;m a Nairobi-based engineer who likes doing hard things &mdash;
+              from full-stack web systems to AI automation, smart contracts, and
+              blockchain products. What began as curiosity as an IT student grew
+              into shipped software, open-source contributions, and products built
+              with Bitcoin, Cardano, Rust, Python, React, Next.js, and AI tools.
+              If you have a product to ship or a feature to move forward, reach out.
             </p>
             <p className="mt-5 leading-8 text-lg text-gray-700 dark:text-gray-300">
               I&apos;m currently learning{' '}
@@ -182,9 +176,12 @@ export default function About() {
           viewport={{ once: true }}
           className="bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50"
         >
-          <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400 mb-1">
-            GitHub Activity
-          </h3>
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
+            <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400">
+              GitHub Activity
+            </h3>
+            <GitHubStats />
+          </div>
           <ContributionGraph />
         </motion.div>
       </div>

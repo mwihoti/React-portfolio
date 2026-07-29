@@ -31,13 +31,15 @@ export default function VideoShowcase() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700/50 bg-white dark:bg-gray-800/50 card-glow shadow-2xl"
+          className="mx-auto w-full max-w-[360px] rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700/50 bg-white dark:bg-gray-800/50 card-glow shadow-2xl"
         >
-          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+          {/* Native portrait video (608x1080) — frame it 9:16 instead of letterboxing */}
+          <div className="relative w-full aspect-[9/16]">
             <video
               controls
-              className="absolute top-0 left-0 w-full h-full"
-              poster={undefined}
+              preload="none"
+              className="absolute top-0 left-0 w-full h-full object-cover"
+              poster="/video-poster.jpg"
             >
               <source src="/intro-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.

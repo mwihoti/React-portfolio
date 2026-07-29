@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import {
   FaGithub,
   FaLinkedin,
@@ -11,34 +11,35 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import { useTheme } from "../context/theme";
+import { EMAIL, CAL_URL, GITHUB_URL, LINKEDIN_URL } from "../data/site";
 
 const contactLinks = [
   {
     icon: FaGithub,
     label: "GitHub",
-    value: "github.com/mwihoti",
-    href: "https://github.com/mwihoti",
+    value: GITHUB_URL.replace("https://", ""),
+    href: GITHUB_URL,
     color: "hover:text-white",
   },
   {
     icon: FaLinkedin,
     label: "LinkedIn",
     value: "daniel-mwihoti",
-    href: "https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/",
+    href: LINKEDIN_URL,
     color: "hover:text-blue-400",
   },
   {
     icon: FaEnvelope,
     label: "Email",
-    value: "danielmwihoti@gmail.com",
-    href: "mailto:danielmwihoti@gmail.com",
+    value: EMAIL,
+    href: `mailto:${EMAIL}`,
     color: "hover:text-teal-400",
   },
   {
     icon: FaCalendarAlt,
     label: "Schedule Call",
-    value: "cal.com/daniel-mwihoti-5cceb2",
-    href: "https://cal.com/daniel-mwihoti-5cceb2",
+    value: CAL_URL.replace("https://", ""),
+    href: CAL_URL,
     color: "hover:text-purple-400",
   },
 ];
@@ -49,23 +50,12 @@ export default function Contact() {
   const [useCalcom, setUseCalcom] = useState(true);
   const form = useRef();
 
-  useEffect(() => {
-    // Load cal.com embed script
-    const script = document.createElement("script");
-    script.src = "https://cdn.cal.com/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
-      .sendForm(
-        "service_sx21psz",
-        "template_d3c28hq",
-        form.current,
-        "I59mHqfMF093XbTav",
-      )
+      .sendForm("service_sx21psz", "template_d3c28hq", form.current, {
+        publicKey: "I59mHqfMF093XbTav",
+      })
       .then(() => {
         setStatus("success");
         form.current.reset();
@@ -191,27 +181,41 @@ export default function Contact() {
 
             {/* Cal.com embed */}
             {useCalcom && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="cal-inline-embed"
-                data-calcom-namespace=""
-                style={{
-                  width: "100%",
-                  height: "630px",
-                  overflow: "scroll",
-                }}
-              >
-                <iframe
-                  src="https://cal.com/daniel-mwihoti-5cceb2?embed=true&embedType=inline"
-                  width="100%"
-                  height="630"
-                  frameBorder="0"
-                  title="Schedule a call with Daniel"
-                  className="rounded-lg"
-                />
-              </motion.div>
+              <>
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="cal-inline-embed"
+                  style={{
+                    width: "100%",
+                    height: "min(630px, 75vh)",
+                    overflow: "auto",
+                  }}
+                >
+                  <iframe
+                    src={`${CAL_URL}?embed=true&embedType=inline`}
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    loading="lazy"
+                    title="Schedule a call with Daniel"
+                    className="rounded-lg"
+                  />
+                </motion.div>
+                <p className="mt-2 text-xs text-center text-gray-400 dark:text-gray-500">
+                  Calendar not loading?{' '}
+                  <a
+                    href={CAL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-teal-500 hover:underline"
+                  >
+                    Open cal.com directly
+                  </a>
+                  .
+                </p>
+              </>
             )}
 
             {/* Contact form */}
@@ -224,18 +228,21 @@ export default function Contact() {
                 )}
                 {status === "error" && (
                   <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/50 text-red-600 dark:text-red-400 rounded-lg text-sm">
-                    Something went wrong. Try emailing directly at
-                    danielmwihoti@gmail.com
+                    Something went wrong. Try emailing directly at {EMAIL}
                   </div>
                 )}
 
                 <form ref={form} onSubmit={sendEmail} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5">
+                      <label
+                        htmlFor="contact-name"
+                        className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5"
+                      >
                         Name
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         name="from_name"
                         required
@@ -244,10 +251,14 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5">
+                      <label
+                        htmlFor="contact-email"
+                        className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5"
+                      >
                         Email
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
                         name="to_name"
                         required
@@ -258,10 +269,14 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5">
+                    <label
+                      htmlFor="contact-message"
+                      className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5"
+                    >
                       Message
                     </label>
                     <textarea
+                      id="contact-message"
                       name="message"
                       rows="6"
                       required

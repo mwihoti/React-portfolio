@@ -1,11 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaBriefcase, FaUsers, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaBriefcase, FaUsers, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useTheme } from '../context/theme';
 
 const experiences = [
+  {
+    title: 'Team1 Collaborator — Avalanche',
+    company: 'Team1 Africa · Avalanche ecosystem',
+    period: 'July 2026 – Present',
+    type: 'community',
+    description: [
+      'Accepted as a Team1 Collaborator — a global network of builders, developers, and creators growing the Avalanche ecosystem.',
+      'Contributing through Team1 Africa: community calls, ecosystem building across the region, and the Mini Hack Cohort 2 build program.',
+    ],
+  },
   {
     title: 'Author — Claude Code Setup Guide',
     company: 'Open source · Self-published',
@@ -122,8 +132,12 @@ function TypeBadge({ type }) {
   return null;
 }
 
+const INITIAL_COUNT = 3;
+
 export default function Experience() {
   const darkTheme = useTheme();
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? experiences : experiences.slice(0, INITIAL_COUNT);
 
   return (
     <section
@@ -145,7 +159,7 @@ export default function Experience() {
         <div className="relative">
           <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-teal-500/60 via-teal-500/30 to-transparent" />
 
-          {experiences.map((exp, index) => (
+          {visible.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -40 }}
@@ -205,6 +219,26 @@ export default function Experience() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <button
+            onClick={() => setShowAll((s) => !s)}
+            aria-expanded={showAll}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium border border-teal-500/40 text-teal-600 dark:text-teal-400 hover:bg-teal-500/10 transition-colors"
+          >
+            {showAll ? (
+              <>
+                Show less
+                <FaChevronUp className="h-3 w-3" aria-hidden="true" />
+              </>
+            ) : (
+              <>
+                Show all {experiences.length} roles
+                <FaChevronDown className="h-3 w-3" aria-hidden="true" />
+              </>
+            )}
+          </button>
         </div>
       </div>
     </section>

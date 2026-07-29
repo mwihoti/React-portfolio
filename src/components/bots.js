@@ -71,7 +71,7 @@ export default function Bots() {
               transition={{ delay: index * 0.07, duration: 0.4 }}
               className="group relative bg-white dark:bg-gray-800/60 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700/50 card-glow"
             >
-              <div className="absolute inset-0 bg-gray-900/90 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 rounded-2xl pointer-events-none">
+              <div className="absolute inset-0 bg-gray-900/90 hidden md:flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 z-10 rounded-2xl pointer-events-none">
                 <p className="text-teal-400 text-center font-medium leading-relaxed">
                   {bot.problem}
                 </p>
@@ -90,6 +90,9 @@ export default function Bots() {
                 </h3>
                 <p className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-3">
                   {bot.handle}
+                </p>
+                <p className="mb-3 text-sm italic text-teal-700 dark:text-teal-400 md:hidden">
+                  {bot.problem}
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
                   {bot.description}

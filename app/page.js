@@ -10,15 +10,15 @@ import Footer from "../src/components/footer";
 import Navbar from "../src/components/navbar";
 import Experience from "../src/components/experience";
 import ChatBot from "../src/components/ChatBot";
-import WhyHireMe from "../src/components/WhyHireMe";
 import VideoShowcase from "../src/components/video";
 import { useTheme } from "../src/context/theme";
+import { MotionConfig } from "framer-motion";
 
 export default function Home() {
   const darkTheme = useTheme();
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <ChatBot />
       <div className={darkTheme ? "dark" : ""}>
         <div className="bg-white dark:bg-[#0a0a0f] transition-colors duration-300">
@@ -30,11 +30,10 @@ export default function Home() {
           <Skills />
           <Work />
           <Bots />
-          <WhyHireMe />
           <Contact />
           <Footer />
         </div>
       </div>
-    </>
+    </MotionConfig>
   );
 }

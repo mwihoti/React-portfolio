@@ -24,8 +24,12 @@ export default function ParticleBackground() {
       mouse.y = e.clientY - rect.top;
     };
 
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
     window.addEventListener('resize', onResize);
-    window.addEventListener('mousemove', onMouseMove);
+    if (!prefersReducedMotion) window.addEventListener('mousemove', onMouseMove);
 
     const N = 70;
     const particles = Array.from({ length: N }, () => ({
@@ -87,7 +91,8 @@ export default function ParticleBackground() {
         }
       }
 
-      animId = requestAnimationFrame(draw);
+      // Render a single static frame when the user prefers reduced motion
+      if (!prefersReducedMotion) animId = requestAnimationFrame(draw);
     };
 
     draw();

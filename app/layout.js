@@ -4,8 +4,8 @@ import { ThemeProvider } from '../src/context/theme';
 import '../src/index.css';
 import '../src/App.css';
 import '../src/components/floatingElements.css';
+import { SITE_URL } from '../src/data/site';
 
-const SITE_URL = 'https://danieled-portfolio.vercel.app';
 const SITE_TITLE = 'Daniel Mwihoti - Global Bitcoin, Cardano, AI and Rust Developer';
 
 export const metadata = {
@@ -14,31 +14,13 @@ export const metadata = {
   description:
     'Daniel Mwihoti is a global Bitcoin, Cardano, AI and Rust developer building blockchain systems, AI agents, smart contracts, and full-stack products for remote teams worldwide.',
   keywords: [
-    'Daniel Mwihoti - Global Bitcoin, Cardano, AI and Rust Developer',
     'Daniel Mwihoti',
-    'Mwihoti',
-    'Mwihoti developer',
-    'Mwihoti Bitcoin developer',
-    'Mwihoti Cardano developer',
-    'Mwihoti AI and Rust developer',
-    'global blockchain developer',
-    'remote blockchain developer',
-    'remote AI developer',
-    'remote Rust developer',
-    'Daniel Edward Mwihoti',
     'Bitcoin developer',
     'Cardano developer',
-    'AI and Rust developer',
-    'Rust blockchain developer',
-    'software developer',
-    'blockchain developer',
-    'AI developer',
-    'fullstack developer',
     'Rust developer',
-    'Python',
-    'Next.js',
-    'Elixir',
-    'machine learning',
+    'AI developer',
+    'blockchain developer',
+    'fullstack developer',
     'open source',
     'Nairobi',
     'Kenya',

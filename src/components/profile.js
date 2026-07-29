@@ -9,11 +9,11 @@ import {
   FaGithub,
   FaLinkedin,
 } from 'react-icons/fa';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/theme';
 import ParticleBackground from './ParticleBackground';
-
-const me = '/me.jpg';
+import { EMAIL, CAL_URL, GITHUB_URL, LINKEDIN_URL, PROOF_POINTS } from '../data/site';
 
 function SocialLink({ href, icon: Icon, label }) {
   return (
@@ -31,11 +31,6 @@ function SocialLink({ href, icon: Icon, label }) {
 
 export default function Profile() {
   const darkTheme = useTheme();
-  const proofPoints = [
-    { value: '20+', label: 'Products shipped' },
-    { value: '5+', label: 'Open-source PRs merged' },
-    { value: '4', label: 'Blockchain communities' },
-  ];
   const valuePoints = [
     'Map the riskiest product decision first',
     'Choose the right stack for speed and security',
@@ -89,7 +84,7 @@ export default function Profile() {
               className="mb-6 flex justify-center"
             >
               <div className="avatar">
-                <img src={me} alt="Daniel Mwihoti" />
+                <Image src="/me.jpg" alt="Daniel Mwihoti" width={300} height={300} priority />
               </div>
             </motion.div>
 
@@ -132,7 +127,7 @@ export default function Profile() {
               className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
             >
               <a
-                href="https://cal.com/daniel-mwihoti-5cceb2"
+                href={CAL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-teal-600 text-white px-7 py-3 rounded-full font-semibold hover:bg-teal-500 transition-colors shadow-lg hover:shadow-teal-500/25"
@@ -151,22 +146,18 @@ export default function Profile() {
               transition={{ duration: 0.5, delay: 0.34 }}
               className="mt-8 flex justify-center lg:justify-start gap-6"
             >
-              <SocialLink href="https://github.com/mwihoti" icon={FaGithub} label="GitHub" />
-              <SocialLink
-                href="https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/"
-                icon={FaLinkedin}
-                label="LinkedIn"
-              />
-              <SocialLink href="mailto:danielmwihoti@gmail.com" icon={FaEnvelope} label="Email" />
+              <SocialLink href={GITHUB_URL} icon={FaGithub} label="GitHub" />
+              <SocialLink href={LINKEDIN_URL} icon={FaLinkedin} label="LinkedIn" />
+              <SocialLink href={`mailto:${EMAIL}`} icon={FaEnvelope} label="Email" />
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-8 grid grid-cols-3 gap-3 max-w-2xl mx-auto lg:mx-0"
+              className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto lg:mx-0"
             >
-              {proofPoints.map((point) => (
+              {PROOF_POINTS.map((point) => (
                 <div
                   key={point.label}
                   className="rounded-lg border border-gray-200 bg-white/80 p-4 text-center dark:border-gray-700/60 dark:bg-gray-900/60"
@@ -217,11 +208,7 @@ export default function Profile() {
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-2 text-sm text-gray-600 dark:text-gray-300">
-              <a href="https://cal.com/daniel-mwihoti-5cceb2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg bg-teal-600 px-4 py-3 font-semibold text-white hover:bg-teal-500 transition-colors">
-                Book the 15-minute call
-                <FaArrowRight className="h-4 w-4" />
-              </a>
-              <a href="#projects" className="rounded-lg border border-gray-200 px-4 py-3 text-center hover:border-teal-500 hover:text-teal-600 dark:border-gray-700 dark:hover:text-teal-400 transition-colors">
+              <a href="#projects" className="rounded-lg border border-gray-200 px-4 py-3 text-center font-medium hover:border-teal-500 hover:text-teal-600 dark:border-gray-700 dark:hover:text-teal-400 transition-colors">
                 View selected projects
               </a>
             </div>
