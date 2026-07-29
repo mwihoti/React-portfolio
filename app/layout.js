@@ -98,10 +98,13 @@ const personSchema = {
   description:
     'Daniel Mwihoti is a global Bitcoin, Cardano, AI and Rust developer specializing in blockchain systems, AI agents, smart contracts, and open-source software for remote teams worldwide.',
   knowsAbout: [
+    'Bitcoin',
+    'Cardano',
+    'Avalanche',
     'Rust',
     'Python',
     'Next.js',
-    'Elixir',
+    'Smart Contracts',
     'Machine Learning',
     'AI Integration',
     'Blockchain Development',
@@ -128,6 +131,15 @@ const personSchema = {
 };
 
 const author = { '@type': 'Person', name: 'Daniel Edward Mwihoti', url: SITE_URL };
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Daniel Mwihoti — Portfolio',
+  alternateName: 'Mwihoti Portfolio',
+  url: SITE_URL,
+  author,
+};
 
 const botsGraph = {
   '@context': 'https://schema.org',
@@ -162,6 +174,10 @@ export default function RootLayout({ children }) {
         <ThemeProvider>{children}</ThemeProvider>
         <Analytics />
         <SpeedInsights />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
