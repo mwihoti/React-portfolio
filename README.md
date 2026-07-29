@@ -25,6 +25,26 @@ npm run dev            # http://localhost:3000
 - `npm run start` — serve the production build
 - `npm run lint` — ESLint (`next/core-web-vitals`)
 
+## Writing blog posts
+
+Posts are markdown files in `content/writing/`. Add a file like `my-post.md`:
+
+```markdown
+---
+title: "My post title"
+date: "2026-08-01"
+summary: "One or two sentences shown on the /writing index and in search results."
+tags: ["Bitcoin", "Rust"]
+draft: true
+---
+
+Post body in markdown…
+```
+
+The filename becomes the URL (`/writing/my-post`). While `draft: true`, the post
+only appears in `npm run dev`; set `draft: false` (or delete the line) to publish.
+Posts are statically generated and added to the sitemap automatically.
+
 ## Structure
 
 - `app/` — routes (`/`, `/writing`), API route (`/api/chat`), metadata, sitemap/robots

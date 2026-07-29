@@ -1,5 +1,7 @@
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaGithub, FaLinkedin, FaArrowRight } from 'react-icons/fa';
 import { SITE_URL, GITHUB_URL, X_URL } from '../../src/data/site';
+import { getAllPosts, formatPostDate } from '../../src/lib/posts';
 import ThemeWrapper from '../../src/components/ThemeWrapper';
 import Navbar from '../../src/components/navbar';
 import Footer from '../../src/components/footer';
@@ -49,6 +51,8 @@ const articles = [
 ];
 
 export default function WritingPage() {
+  const posts = getAllPosts();
+
   return (
     <ThemeWrapper>
       <div className="bg-white dark:bg-[#0a0a0f] transition-colors duration-300">
@@ -66,6 +70,52 @@ export default function WritingPage() {
             </header>
 
             <div className="space-y-6">
+              {posts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 card-glow"
+                >
+                  <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">
+                    {formatPostDate(post.date)}
+                    {post.draft && (
+                      <span className="ml-3 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 normal-case">
+                        Draft
+                      </span>
+                    )}
+                  </p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    <Link
+                      href={`/writing/${post.slug}`}
+                      className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+                    >
+                      {post.title}
+                    </Link>
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                    {post.summary}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-0.5 text-xs bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300 rounded-full border border-teal-200 dark:border-teal-800/50"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Link
+                    href={`/writing/${post.slug}`}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-sm font-medium transition-colors"
+                  >
+                    Read the post
+                    <FaArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </Link>
+                </article>
+              ))}
+
               {articles.map((article) => (
                 <article
                   key={article.title}
