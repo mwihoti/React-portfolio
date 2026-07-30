@@ -18,6 +18,18 @@ const bots = [
     github: 'https://github.com/mwihoti/memorabilia',
   },
   {
+    handle: '@btc_opensource_projects_bot',
+    name: 'Bitcoin OSS Triage',
+    badge: 'Live',
+    problem:
+      'Finding high-signal open-source contribution opportunities means trawling issue trackers by hand every day.',
+    description:
+      'Autonomous agent that scans GitHub repositories daily for good-first-issue, help-wanted, and bug labels, analyzes each with an LLM, and delivers a prioritized digest via Telegram. Built with Node.js, Gemini/Groq/Ollama, Airtable, and cron scheduling.',
+    tech: ['Telegram Bot API', 'Node.js', 'LLM', 'Airtable', 'Cron'],
+    telegram: 'https://t.me/btc_opensource_projects_bot',
+    github: 'https://github.com/mwihoti/danpersonalagent',
+  },
+  {
     handle: '@danmwisecondbrainbot',
     name: 'Second Brain',
     badge: 'Live',

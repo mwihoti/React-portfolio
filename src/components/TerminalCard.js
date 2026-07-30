@@ -29,7 +29,7 @@ export default function TerminalCard() {
         </div>
         <div className="text-yellow-400 pl-2 text-xs">&#x2713; IntersectMBO/lsm-tree #818</div>
         <div className="text-yellow-400 pl-2 text-xs">&#x2713; cardano-foundation/cardano-org</div>
-        <div className="text-yellow-400 pl-2 text-xs">&#x2713; bitcoin-core/bitcoin</div>
+        <div className="text-yellow-400 pl-2 text-xs">&#x2713; payjoin/rust-payjoin</div>
         <div className="mt-1">
           <span className="text-teal-400">❯ </span>
           <span className="blink-cursor text-teal-400">&#x2588;</span>

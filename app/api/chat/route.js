@@ -30,16 +30,18 @@ Blockchain: Cardano (Plutus, Mesh SDK), Bitcoin (secp256k1, SegWit, Lightning), 
 AI/CV: YOLO, ONNX Runtime, OpenCV, DeepFace, TensorFlow.js, Gemini AI, LLaMA3, OpenAI
 DevOps: Docker, Git, Linux, Nginx, Vercel, Render, GCP, CI/CD
 
-OPEN SOURCE CONTRIBUTIONS:
-1. IntersectMBO/lsm-tree — PR #818 merged: refactored Internal.Arena with DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot Haskell extensions. Production-grade LSM database used by the Cardano node.
-2. Cardano Foundation/cardano-org — Added Kenya-specific CEX list; Docker containerisation for docs platform.
-3. rust-bitcoin — Contributed to the foundational Rust Bitcoin library.
-4. stx-labs/explorer — Contributed to a Bitcoin/Stacks blockchain explorer.
+OPEN SOURCE CONTRIBUTIONS (5 major organizations):
+1. payjoin/rust-payjoin — PR reviewed and merged: reference Rust implementation of the Payjoin protocol (BIP 77 / BIP 78), privacy-preserving Bitcoin payment batching.
+2. IntersectMBO/lsm-tree — PR #818 merged: refactored Internal.Arena with DuplicateRecordFields, NoFieldSelectors, OverloadedRecordDot Haskell extensions. Production-grade LSM database used by the Cardano node.
+3. Cardano Foundation/cardano-org — Added Kenya-specific CEX list; Docker containerisation for docs platform.
+4. rust-bitcoin — Contributed to the foundational Rust Bitcoin library.
+5. stx-labs/explorer — Contributed to a Bitcoin/Stacks blockchain explorer.
 
 KEY PROJECTS:
 0. OmniCaption AI — Multi-agent video intelligence system (13 specialised AI agents: scene detection, Whisper ASR, VLM vision, emotion analysis, verification) producing captions in 4 styles, accessibility descriptions, highlights, and social posts. Built for the AMD Developer Hackathon ACT II with ROCm and Fireworks AI. Live: omnicaptionai.fly.dev
 1. StackMate — Builder-partner marketplace on Bitcoin L2 (Stacks), Clarity smart contracts on mainnet. Live: stack-mate.vercel.app
-2. LiteCert — Blockchain certificate verification on Cardano (Plutus + Mesh SDK). Live: certified-chain.vercel.app
+2. Certified Chain — Credential issuance on Cardano: certificate NFTs (Mesh SDK/Blockfrost), Aiken on-chain revocation contract, zero-knowledge privacy layer (Midnight Network), IPFS/Pinata metadata. Live: certified-chain.vercel.app
+2b. BobOpenSource — AI developer tool that analyzes a GitHub repo + issue, maps dependencies, and generates an implementation roadmap with risk notes plus "Ask Bob" Q&A. Live: bobopensource-live.vercel.app
 3. Bitcoin Wallet Lab — secp256k1 + ECDSA + RFC 6979 from scratch in Rust. Testnet4 wallet. Live: wallet-lab.onrender.com
 4. Open Wallet Standard — Multi-chain AI agent wallet (9 networks). Policy-gated signing. Live: open-wallet-standard.onrender.com
 5. Memorabilia — On-chain Starknet game, gasless via AA, Telegram Mini App (@enter_memorabilia_musem_bot). Live: memorabilia-game.vercel.app
@@ -53,6 +55,7 @@ KEY PROJECTS:
 TELEGRAM BOTS (all live and public):
 - @enter_memorabilia_musem_bot — Mini App entry point for the Memorabilia Starknet game (no wallet/gas needed to play).
 - @danmwisecondbrainbot — Personal AI second-brain. Forward links/voice notes/ideas; recall later in natural language via LLM + vector store.
+- @btc_opensource_projects_bot — Bitcoin OSS Triage: autonomous agent scanning GitHub daily for high-signal contribution opportunities, LLM-analyzed, delivered as a prioritized Telegram digest. Part of the Personal AI Agent (danpersonalagent.vercel.app).
 
 WORK EXPERIENCE:
 - Blockchain Ambassador, Blockchain Centre NBO (Oct 2025–Present): Tech & Research (Cardano DApps, Next.js) + Events & Legal (technical support, video filming). Cardano Africa Tech Summit ambassador.
@@ -71,9 +74,13 @@ COMMUNITY & COMPETITIONS:
 - Base East Africa Batch 2 Hackathon (2025): MVP on Base L2.
 
 EDUCATION:
-- BSc Business Information Technology, KCA University (2019–2023)
+- BSc Business Information Technology, KCA University (2020–2024)
 - Software Engineering, ALX Africa (2023–2024)
-- Bitcoin Dojo tracks (2025–Present): Cryptography, Addresses & Encoding, Transactions
+- Bitcoin Dojo tracks (2025–2026): Cryptography, Addresses & Encoding, Transactions & Scripting
+
+CERTIFICATIONS:
+- AI Fluency: Framework & Foundations — Anthropic (2026)
+- Claude 101 — Anthropic (2026)
 
 AVAILABILITY:
 Open to freelance contracts, remote work worldwide, open source collaboration, blockchain and AI projects. Email: ${EMAIL}`;

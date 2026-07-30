@@ -1,10 +1,11 @@
 # Daniel Mwihoti
 
-> Daniel Edward Mwihoti is a global Bitcoin, Cardano, AI and Rust developer based in Nairobi, Kenya, working with remote teams worldwide. Full-stack engineer and open-source contributor (IntersectMBO/lsm-tree, Cardano Foundation, rust-bitcoin). Available for freelance contracts, remote roles, and open-source collaboration.
+> Daniel Edward Mwihoti is a global Bitcoin, Cardano, AI and Rust developer based in Nairobi, Kenya, working with remote teams worldwide. Full-stack engineer with merged pull requests in five major open-source organizations (Payjoin/rust-payjoin, IntersectMBO, Cardano Foundation, rust-bitcoin, Stacks explorer). Available for freelance contracts, remote roles, and open-source collaboration.
 
 Key facts:
 - Role: Software Developer — Full-Stack, Blockchain (Bitcoin & Cardano), AI/CV, Rust
-- Experience: 3+ years, 20+ products shipped, 5+ open-source PRs merged
+- Experience: 3+ years, 20+ products shipped (6+ live), merged PRs in 5 open-source orgs
+- Certifications: AI Fluency: Framework & Foundations (Anthropic, 2026); Claude 101 (Anthropic, 2026)
 - Location: Nairobi, Kenya (remote worldwide)
 - Contact: danielmwihoti@gmail.com
 - Book a call: https://cal.com/daniel-mwihoti-5cceb2
@@ -24,18 +25,21 @@ Key facts:
 ## Selected projects
 
 - [StackMate](https://stack-mate.vercel.app): Builder-partner marketplace on Bitcoin L2 (Stacks); four Clarity smart contracts on mainnet anchor a verifiable builder reputation trail
-- [OmniCaption AI](https://omnicaptionai.fly.dev): Multi-agent video intelligence system — 13 specialised AI agents produce captions, accessibility descriptions, and highlights (AMD Developer Hackathon ACT II)
+- [OmniCaption AI](https://omnicaptionai.fly.dev): Multi-agent video-intelligence platform — 13 specialised AI agents produce transcripts, accessibility descriptions, emotion timelines, and social captions with a hallucination-verification loop; deployed on AMD ROCm (AMD Developer Hackathon)
+- [BobOpenSource](https://bobopensource-live.vercel.app): AI developer tool that analyzes a GitHub repo + issue, maps dependencies, and generates an implementation roadmap with risk notes, plus interactive "Ask Bob" Q&A
+- [Personal AI Agent — Bitcoin OSS Triage Bot](https://danpersonalagent.vercel.app): Autonomous agent scanning GitHub daily for high-signal contribution opportunities, LLM-analyzed, delivered as a prioritized Telegram digest (@btc_opensource_projects_bot)
 - [Open Wallet Standard](https://open-wallet-standard.onrender.com): Multi-chain AI-agent wallet across 9 networks with policy-gated signing — agents never hold raw keys
 - [Bitcoin Wallet Lab](https://wallet-lab.onrender.com): Educational testnet4 wallet; secp256k1 + ECDSA + RFC 6979 implemented from scratch in Rust
-- [LiteCert](https://certified-chain.vercel.app): Blockchain certificate verification on Cardano (Plutus + Mesh SDK)
+- [Certified Chain](https://certified-chain.vercel.app): Credential issuance on Cardano — certificate NFTs (Mesh SDK/Blockfrost), Aiken on-chain revocation, zero-knowledge privacy layer (Midnight Network), IPFS/Pinata
 - [Memorabilia](https://memorabilia-game.vercel.app): Fully on-chain Starknet memory game, gasless via Account Abstraction, playable as a Telegram Mini App
 - [Daily Habit Hub](https://daily-habit-hub.vercel.app): Fitness tracking with Web3 rewards on Avalanche
 - [Computer Vision](https://github.com/mwihoti/computer_vision): Dual Python + Rust YOLO/ONNX system for edge deployment on NVIDIA Jetson
 
 ## Open source
 
+- payjoin/rust-payjoin — PR reviewed and merged: reference Rust implementation of the Payjoin protocol (BIP 77 / BIP 78), privacy-preserving Bitcoin payment batching
 - IntersectMBO/lsm-tree — PR #818 merged: Haskell record-extension refactor in a production LSM database used by the Cardano node
-- Cardano Foundation/cardano-org — Kenya CEX list; Docker containerisation for the docs platform
+- Cardano Foundation/cardano-org — Kenya ADA on-ramp listings; Docker containerisation for the docs platform
 - rust-bitcoin — contributions to the foundational Rust Bitcoin library
 - stx-labs/explorer — Bitcoin/Stacks blockchain explorer contributions
 

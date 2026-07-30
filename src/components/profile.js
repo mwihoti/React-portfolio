@@ -59,7 +59,7 @@ export default function Profile() {
           className="flex justify-center mb-6"
         >
           <a
-            href="https://github.com/mwihoti/danpersonalagent"
+            href="https://danpersonalagent.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold tracking-wider uppercase border-2 bg-gradient-to-r from-teal-200 to-cyan-200 border-teal-600 text-teal-900 shadow-[3px_3px_0_0_rgba(15,118,110,0.9)] hover:shadow-[5px_5px_0_0_rgba(15,118,110,0.9)] hover:-translate-x-0.5 hover:-translate-y-0.5 dark:from-teal-900/60 dark:to-cyan-900/60 dark:border-teal-400 dark:text-teal-200 dark:shadow-[3px_3px_0_0_rgba(45,212,191,0.5)] dark:hover:shadow-[5px_5px_0_0_rgba(45,212,191,0.7)] glow-teal transition-all duration-200"
