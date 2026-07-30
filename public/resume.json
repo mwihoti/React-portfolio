@@ -2,10 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Daniel Edward Mwihoti",
-    "label": "Bitcoin, Cardano, AI & Rust Developer — Full-Stack & Blockchain Engineer",
+    "label": "Software Developer | Full-Stack Engineer | Blockchain & AI Developer",
     "email": "danielmwihoti@gmail.com",
     "url": "https://danieled-portfolio.vercel.app",
-    "summary": "Full-stack developer and blockchain engineer specialising in Bitcoin (secp256k1, SegWit, Lightning), Cardano (Plutus, Mesh SDK), computer vision (YOLO, ONNX, Rust + Python), and production web applications. Open-source contributor to IntersectMBO/lsm-tree, the Cardano Foundation, and rust-bitcoin. 3+ years experience, 20+ products shipped. Open to freelance contracts and remote roles worldwide.",
+    "summary": "Software Developer with 3+ years of experience building full-stack web applications, blockchain systems, and AI automation tools for remote teams worldwide. Skilled across the modern stack — TypeScript, React, Next.js, Node.js, Python, Rust, and PostgreSQL — with deep, hands-on expertise in smart contracts, wallet infrastructure, and AI agent development. Open-source contributor to five major ecosystem projects including Payjoin (rust-payjoin), IntersectMBO (Cardano), the Cardano Foundation, rust-bitcoin, and the Stacks explorer. 20+ products delivered, 6+ deployed live. Open to freelance contracts and remote roles worldwide.",
     "location": {
       "city": "Nairobi",
       "countryCode": "KE"
@@ -18,44 +18,23 @@
   },
   "work": [
     {
-      "name": "Blockchain Centre NBO",
+      "name": "Freelance / Remote",
+      "position": "Full-Stack Developer",
+      "startDate": "2024",
+      "summary": "Built and shipped 20+ full-stack products, blockchain applications, Telegram bots, and AI automation tools. Developed Open Wallet Standard (multi-chain AI agent wallet, 9 networks, policy-gated signing) and Bitcoin Wallet Lab (educational Rust wallet on Testnet4: secp256k1, ECDSA/RFC 6979, P2PKH + Nested/Native SegWit). Designed AI-powered assistants and automation workflows integrating LLMs with backend systems. Delivered production apps with React/Next.js, Node.js/Python, PostgreSQL, Docker, and CI/CD."
+    },
+    {
+      "name": "Blockchain Centre NBO, Nairobi",
       "position": "Blockchain Ambassador",
       "startDate": "2025-10",
-      "summary": "Tech & Research and Events & Legal departments: built Cardano DApps (Plutus, Mesh SDK) and Next.js projects; ecosystem research; represented the centre at the Cardano Africa Tech Summit."
+      "summary": "Build Cardano dApps and Next.js developer tools (Plutus, Mesh SDK) in the centre's technical programmes. Conduct research across Cardano, Bitcoin, and Starknet ecosystems; represent the centre at events including the Cardano Africa Tech Summit and Cardano Corner at Africa Tech Summit."
     },
     {
-      "name": "Freelance",
-      "position": "Full-Stack Developer",
-      "startDate": "2024-01",
-      "summary": "10+ projects across Web3, AI, and full-stack: Guess Game DApp on Arbitrum Sepolia, PYUSD dApp with GCP Blockchain Node Engine, Kenyan AI Advisory on ICP (Motoko, LLaMA3 agents). Top 10 at StackUp August 2024 Hackathon."
-    },
-    {
-      "name": "FaithTech",
-      "position": "Data Analyst & Engineer",
-      "startDate": "2025-08",
-      "endDate": "2025-09",
-      "summary": "ETL pipelines, regex CSV processing, LaTeX PDF report generation."
-    },
-    {
-      "name": "HNG",
-      "position": "Backend Developer Intern",
-      "startDate": "2024-04",
-      "endDate": "2024-08",
-      "summary": "Node.js, Express, PostgreSQL. Stage 5 certified."
-    },
-    {
-      "name": "KejaSpace",
-      "position": "Fullstack Developer",
-      "startDate": "2024-05",
-      "endDate": "2024-07",
-      "summary": "React, Node.js, role-based access control, Tailwind redesign."
-    },
-    {
-      "name": "KTDA",
-      "position": "Business Systems Administrator Intern",
+      "name": "Kenya Tea Development Agency (KTDA)",
+      "position": "Business Systems Administrator (Intern)",
       "startDate": "2023-05",
       "endDate": "2023-09",
-      "summary": "MS Dynamics NAV, SQL."
+      "summary": "Configured the Pesa-Ulipo application on KTDA Wizarpos devices for financial operations across field sites. Resolved Microsoft Dynamics NAV issues; analysed business datasets with SQL."
     }
   ],
   "volunteer": [
@@ -66,102 +45,118 @@
       "summary": "Global builder network growing the Avalanche ecosystem; Mini Hack Cohort 2 build program."
     },
     {
+      "organization": "payjoin / rust-payjoin",
+      "position": "Open Source Contributor",
+      "startDate": "2026",
+      "summary": "Contributed to the reference Rust implementation of Payjoin (BIP 77 / BIP 78, privacy-preserving Bitcoin payment batching); pull request reviewed and merged upstream."
+    },
+    {
       "organization": "IntersectMBO / lsm-tree",
       "position": "Open Source Contributor",
       "startDate": "2026-02",
       "endDate": "2026-04",
-      "summary": "PR #818 merged: refactored Internal.Arena with modern Haskell record extensions in a production-grade LSM database used by the Cardano node."
+      "summary": "Refactored Internal.Arena with modern Haskell record extensions in a production-grade LSM database library used in Cardano infrastructure."
     },
     {
-      "organization": "Cardano Foundation",
+      "organization": "Cardano Foundation / cardano-org",
       "position": "Open Source Contributor",
-      "startDate": "2025-01",
-      "endDate": "2025-12",
-      "summary": "Kenya-specific CEX list merged to cardano-org; Docker containerisation for the documentation platform."
+      "startDate": "2025",
+      "summary": "Added Kenya-specific ADA on-ramp exchange listings; contributed Docker-based local development support for reproducible contributor workflows."
     },
     {
       "organization": "rust-bitcoin / stx-labs explorer",
       "position": "Open Source Contributor",
       "startDate": "2026-01",
-      "summary": "Contributions to the foundational Rust Bitcoin library and a Bitcoin/Stacks blockchain explorer."
+      "summary": "Contributions to the foundational Rust Bitcoin library and the Stacks blockchain explorer — blockchain infrastructure and developer-facing tooling."
     }
   ],
   "education": [
     {
-      "institution": "KCA University",
+      "institution": "KCA University, Nairobi",
       "area": "Business Information Technology",
       "studyType": "BSc",
-      "startDate": "2019",
-      "endDate": "2023"
+      "startDate": "2020",
+      "endDate": "2024"
     },
     {
       "institution": "ALX Africa",
-      "area": "Software Engineering",
+      "area": "Software Engineering Programme",
       "startDate": "2023",
       "endDate": "2024"
     },
     {
       "institution": "Bitcoin Dojo",
-      "area": "Cryptography, Addresses & Encoding, Transactions",
-      "startDate": "2025"
+      "area": "Cryptography, Addresses & Encoding, Transactions & Scripting",
+      "startDate": "2025",
+      "endDate": "2026"
     }
   ],
+  "certificates": [
+    { "name": "AI Fluency: Framework & Foundations", "issuer": "Anthropic", "date": "2026-07" },
+    { "name": "Claude 101", "issuer": "Anthropic", "date": "2026-07" }
+  ],
   "skills": [
-    { "name": "Languages", "keywords": ["TypeScript", "JavaScript", "Rust", "Python", "Haskell", "Solidity", "Cairo", "SQL", "Motoko"] },
-    { "name": "Frontend", "keywords": ["React", "Next.js", "Tailwind CSS", "Framer Motion", "shadcn/ui"] },
-    { "name": "Backend", "keywords": ["Node.js", "Express", "Axum", "Tokio", "FastAPI", "PostgreSQL", "MongoDB", "Supabase", "Redis"] },
-    { "name": "Blockchain", "keywords": ["Bitcoin", "secp256k1", "SegWit", "Lightning Network", "Cardano", "Plutus", "Mesh SDK", "Stacks", "Clarity", "Starknet", "Cairo", "EVM", "Avalanche", "Solana", "XRPL", "ICP", "Wagmi", "Hardhat"] },
-    { "name": "AI / Computer Vision", "keywords": ["YOLO", "ONNX Runtime", "OpenCV", "DeepFace", "TensorFlow.js", "LLM integration", "RAG", "AI agents"] },
-    { "name": "DevOps", "keywords": ["Docker", "Git", "Linux", "Nginx", "Vercel", "Render", "GCP", "CI/CD"] }
+    { "name": "Languages", "keywords": ["TypeScript", "JavaScript", "Python", "Rust", "Haskell", "Solidity", "Cairo", "SQL"] },
+    { "name": "Frontend", "keywords": ["React", "Next.js", "Tailwind CSS", "HTML5", "CSS3", "shadcn/ui", "Framer Motion"] },
+    { "name": "Backend", "keywords": ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB", "Redis", "Supabase"] },
+    { "name": "Blockchain", "keywords": ["Bitcoin", "Lightning", "Ethereum/EVM", "Cardano", "Plutus", "Mesh SDK", "Starknet", "Stacks", "Solana", "SegWit", "PSBT", "Hardhat", "Wagmi"] },
+    { "name": "AI / Automation", "keywords": ["LLM integration", "RAG pipelines", "vector databases", "AI agents", "workflow automation", "bot development", "TensorFlow.js", "OpenCV"] },
+    { "name": "DevOps & Tools", "keywords": ["Docker", "Git", "Linux", "Nginx", "CI/CD", "GCP", "Vercel", "Render"] }
   ],
   "projects": [
     {
-      "name": "StackMate",
-      "description": "Builder-partner marketplace on Bitcoin L2 (Stacks). Four Clarity smart contracts on mainnet anchor registration, applications, acceptances, and endorsements into a verifiable on-chain reputation trail; off-chain Postgres handles search.",
-      "url": "https://stack-mate.vercel.app",
-      "keywords": ["Stacks", "Clarity", "Bitcoin", "Next.js", "TypeScript"]
+      "name": "OmniCaption AI",
+      "description": "Multi-agent video-intelligence platform (13 specialized AI agents) producing transcripts, accessibility descriptions, emotion timelines, and social captions, with a factual-grounding + hallucination-verification loop. React, FastAPI/Python, Whisper; deployed on AMD ROCm. Built for the AMD Developer Hackathon.",
+      "url": "https://omnicaptionai.fly.dev",
+      "keywords": ["Python", "FastAPI", "React", "Whisper", "ROCm"]
     },
     {
-      "name": "OmniCaption AI",
-      "description": "Multi-agent video intelligence system: 13 specialised AI agents produce captions in 4 styles, accessibility descriptions, emotion timelines, and highlights from a single video. Built for the AMD Developer Hackathon ACT II.",
-      "url": "https://omnicaptionai.fly.dev",
-      "keywords": ["Python", "TypeScript", "Whisper", "FFmpeg", "ROCm", "Fireworks AI"]
+      "name": "Certified Chain",
+      "description": "Blockchain credential-issuance platform on Cardano: certificate NFTs via Mesh SDK/Blockfrost, an Aiken on-chain revocation contract, and a zero-knowledge privacy layer (Midnight Network) so only hashes touch the chain. Next.js, TypeScript, Neon Postgres, IPFS/Pinata.",
+      "url": "https://certified-chain.vercel.app",
+      "keywords": ["Cardano", "Mesh SDK", "Aiken", "Midnight Network", "IPFS"]
+    },
+    {
+      "name": "Personal AI Agent — Bitcoin OSS Triage Bot",
+      "description": "Autonomous agent that scans GitHub repositories daily for high-signal contribution opportunities (good-first-issue, help-wanted, bugs), analyzes them with an LLM, and delivers a prioritized digest via Telegram (@btc_opensource_projects_bot). Node.js, Gemini/Groq/Ollama, Airtable, cron scheduling.",
+      "url": "https://danpersonalagent.vercel.app",
+      "keywords": ["Node.js", "AI agents", "Telegram", "LLM"]
+    },
+    {
+      "name": "BobOpenSource",
+      "description": "AI developer tool that analyzes a GitHub repo and issue, maps dependencies, and generates an implementation roadmap with code guidance and risk notes, plus an interactive \"Ask Bob\" Q&A. Next.js, React, Node.js, GitHub API, Neon Postgres, Clerk.",
+      "url": "https://bobopensource-live.vercel.app",
+      "keywords": ["Next.js", "Node.js", "GitHub API", "AI"]
+    },
+    {
+      "name": "StackMate",
+      "description": "Builder-partner marketplace on Bitcoin L2 (Stacks). Four Clarity smart contracts on mainnet anchor registration, applications, acceptances, and endorsements into a verifiable on-chain reputation trail.",
+      "url": "https://stack-mate.vercel.app",
+      "keywords": ["Stacks", "Clarity", "Bitcoin", "Next.js"]
     },
     {
       "name": "Open Wallet Standard",
-      "description": "Multi-chain AI-agent wallet supporting 9 networks with policy-gated signing tokens — agents never hold raw keys.",
+      "description": "Multi-chain AI agent wallet supporting 9 networks (EVM, Solana, Cosmos, Bitcoin, XRPL) with policy-gated signing so agents can act without exposure to raw private keys.",
       "url": "https://open-wallet-standard.onrender.com",
       "keywords": ["TypeScript", "Rust", "Solana", "EVM", "Bitcoin", "XRPL"]
     },
     {
       "name": "Bitcoin Wallet Lab",
-      "description": "Educational Bitcoin wallet on testnet4: all three address types from one key, real transaction building and broadcast; secp256k1 + ECDSA + RFC 6979 from scratch in Rust.",
+      "description": "Educational Rust wallet on Testnet4 implementing secp256k1, ECDSA signing (RFC 6979), and P2PKH, Nested SegWit, and Native SegWit address generation.",
       "url": "https://wallet-lab.onrender.com",
-      "keywords": ["Rust", "Axum", "secp256k1", "ECDSA"]
-    },
-    {
-      "name": "LiteCert",
-      "description": "Blockchain certificate verification on Cardano: institutions issue hashed credentials, employers verify instantly via on-chain transaction hash.",
-      "url": "https://certified-chain.vercel.app",
-      "keywords": ["Cardano", "Mesh SDK", "Plutus", "React"]
+      "keywords": ["Rust", "secp256k1", "ECDSA", "Bitcoin"]
     },
     {
       "name": "Memorabilia",
-      "description": "Fully on-chain Starknet memory game — gasless via Account Abstraction, playable as a Telegram Mini App, NFT minting via Cartridge.",
+      "description": "On-chain memory-card game on Starknet (Cairo, Dojo Engine), playable as a Telegram Mini App with account-abstraction wallets, gasless interaction, and NFT minting.",
       "url": "https://memorabilia-game.vercel.app",
-      "keywords": ["Starknet", "Dojo Engine", "Cairo", "Telegram Mini App"]
+      "keywords": ["Starknet", "Cairo", "Dojo Engine", "Telegram Mini App"]
     },
     {
       "name": "Daily Habit Hub",
-      "description": "Fitness tracking with social accountability and Web3 rewards ($HABIT tokens, proof-of-progress NFTs) on Avalanche.",
+      "description": "Fitness-tracking dApp on Avalanche (Next.js, Supabase, Wagmi, RainbowKit) with daily streaks, token incentives, and NFT-based \"Proof of Progress\" rewards.",
       "url": "https://daily-habit-hub.vercel.app",
-      "keywords": ["Next.js", "Supabase", "Avalanche", "Wagmi"]
-    },
-    {
-      "name": "Computer Vision — Traffic & Attendance",
-      "description": "Edge-native CV system for real-time traffic sensing: dual Python + Rust stack (YOLO, ONNX Runtime, OpenCV), homography-based speed calibration, NVIDIA Jetson deployment.",
-      "url": "https://github.com/mwihoti/computer_vision",
-      "keywords": ["Python", "Rust", "YOLO", "ONNX"]
+      "keywords": ["Avalanche", "Next.js", "Supabase", "Wagmi"]
     }
   ],
   "languages": [

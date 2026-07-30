@@ -40,7 +40,7 @@ const stackTimeline = [
 
 const openSourceStats = [
   { value: '5+', label: 'PRs Merged' },
-  { value: '3', label: 'OS Orgs' },
+  { value: '5', label: 'OS Orgs' },
   { value: '20+', label: 'Projects' },
   { value: '5', label: 'Communities' },
 ];

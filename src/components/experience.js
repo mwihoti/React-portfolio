@@ -39,6 +39,16 @@ const experiences = [
   },
   {
     title: 'Open Source Contributor',
+    company: 'rust-payjoin — Payjoin Protocol (BIP 77 / BIP 78)',
+    period: '2026',
+    type: 'opensource',
+    description: [
+      'Contributed to rust-payjoin, the reference Rust implementation of Payjoin — privacy-preserving Bitcoin payment batching.',
+      'Pull request reviewed and merged into the upstream project.',
+    ],
+  },
+  {
+    title: 'Open Source Contributor',
     company: 'IntersectMBO / lsm-tree',
     period: 'February – April 2026',
     type: 'opensource',

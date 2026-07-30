@@ -58,15 +58,25 @@ const projects = [
     image: '/projects/bitcoin-wallet-lab.jpg',
   },
   {
-    title: 'LiteCert — Blockchain Certificate Verification',
-    problem: 'Give institutions a tamper-proof way to issue and instantly verify credentials without a centralised authority.',
+    title: 'Certified Chain — Credential Issuance on Cardano',
+    problem: 'Give institutions a tamper-proof way to issue, verify, and revoke credentials without a centralised authority.',
     description:
-      'Certificate verification platform anchored on the Cardano blockchain using Mesh SDK. Institutions issue digital credentials with unique identifiers (e.g. CAR_JOH_01); employers verify instantly via on-chain transaction hash. Privacy-first: certificate data is hashed before blockchain submission.',
-    tech: ['TypeScript', 'React', 'Cardano', 'Mesh SDK', 'Plutus'],
+      'Blockchain credential-issuance platform on Cardano: certificate NFTs minted via Mesh SDK and Blockfrost, an Aiken on-chain revocation contract, and a zero-knowledge privacy layer (Midnight Network) so only hashes touch the chain. Certificate metadata is pinned to IPFS via Pinata; employers verify instantly via on-chain transaction hash.',
+    tech: ['Next.js', 'TypeScript', 'Cardano', 'Mesh SDK', 'Aiken', 'Midnight Network', 'IPFS', 'Neon Postgres'],
     live: 'https://certified-chain.vercel.app',
     github: 'https://github.com/mwihoti/certified-chain',
     category: ['Web3'],
     image: '/projects/litecert.jpg',
+  },
+  {
+    title: 'BobOpenSource',
+    problem: 'New contributors face unfamiliar repos with no map — which files matter, what could break, where to start.',
+    description:
+      'AI developer tool that analyzes a GitHub repo and issue, maps dependencies, and generates an implementation roadmap with code guidance and risk notes — plus an interactive "Ask Bob" Q&A over the analysis.',
+    tech: ['Next.js', 'React', 'Node.js', 'GitHub API', 'Neon Postgres', 'Clerk'],
+    live: 'https://bobopensource-live.vercel.app',
+    category: ['AI', 'Fullstack'],
+    image: '/projects/bobopensource.jpg',
   },
   {
     title: 'Memorabilia',
