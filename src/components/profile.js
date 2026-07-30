@@ -88,16 +88,17 @@ export default function Profile() {
               </div>
             </motion.div>
 
-            <motion.p
+            {/* h1 carries the personal-brand keyword (the name); the tagline below is visual */}
+            <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.1 }}
               className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-teal-700 dark:text-teal-300"
             >
               Daniel Mwihoti
-            </motion.p>
+            </motion.h1>
 
-            <motion.h1
+            <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
@@ -107,7 +108,7 @@ export default function Profile() {
             >
               Building blockchain and AI products that don&apos;t just work.
               They move forward.
-            </motion.h1>
+            </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 18 }}

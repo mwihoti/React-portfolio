@@ -59,6 +59,10 @@ export default function Footer() {
             </a>
           </div>
 
+          <p className="text-sm text-center text-gray-500 dark:text-gray-500">
+            Daniel Mwihoti &mdash; Bitcoin, Cardano, AI &amp; Rust developer. Nairobi, Kenya
+            &middot; working with remote teams worldwide.
+          </p>
           <p className="text-sm text-gray-500 dark:text-gray-500">
             &copy; {new Date().getFullYear()} Daniel Mwihoti. Built with React &amp; Tailwind.
           </p>
