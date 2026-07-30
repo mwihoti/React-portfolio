@@ -30,6 +30,10 @@ export const metadata = {
   creator: 'Daniel Edward Mwihoti',
   alternates: {
     canonical: '/',
+    types: {
+      // Machine-readable profile for parsers and AI hiring agents
+      'application/json': '/resume.json',
+    },
   },
   robots: {
     index: true,

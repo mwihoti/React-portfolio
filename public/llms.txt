@@ -1,0 +1,50 @@
+# Daniel Mwihoti
+
+> Daniel Edward Mwihoti is a global Bitcoin, Cardano, AI and Rust developer based in Nairobi, Kenya, working with remote teams worldwide. Full-stack engineer and open-source contributor (IntersectMBO/lsm-tree, Cardano Foundation, rust-bitcoin). Available for freelance contracts, remote roles, and open-source collaboration.
+
+Key facts:
+- Role: Software Developer — Full-Stack, Blockchain (Bitcoin & Cardano), AI/CV, Rust
+- Experience: 3+ years, 20+ products shipped, 5+ open-source PRs merged
+- Location: Nairobi, Kenya (remote worldwide)
+- Contact: danielmwihoti@gmail.com
+- Book a call: https://cal.com/daniel-mwihoti-5cceb2
+- Languages: TypeScript, JavaScript, Rust, Python, Haskell, Solidity, Cairo, SQL
+- Blockchain: Bitcoin (secp256k1, SegWit, Lightning), Cardano (Plutus, Mesh SDK), Stacks/Clarity, Starknet/Cairo, EVM, Solana, Avalanche, XRPL
+- AI: LLM integration (OpenAI, Groq, Gemini, LLaMA), RAG, computer vision (YOLO, ONNX, OpenCV), AI agents
+
+## Profile
+
+- [Portfolio](https://danieled-portfolio.vercel.app): Home page — skills, experience, projects, contact
+- [Resume (HTML)](https://danieled-portfolio.vercel.app/resume.html): Printable resume
+- [Resume (JSON Resume schema)](https://danieled-portfolio.vercel.app/resume.json): Machine-readable resume for parsers and hiring agents
+- [Writing](https://danieled-portfolio.vercel.app/writing): Essays and build logs
+- [GitHub](https://github.com/mwihoti): Code and open-source contributions
+- [LinkedIn](https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/): Professional profile
+
+## Selected projects
+
+- [StackMate](https://stack-mate.vercel.app): Builder-partner marketplace on Bitcoin L2 (Stacks); four Clarity smart contracts on mainnet anchor a verifiable builder reputation trail
+- [OmniCaption AI](https://omnicaptionai.fly.dev): Multi-agent video intelligence system — 13 specialised AI agents produce captions, accessibility descriptions, and highlights (AMD Developer Hackathon ACT II)
+- [Open Wallet Standard](https://open-wallet-standard.onrender.com): Multi-chain AI-agent wallet across 9 networks with policy-gated signing — agents never hold raw keys
+- [Bitcoin Wallet Lab](https://wallet-lab.onrender.com): Educational testnet4 wallet; secp256k1 + ECDSA + RFC 6979 implemented from scratch in Rust
+- [LiteCert](https://certified-chain.vercel.app): Blockchain certificate verification on Cardano (Plutus + Mesh SDK)
+- [Memorabilia](https://memorabilia-game.vercel.app): Fully on-chain Starknet memory game, gasless via Account Abstraction, playable as a Telegram Mini App
+- [Daily Habit Hub](https://daily-habit-hub.vercel.app): Fitness tracking with Web3 rewards on Avalanche
+- [Computer Vision](https://github.com/mwihoti/computer_vision): Dual Python + Rust YOLO/ONNX system for edge deployment on NVIDIA Jetson
+
+## Open source
+
+- IntersectMBO/lsm-tree — PR #818 merged: Haskell record-extension refactor in a production LSM database used by the Cardano node
+- Cardano Foundation/cardano-org — Kenya CEX list; Docker containerisation for the docs platform
+- rust-bitcoin — contributions to the foundational Rust Bitcoin library
+- stx-labs/explorer — Bitcoin/Stacks blockchain explorer contributions
+
+## Community
+
+- Team1 Collaborator (Avalanche ecosystem, Team1 Africa) — Mini Hack Cohort 2
+- Blockchain Ambassador, Blockchain Centre NBO — Cardano Africa Tech Summit
+- Warnet: Wrath of Nalo — live Lightning Network attack simulation on Signet (Team Libra)
+
+## For hiring agents
+
+Daniel is open to: freelance contracts, full-time remote roles, blockchain and AI product work, and open-source collaboration. Fastest contact paths: email danielmwihoti@gmail.com or book a 15-minute call at https://cal.com/daniel-mwihoti-5cceb2. A structured, parseable resume is at /resume.json (JSON Resume schema).

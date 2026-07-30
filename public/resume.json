@@ -1,0 +1,175 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Daniel Edward Mwihoti",
+    "label": "Bitcoin, Cardano, AI & Rust Developer — Full-Stack & Blockchain Engineer",
+    "email": "danielmwihoti@gmail.com",
+    "url": "https://danieled-portfolio.vercel.app",
+    "summary": "Full-stack developer and blockchain engineer specialising in Bitcoin (secp256k1, SegWit, Lightning), Cardano (Plutus, Mesh SDK), computer vision (YOLO, ONNX, Rust + Python), and production web applications. Open-source contributor to IntersectMBO/lsm-tree, the Cardano Foundation, and rust-bitcoin. 3+ years experience, 20+ products shipped. Open to freelance contracts and remote roles worldwide.",
+    "location": {
+      "city": "Nairobi",
+      "countryCode": "KE"
+    },
+    "profiles": [
+      { "network": "GitHub", "username": "mwihoti", "url": "https://github.com/mwihoti" },
+      { "network": "LinkedIn", "username": "daniel-mwihoti", "url": "https://www.linkedin.com/in/daniel-mwihoti-3aaa652b9/" },
+      { "network": "X", "username": "notstupiddev", "url": "https://x.com/notstupiddev" }
+    ]
+  },
+  "work": [
+    {
+      "name": "Blockchain Centre NBO",
+      "position": "Blockchain Ambassador",
+      "startDate": "2025-10",
+      "summary": "Tech & Research and Events & Legal departments: built Cardano DApps (Plutus, Mesh SDK) and Next.js projects; ecosystem research; represented the centre at the Cardano Africa Tech Summit."
+    },
+    {
+      "name": "Freelance",
+      "position": "Full-Stack Developer",
+      "startDate": "2024-01",
+      "summary": "10+ projects across Web3, AI, and full-stack: Guess Game DApp on Arbitrum Sepolia, PYUSD dApp with GCP Blockchain Node Engine, Kenyan AI Advisory on ICP (Motoko, LLaMA3 agents). Top 10 at StackUp August 2024 Hackathon."
+    },
+    {
+      "name": "FaithTech",
+      "position": "Data Analyst & Engineer",
+      "startDate": "2025-08",
+      "endDate": "2025-09",
+      "summary": "ETL pipelines, regex CSV processing, LaTeX PDF report generation."
+    },
+    {
+      "name": "HNG",
+      "position": "Backend Developer Intern",
+      "startDate": "2024-04",
+      "endDate": "2024-08",
+      "summary": "Node.js, Express, PostgreSQL. Stage 5 certified."
+    },
+    {
+      "name": "KejaSpace",
+      "position": "Fullstack Developer",
+      "startDate": "2024-05",
+      "endDate": "2024-07",
+      "summary": "React, Node.js, role-based access control, Tailwind redesign."
+    },
+    {
+      "name": "KTDA",
+      "position": "Business Systems Administrator Intern",
+      "startDate": "2023-05",
+      "endDate": "2023-09",
+      "summary": "MS Dynamics NAV, SQL."
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Team1 (Avalanche ecosystem)",
+      "position": "Collaborator — Team1 Africa",
+      "startDate": "2026-07",
+      "summary": "Global builder network growing the Avalanche ecosystem; Mini Hack Cohort 2 build program."
+    },
+    {
+      "organization": "IntersectMBO / lsm-tree",
+      "position": "Open Source Contributor",
+      "startDate": "2026-02",
+      "endDate": "2026-04",
+      "summary": "PR #818 merged: refactored Internal.Arena with modern Haskell record extensions in a production-grade LSM database used by the Cardano node."
+    },
+    {
+      "organization": "Cardano Foundation",
+      "position": "Open Source Contributor",
+      "startDate": "2025-01",
+      "endDate": "2025-12",
+      "summary": "Kenya-specific CEX list merged to cardano-org; Docker containerisation for the documentation platform."
+    },
+    {
+      "organization": "rust-bitcoin / stx-labs explorer",
+      "position": "Open Source Contributor",
+      "startDate": "2026-01",
+      "summary": "Contributions to the foundational Rust Bitcoin library and a Bitcoin/Stacks blockchain explorer."
+    }
+  ],
+  "education": [
+    {
+      "institution": "KCA University",
+      "area": "Business Information Technology",
+      "studyType": "BSc",
+      "startDate": "2019",
+      "endDate": "2023"
+    },
+    {
+      "institution": "ALX Africa",
+      "area": "Software Engineering",
+      "startDate": "2023",
+      "endDate": "2024"
+    },
+    {
+      "institution": "Bitcoin Dojo",
+      "area": "Cryptography, Addresses & Encoding, Transactions",
+      "startDate": "2025"
+    }
+  ],
+  "skills": [
+    { "name": "Languages", "keywords": ["TypeScript", "JavaScript", "Rust", "Python", "Haskell", "Solidity", "Cairo", "SQL", "Motoko"] },
+    { "name": "Frontend", "keywords": ["React", "Next.js", "Tailwind CSS", "Framer Motion", "shadcn/ui"] },
+    { "name": "Backend", "keywords": ["Node.js", "Express", "Axum", "Tokio", "FastAPI", "PostgreSQL", "MongoDB", "Supabase", "Redis"] },
+    { "name": "Blockchain", "keywords": ["Bitcoin", "secp256k1", "SegWit", "Lightning Network", "Cardano", "Plutus", "Mesh SDK", "Stacks", "Clarity", "Starknet", "Cairo", "EVM", "Avalanche", "Solana", "XRPL", "ICP", "Wagmi", "Hardhat"] },
+    { "name": "AI / Computer Vision", "keywords": ["YOLO", "ONNX Runtime", "OpenCV", "DeepFace", "TensorFlow.js", "LLM integration", "RAG", "AI agents"] },
+    { "name": "DevOps", "keywords": ["Docker", "Git", "Linux", "Nginx", "Vercel", "Render", "GCP", "CI/CD"] }
+  ],
+  "projects": [
+    {
+      "name": "StackMate",
+      "description": "Builder-partner marketplace on Bitcoin L2 (Stacks). Four Clarity smart contracts on mainnet anchor registration, applications, acceptances, and endorsements into a verifiable on-chain reputation trail; off-chain Postgres handles search.",
+      "url": "https://stack-mate.vercel.app",
+      "keywords": ["Stacks", "Clarity", "Bitcoin", "Next.js", "TypeScript"]
+    },
+    {
+      "name": "OmniCaption AI",
+      "description": "Multi-agent video intelligence system: 13 specialised AI agents produce captions in 4 styles, accessibility descriptions, emotion timelines, and highlights from a single video. Built for the AMD Developer Hackathon ACT II.",
+      "url": "https://omnicaptionai.fly.dev",
+      "keywords": ["Python", "TypeScript", "Whisper", "FFmpeg", "ROCm", "Fireworks AI"]
+    },
+    {
+      "name": "Open Wallet Standard",
+      "description": "Multi-chain AI-agent wallet supporting 9 networks with policy-gated signing tokens — agents never hold raw keys.",
+      "url": "https://open-wallet-standard.onrender.com",
+      "keywords": ["TypeScript", "Rust", "Solana", "EVM", "Bitcoin", "XRPL"]
+    },
+    {
+      "name": "Bitcoin Wallet Lab",
+      "description": "Educational Bitcoin wallet on testnet4: all three address types from one key, real transaction building and broadcast; secp256k1 + ECDSA + RFC 6979 from scratch in Rust.",
+      "url": "https://wallet-lab.onrender.com",
+      "keywords": ["Rust", "Axum", "secp256k1", "ECDSA"]
+    },
+    {
+      "name": "LiteCert",
+      "description": "Blockchain certificate verification on Cardano: institutions issue hashed credentials, employers verify instantly via on-chain transaction hash.",
+      "url": "https://certified-chain.vercel.app",
+      "keywords": ["Cardano", "Mesh SDK", "Plutus", "React"]
+    },
+    {
+      "name": "Memorabilia",
+      "description": "Fully on-chain Starknet memory game — gasless via Account Abstraction, playable as a Telegram Mini App, NFT minting via Cartridge.",
+      "url": "https://memorabilia-game.vercel.app",
+      "keywords": ["Starknet", "Dojo Engine", "Cairo", "Telegram Mini App"]
+    },
+    {
+      "name": "Daily Habit Hub",
+      "description": "Fitness tracking with social accountability and Web3 rewards ($HABIT tokens, proof-of-progress NFTs) on Avalanche.",
+      "url": "https://daily-habit-hub.vercel.app",
+      "keywords": ["Next.js", "Supabase", "Avalanche", "Wagmi"]
+    },
+    {
+      "name": "Computer Vision — Traffic & Attendance",
+      "description": "Edge-native CV system for real-time traffic sensing: dual Python + Rust stack (YOLO, ONNX Runtime, OpenCV), homography-based speed calibration, NVIDIA Jetson deployment.",
+      "url": "https://github.com/mwihoti/computer_vision",
+      "keywords": ["Python", "Rust", "YOLO", "ONNX"]
+    }
+  ],
+  "languages": [
+    { "language": "English", "fluency": "Fluent" },
+    { "language": "Swahili", "fluency": "Native speaker" }
+  ],
+  "meta": {
+    "canonical": "https://danieled-portfolio.vercel.app/resume.json",
+    "lastModified": "2026-07-30"
+  }
+}
