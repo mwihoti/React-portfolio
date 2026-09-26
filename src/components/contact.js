@@ -1,67 +1,50 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import {
+  FaArrowRight,
+  FaCalendarAlt,
+  FaCheck,
+  FaCopy,
   FaGithub,
   FaLinkedin,
-  FaEnvelope,
   FaPaperPlane,
-  FaCalendarAlt,
 } from "react-icons/fa";
-import { useTheme } from "../context/theme";
-import { EMAIL, CAL_URL, GITHUB_URL, LINKEDIN_URL } from "../data/site";
+import { EMAIL, CAL_URL, GITHUB_URL, LINKEDIN_URL, LOCATION } from "../data/site";
+import { Reveal } from "./ui";
 
-const contactLinks = [
-  {
-    icon: FaGithub,
-    label: "GitHub",
-    value: GITHUB_URL.replace("https://", ""),
-    href: GITHUB_URL,
-    color: "hover:text-white",
-  },
-  {
-    icon: FaLinkedin,
-    label: "LinkedIn",
-    value: "daniel-mwihoti",
-    href: LINKEDIN_URL,
-    color: "hover:text-blue-400",
-  },
-  {
-    icon: FaEnvelope,
-    label: "Email",
-    value: EMAIL,
-    href: `mailto:${EMAIL}`,
-    color: "hover:text-teal-400",
-  },
-  {
-    icon: FaCalendarAlt,
-    label: "Schedule Call",
-    value: CAL_URL.replace("https://", ""),
-    href: CAL_URL,
-    color: "hover:text-purple-400",
-  },
+const TABS = [
+  { id: "call", label: "Book a call", icon: FaCalendarAlt },
+  { id: "message", label: "Send a message", icon: FaPaperPlane },
 ];
 
 export default function Contact() {
-  const darkTheme = useTheme();
-  const [status, setStatus] = useState(null); // 'success' | 'error' | null
-  const [useCalcom, setUseCalcom] = useState(true);
+  const [tab, setTab] = useState("call");
+  const [status, setStatus] = useState(null); // 'sending' | 'success' | 'error' | null
+  const [copied, setCopied] = useState(false);
   const form = useRef();
+
+  const copyEmail = () => {
+    navigator.clipboard
+      .writeText(EMAIL)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {});
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setStatus("sending");
     emailjs
       .sendForm("service_sx21psz", "template_d3c28hq", form.current, {
         publicKey: "I59mHqfMF093XbTav",
       })
       .then(() => {
         setStatus("success");
-        form.current.reset();
-        // Clear success message after 5 seconds
-        setTimeout(() => setStatus(null), 5000);
-        setTimeout(() => form.current.reset(), 500);
+        form.current?.reset();
       })
       .catch((error) => {
         console.error("EmailJS Error:", error);
@@ -70,129 +53,86 @@ export default function Contact() {
   };
 
   const inputClass =
-    "w-full rounded-lg px-4 py-3 text-sm bg-gray-50 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-700/60 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-1 focus:ring-teal-500/30 transition-colors";
+    "w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none transition-colors";
+  const labelClass = "mb-1.5 block font-mono text-xs text-muted";
 
   return (
-    <section
-      id="contact"
-      className={`py-20 ${darkTheme ? "bg-[#0a0a0f]" : "bg-gray-50"}`}
-    >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold text-teal-600 dark:text-teal-400 glow-teal">
-            Let&apos;s Build the Next Move
-          </h2>
-          <p className="mt-3 text-gray-500 dark:text-gray-400">
-            Questions, architecture reviews, wallet ideas, smart contract builds, or AI agent
-            automation: send the signal and I&apos;ll help you find the next step.
-          </p>
-        </motion.div>
+    <section id="contact" aria-labelledby="contact-title" className="border-t border-line py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <Reveal className="flex flex-col">
+            <p className="font-mono text-accent" aria-hidden="true">&gt;</p>
+            <h2 id="contact-title" className="mt-2 font-serif text-5xl font-semibold leading-[1.05] tracking-tight text-ink">
+              Let&apos;s build something <span className="italic text-accent">useful.</span>
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted">
+              Tell me what you&apos;re building and where it&apos;s stuck. A rough idea is fine,
+              and so is a half-broken repo. Messages come straight to my inbox.
+            </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          {/* Left panel — contact info */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-2 flex flex-col justify-between bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
-          >
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                Choose the fastest route
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-8">
-                Book a quick call for live project scoping, send a direct email for a written
-                brief, or check the code trail before you reach out.
-              </p>
-
-              <div className="space-y-4">
-                {contactLinks.map(
-                  ({ icon: Icon, label, value, href, color }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target={label !== "Email" ? "_blank" : undefined}
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-3 text-gray-500 dark:text-gray-400 ${color} transition-colors group`}
-                    >
-                      <span className="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700/50 group-hover:bg-teal-500/10 transition-colors">
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <div>
-                        <div className="text-xs text-gray-400 dark:text-gray-500">
-                          {label}
-                        </div>
-                        <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                          {value}
-                        </div>
-                      </div>
-                    </a>
-                  ),
-                )}
+            <div className="mt-8 space-y-3">
+              <button
+                onClick={copyEmail}
+                className="panel panel-hover flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                aria-label={`Copy email address ${EMAIL}`}
+              >
+                <span>
+                  <span className="block font-mono text-xs text-faint">Email</span>
+                  <span className="text-ink">{EMAIL}</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-mono text-xs text-accent" aria-live="polite">
+                  {copied ? (
+                    <>
+                      <FaCheck className="h-3 w-3" /> Copied
+                    </>
+                  ) : (
+                    <>
+                      <FaCopy className="h-3 w-3" /> Copy
+                    </>
+                  )}
+                </span>
+              </button>
+              <div className="grid grid-cols-2 gap-3">
+                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="panel panel-hover flex items-center gap-3 px-5 py-4 text-sm text-ink">
+                  <FaGithub className="h-4 w-4 text-muted" aria-hidden="true" /> GitHub
+                </a>
+                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="panel panel-hover flex items-center gap-3 px-5 py-4 text-sm text-ink">
+                  <FaLinkedin className="h-4 w-4 text-muted" aria-hidden="true" /> LinkedIn
+                </a>
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700/50">
-              <p className="text-xs text-gray-400 dark:text-gray-500">
-                Based in Nairobi, Kenya &mdash; open to remote work worldwide.
-              </p>
-            </div>
-          </motion.div>
+            <p className="mt-auto pt-8 font-mono text-xs text-faint">
+              Based in {LOCATION} (EAT, UTC+3). Happy to work across time zones.
+            </p>
+          </Reveal>
 
-          {/* Right panel — booking or form */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-3 bg-white dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
-          >
-            {/* Toggle between booking and contact form */}
-            <div className="flex gap-3 mb-6 bg-gray-100 dark:bg-gray-900/50 rounded-lg p-1">
-              <button
-                onClick={() => setUseCalcom(true)}
-                className={`flex-1 py-2 px-4 rounded-md font-medium text-sm transition-all ${
-                  useCalcom
-                    ? "bg-teal-600 text-white shadow-md"
-                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
-                }`}
-              >
-                <FaCalendarAlt className="inline mr-2 h-4 w-4" />
-                Schedule a Quick Call
-              </button>
-              <button
-                onClick={() => setUseCalcom(false)}
-                className={`flex-1 py-2 px-4 rounded-md font-medium text-sm transition-all ${
-                  !useCalcom
-                    ? "bg-teal-600 text-white shadow-md"
-                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
-                }`}
-              >
-                <FaPaperPlane className="inline mr-2 h-4 w-4" />
-                Email the Brief
-              </button>
-            </div>
-
-            {/* Cal.com embed */}
-            {useCalcom && (
-              <>
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="cal-inline-embed"
-                  style={{
-                    width: "100%",
-                    height: "min(630px, 75vh)",
-                    overflow: "auto",
-                  }}
+          <Reveal delay={0.08} className="panel p-2 sm:p-3">
+            <div className="flex gap-1 rounded-lg bg-raised p-1" role="tablist" aria-label="How to reach me">
+              {TABS.map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  role="tab"
+                  id={`tab-${id}`}
+                  aria-selected={tab === id}
+                  aria-controls={`panel-${id}`}
+                  onClick={() => setTab(id)}
+                  className={`flex flex-1 items-center justify-center gap-2 rounded-md px-4 py-2.5 font-mono text-sm transition-colors ${
+                    tab === id ? "bg-surface text-accent shadow-sm" : "text-muted hover:text-ink"
+                  }`}
                 >
+                  <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {tab === "call" && (
+              <div id="panel-call" role="tabpanel" aria-labelledby="tab-call" className="p-3 sm:p-4">
+                <p className="mb-4 text-sm text-muted">
+                  15 minutes to talk through your idea. No pitch, no obligation.
+                </p>
+                <div className="overflow-hidden rounded-lg border border-line" style={{ height: "min(630px, 75vh)" }}>
                   <iframe
                     src={`${CAL_URL}?embed=true&embedType=inline`}
                     width="100%"
@@ -200,104 +140,83 @@ export default function Contact() {
                     frameBorder="0"
                     loading="lazy"
                     title="Schedule a call with Daniel"
-                    className="rounded-lg"
                   />
-                </motion.div>
-                <p className="mt-2 text-xs text-center text-gray-400 dark:text-gray-500">
-                  Calendar not loading?{' '}
-                  <a
-                    href={CAL_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-teal-500 hover:underline"
-                  >
-                    Open cal.com directly
+                </div>
+                <p className="mt-3 text-center text-xs text-faint">
+                  Calendar not loading?{" "}
+                  <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                    Open it on cal.com
                   </a>
                   .
                 </p>
-              </>
+              </div>
             )}
 
-            {/* Contact form */}
-            {!useCalcom && (
-              <>
-                {status === "success" && (
-                  <div className="mb-6 p-4 bg-teal-50 dark:bg-teal-900/30 border border-teal-200 dark:border-teal-700/50 text-teal-700 dark:text-teal-300 rounded-lg text-sm">
-                    &#x2713; Message sent! I&apos;ll get back to you soon.
+            {tab === "message" && (
+              <div id="panel-message" role="tabpanel" aria-labelledby="tab-message" className="p-3 sm:p-4">
+                {status === "success" ? (
+                  <div className="flex flex-col items-center py-16 text-center">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
+                      <FaCheck className="h-5 w-5" />
+                    </span>
+                    <p className="mt-4 font-serif text-2xl text-ink">Thanks, got it.</p>
+                    <p className="mt-2 max-w-sm text-sm text-muted">
+                      I&apos;ll read it properly and reply to the email you gave.
+                    </p>
+                    <button onClick={() => setStatus(null)} className="link-arrow mt-6">
+                      Send another
+                    </button>
                   </div>
-                )}
-                {status === "error" && (
-                  <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/50 text-red-600 dark:text-red-400 rounded-lg text-sm">
-                    Something went wrong. Try emailing directly at {EMAIL}
-                  </div>
-                )}
-
-                <form ref={form} onSubmit={sendEmail} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                ) : (
+                  <form ref={form} onSubmit={sendEmail} className="space-y-5">
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      <div>
+                        <label htmlFor="contact-name" className={labelClass}>
+                          Your name
+                        </label>
+                        <input id="contact-name" type="text" name="from_name" required autoComplete="name" className={inputClass} />
+                      </div>
+                      <div>
+                        <label htmlFor="contact-email" className={labelClass}>
+                          Your email
+                        </label>
+                        {/* EmailJS template reads the sender's address from `to_name` */}
+                        <input id="contact-email" type="email" name="to_name" required autoComplete="email" className={inputClass} />
+                      </div>
+                    </div>
                     <div>
-                      <label
-                        htmlFor="contact-name"
-                        className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5"
-                      >
-                        Name
+                      <label htmlFor="contact-message" className={labelClass}>
+                        What are you working on?
                       </label>
-                      <input
-                        id="contact-name"
-                        type="text"
-                        name="from_name"
+                      <textarea
+                        id="contact-message"
+                        name="message"
+                        rows="8"
                         required
-                        placeholder="Your name"
+                        placeholder="What you're building, what's blocking you, and what a good outcome looks like."
                         className={inputClass}
                       />
                     </div>
-                    <div>
-                      <label
-                        htmlFor="contact-email"
-                        className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5"
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="contact-email"
-                        type="email"
-                        name="to_name"
-                        required
-                        placeholder="you@email.com"
-                        className={inputClass}
-                      />
-                    </div>
-                  </div>
 
-                  <div>
-                    <label
-                      htmlFor="contact-message"
-                      className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      rows="6"
-                      required
-                      placeholder="What are you building, what is blocked, and what outcome do you need?"
-                      className={inputClass}
-                    />
-                  </div>
+                    {status === "error" && (
+                      <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-300" role="alert">
+                        That didn&apos;t send, sorry. Please email me directly at{" "}
+                        <a href={`mailto:${EMAIL}`} className="underline">
+                          {EMAIL}
+                        </a>
+                        .
+                      </p>
+                    )}
 
-                  <motion.button
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-semibold text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-colors shadow-lg shadow-teal-500/10"
-                  >
-                    <FaPaperPlane className="h-4 w-4" />
-                    Send the Brief
-                  </motion.button>
-                </form>
-              </>
+                    <button type="submit" disabled={status === "sending"} className="btn-primary w-full disabled:opacity-60">
+                      {status === "sending" ? "Sending…" : "Send message"}
+                      <FaArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </button>
+                  </form>
+                )}
+              </div>
             )}
-          </motion.div>
+          </Reveal>
         </div>
       </div>
     </section>

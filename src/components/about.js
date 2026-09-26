@@ -1,189 +1,117 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useTheme } from '../context/theme';
+import { FaArrowRight } from 'react-icons/fa';
+import { NOW, PROOF_POINTS } from '../data/site';
+import { Reveal, SectionHeader } from './ui';
+import Experience from './experience';
 import ContributionGraph from './ContributionGraph';
-import TerminalCard from './TerminalCard';
 import GitHubStats from './GitHubStats';
 
-const stackTimeline = [
-  {
-    year: '2023',
-    techs: ['React', 'Node.js', 'PostgreSQL', 'Express', 'MongoDB'],
-    color: 'text-blue-400',
-    border: 'border-blue-500/40',
-    bg: 'bg-blue-500/10',
-  },
-  {
-    year: '2024',
-    techs: ['Solidity', 'Web3.js', 'ICP', 'Arbitrum', 'Rust', 'Civic Auth'],
-    color: 'text-purple-400',
-    border: 'border-purple-500/40',
-    bg: 'bg-purple-500/10',
-  },
-  {
-    year: '2025',
-    techs: ['JavaScript', 'Python', 'Fullstack', 'Data Eng.', 'ML', 'Deployment'],
-    color: 'text-orange-400',
-    border: 'border-orange-500/40',
-    bg: 'bg-orange-500/10',
-  },
-  {
-    year: '2026',
-    techs: ['Bitcoin', 'Rust', 'Cardano', 'Haskell', 'Starknet', 'AI Agents', 'LSM-tree'],
-    color: 'text-teal-400',
-    border: 'border-teal-500/40',
-    bg: 'bg-teal-500/10',
-  },
-];
-
-const openSourceStats = [
-  { value: '5+', label: 'PRs Merged' },
-  { value: '5', label: 'OS Orgs' },
-  { value: '20+', label: 'Projects' },
-  { value: '5', label: 'Communities' },
-];
-
 export default function About() {
-  const darkTheme = useTheme();
-
   return (
-    <section
-      id="about"
-      className={`py-20 w-full ${darkTheme ? 'bg-[#0d1117]' : 'bg-gray-100'}`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold text-teal-600 dark:text-teal-400 glow-teal">
-            About Me
-          </h2>
-        </motion.div>
+    <section id="about" aria-labelledby="about-title" className="border-t border-line py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          id="about-title"
+          eyebrow="About"
+          title={
+            <>
+              The person behind <span className="italic text-accent">the commits.</span>
+            </>
+          }
+        />
 
-        {/* Bio + terminal */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow"
-          >
-            <p className="leading-8 text-lg text-gray-700 dark:text-gray-300">
-              I&apos;m a Nairobi-based engineer who likes doing hard things &mdash;
-              from full-stack web systems to AI automation, smart contracts, and
-              blockchain products. What began as curiosity as an IT student grew
-              into shipped software, open-source contributions, and products built
-              with Bitcoin, Cardano, Rust, Python, React, Next.js, and AI tools.
-              If you have a product to ship or a feature to move forward, reach out.
+        <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr]">
+          <Reveal className="space-y-5 text-lg leading-relaxed text-muted">
+            <p>
+              <span className="text-ink">I&apos;m Daniel, a Nairobi-based engineer who likes doing hard things.</span>{' '}
+              I started out as a curious IT student and kept pulling the thread: full-stack web
+              systems first, then smart contracts, then AI automation and blockchain products.
             </p>
-            <p className="mt-5 leading-8 text-lg text-gray-700 dark:text-gray-300">
-              I&apos;m currently learning{' '}
-              <a
-                href="https://github.com/lnbook/lnbook/tree/develop"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-teal-600 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-              >
-                Mastering the Lightning Network
+            <p>
+              Most of my work now happens in the open. I build with Bitcoin, Cardano, Rust,
+              Python, React and Next.js, and I send pull requests to the projects I depend on.
+              Away from the editor you&apos;ll find me at Code Orange and local developer meetups,
+              or helping out with Team1 Africa.
+            </p>
+            <p>
+              If you have a product to ship or a feature that&apos;s stuck, I&apos;d like to hear
+              about it.{' '}
+              <a href="#contact" className="link-arrow text-base">
+                Say hello <FaArrowRight className="h-3 w-3" aria-hidden="true" />
               </a>
-              .
             </p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex justify-center"
-          >
-            <TerminalCard />
-          </motion.div>
-        </div>
-
-        {/* Tech Evolution timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700/50 card-glow mb-10"
-        >
-          <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400 mb-6">
-            Tech Evolution
-          </h3>
-          <div className="relative">
-            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gray-700" />
-            {stackTimeline.map((row, i) => (
-              <motion.div
-                key={row.year}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="relative flex gap-5 mb-6 last:mb-0"
-              >
-                <div
-                  className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold border-2 ${row.border} ${row.bg} ${row.color} flex-shrink-0`}
-                >
-                  {row.year.slice(2)}
-                </div>
-                <div className="pt-1">
-                  <span className={`text-sm font-semibold ${row.color}`}>{row.year}</span>
-                  <div className="flex flex-wrap gap-1.5 mt-1.5">
-                    {row.techs.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded border border-gray-200 dark:border-gray-700"
-                      >
-                        {t}
-                      </span>
-                    ))}
+            <div className="panel !mt-10 p-6">
+              <p className="eyebrow">Now</p>
+              <dl className="mt-4 space-y-3 text-base">
+                {NOW.map(({ label, text, href }) => (
+                  <div key={label} className="grid gap-1 sm:grid-cols-[7rem_1fr]">
+                    <dt className="font-mono text-sm text-faint">{label}</dt>
+                    <dd className="text-ink">
+                      {href ? (
+                        <a href={href} target="_blank" rel="noopener noreferrer" className="underline decoration-accent/50 underline-offset-4 hover:decoration-accent">
+                          {text}
+                        </a>
+                      ) : (
+                        text
+                      )}
+                    </dd>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                ))}
+              </dl>
+            </div>
+          </Reveal>
 
-        {/* Stat counters */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          {openSourceStats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="text-center bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 card-glow"
-            >
-              <div className="text-3xl font-bold text-teal-400 glow-teal">{stat.value}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{stat.label}</div>
-            </motion.div>
-          ))}
+          <Reveal delay={0.1} className="flex flex-col items-center lg:items-end">
+            <figure className="w-full max-w-[300px]">
+              <div className="panel overflow-hidden p-2">
+                {/* Native portrait video (608x1080), framed 9:16 */}
+                <div className="relative aspect-[9/16] overflow-hidden rounded-lg">
+                  <video
+                    controls
+                    preload="none"
+                    poster="/video-poster.jpg"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  >
+                    <source src="/intro-video.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+              <figcaption className="mt-3 text-center font-mono text-xs text-faint">
+                A short hello, in my own words.
+              </figcaption>
+            </figure>
+
+            <dl className="mt-8 grid w-full max-w-[300px] grid-cols-3 gap-2 text-center">
+              {PROOF_POINTS.map(({ value, label }) => (
+                <div key={label} className="panel px-2 py-3">
+                  <dt className="sr-only">{label}</dt>
+                  <dd>
+                    <span className="block font-serif text-2xl font-semibold text-accent">{value}</span>
+                    <span className="mt-1 block text-[11px] leading-tight text-muted">{label}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
 
-        {/* GitHub contribution graph */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400">
-              GitHub Activity
-            </h3>
+        <Reveal className="mt-20">
+          <h3 className="font-serif text-2xl font-semibold text-ink">What I&apos;ve been up to</h3>
+          <p className="mt-2 mb-6 text-sm text-muted">Work, open source and community, most recent first.</p>
+          <Experience />
+        </Reveal>
+
+        <Reveal className="panel mt-16 p-6">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 className="font-mono text-sm text-ink">GitHub activity</h3>
             <GitHubStats />
           </div>
           <ContributionGraph />
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

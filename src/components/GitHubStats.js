@@ -20,14 +20,14 @@ export default function GitHubStats() {
   if (!stats) return null;
 
   return (
-    <div className="flex gap-6 text-sm text-gray-500 dark:text-gray-400">
+    <div className="flex gap-6 font-mono text-xs text-muted">
       <span className="flex items-center gap-1.5">
-        <FaCodeBranch className="h-3.5 w-3.5 text-teal-400" aria-hidden="true" />
-        <span className="text-teal-400 font-semibold">{stats.repos}</span> public repos
+        <FaCodeBranch className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+        <span className="text-accent font-semibold">{stats.repos}</span> public repos
       </span>
       <span className="flex items-center gap-1.5">
-        <FaStar className="h-3.5 w-3.5 text-teal-400" aria-hidden="true" />
-        <span className="text-teal-400 font-semibold">{stats.followers}</span> followers
+        <FaStar className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+        <span className="text-accent font-semibold">{stats.followers}</span> followers
       </span>
     </div>
   );

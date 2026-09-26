@@ -1,39 +1,44 @@
-"use client";
+import Navbar from '../src/components/navbar';
+import Profile from '../src/components/profile';
+import CaseStudies from '../src/components/caseStudies';
+import Work from '../src/components/work';
+import Focus from '../src/components/focus';
+import About from '../src/components/about';
+import WritingPreview from '../src/components/writingPreview';
+import Contact from '../src/components/contact';
+import Footer from '../src/components/footer';
+import ChatBot from '../src/components/ChatBot';
+import { getAllPosts, formatPostDate } from '../src/lib/posts';
+import { externalArticles } from '../src/data/articles';
 
-import Skills from "../src/components/skills";
-import Work from "../src/components/work";
-import Bots from "../src/components/bots";
-import Profile from "../src/components/profile";
-import About from "../src/components/about";
-import Contact from "../src/components/contact";
-import Footer from "../src/components/footer";
-import Navbar from "../src/components/navbar";
-import Experience from "../src/components/experience";
-import ChatBot from "../src/components/ChatBot";
-import VideoShowcase from "../src/components/video";
-import { useTheme } from "../src/context/theme";
-import { MotionConfig } from "framer-motion";
-
+// Order follows the case study's journey: who → proof → breadth → focus →
+// person → thinking → action.
 export default function Home() {
-  const darkTheme = useTheme();
+  const posts = getAllPosts();
+  const writing = [
+    ...posts.map((p) => ({
+      title: p.title,
+      summary: p.summary,
+      date: formatPostDate(p.date),
+      href: `/writing/${p.slug}`,
+    })),
+    ...externalArticles.map((a) => ({ ...a, external: true })),
+  ].slice(0, 4);
 
   return (
-    <MotionConfig reducedMotion="user">
+    <>
+      <Navbar />
+      <main id="main">
+        <Profile />
+        <CaseStudies publishedSlugs={posts.map((p) => p.slug)} />
+        <Work />
+        <Focus />
+        <About />
+        {writing.length > 0 && <WritingPreview posts={writing} />}
+        <Contact />
+      </main>
+      <Footer />
       <ChatBot />
-      <div className={darkTheme ? "dark" : ""}>
-        <div className="bg-white dark:bg-[#0a0a0f] transition-colors duration-300">
-          <Navbar />
-          <Profile />
-          <VideoShowcase />
-          <About />
-          <Experience />
-          <Skills />
-          <Work />
-          <Bots />
-          <Contact />
-          <Footer />
-        </div>
-      </div>
-    </MotionConfig>
+    </>
   );
 }

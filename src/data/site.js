@@ -15,3 +15,24 @@ export const PROOF_POINTS = [
   { value: '5+', label: 'Open-source PRs merged' },
   { value: '5', label: 'Blockchain communities' },
 ];
+
+export const LOCATION = 'Nairobi, Kenya';
+export const TIMEZONE = 'Africa/Nairobi';
+
+// "Now" block on the homepage — update these when focus changes.
+export const NOW = [
+  {
+    label: 'Building',
+    text: 'A personal AI agent for research and task delegation',
+    href: 'https://danpersonalagent.vercel.app',
+  },
+  {
+    label: 'Reading',
+    text: 'Mastering the Lightning Network',
+    href: 'https://github.com/lnbook/lnbook/tree/develop',
+  },
+  {
+    label: 'Community',
+    text: 'Team1 Africa (Avalanche), Code Orange and local developer meetups',
+  },
+];

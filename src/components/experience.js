@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaBriefcase, FaUsers, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { useTheme } from '../context/theme';
+import { FaChevronDown, FaChevronUp, FaExternalLinkAlt } from 'react-icons/fa';
 
 const experiences = [
   {
@@ -114,143 +112,67 @@ const experiences = [
   },
 ];
 
-function TypeIcon({ type }) {
-  if (type === 'opensource') {
-    return <FaGithub className="h-4 w-4 text-teal-400" />;
-  }
-  if (type === 'community') {
-    return <FaUsers className="h-4 w-4 text-purple-400" />;
-  }
-  return <FaBriefcase className="h-4 w-4 text-blue-400" />;
-}
+const TYPE_LABEL = {
+  work: 'Work',
+  opensource: 'Open source',
+  community: 'Community',
+};
 
-function TypeBadge({ type }) {
-  if (type === 'opensource') {
-    return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-teal-900/40 text-teal-300 border border-teal-700/40 rounded-full">
-        <FaGithub className="h-2.5 w-2.5" /> Open Source
-      </span>
-    );
-  }
-  if (type === 'community') {
-    return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-purple-900/40 text-purple-300 border border-purple-700/40 rounded-full">
-        <FaUsers className="h-2.5 w-2.5" /> Community
-      </span>
-    );
-  }
-  return null;
-}
+const INITIAL_COUNT = 4;
 
-const INITIAL_COUNT = 3;
-
+// Compact timeline rendered inside the About section.
 export default function Experience() {
-  const darkTheme = useTheme();
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? experiences : experiences.slice(0, INITIAL_COUNT);
 
   return (
-    <section
-      id="experience"
-      className={`py-20 ${darkTheme ? 'bg-[#0d1117]' : 'bg-gray-50'}`}
-    >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+    <div id="experience">
+      <ol className="divide-y divide-line border-y border-line">
+        {visible.map((exp) => (
+          <li key={exp.title + exp.period} className="grid gap-2 py-6 md:grid-cols-[13rem_1fr] md:gap-8">
+            <div className="font-mono text-xs text-faint">
+              <p>{exp.period}</p>
+              <p className="mt-1 text-accent">{TYPE_LABEL[exp.type]}</p>
+            </div>
+            <div className="max-w-3xl">
+              <h4 className="font-semibold text-ink">{exp.title}</h4>
+              <p className="text-sm text-muted">{exp.company}</p>
+              <ul className="mt-3 space-y-1.5">
+                {exp.description.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
+                    <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              {exp.link && (
+                <a href={exp.link} target="_blank" rel="noopener noreferrer" className="link-arrow mt-3 text-xs">
+                  <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
+                  {exp.link.replace('https://', '')}
+                </a>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      {experiences.length > INITIAL_COUNT && (
+        <button
+          onClick={() => setShowAll((s) => !s)}
+          aria-expanded={showAll}
+          className="btn-outline mt-6 !py-2"
         >
-          <h2 className="text-4xl font-bold text-teal-600 dark:text-teal-400 glow-teal">
-            Experience
-          </h2>
-        </motion.div>
-
-        <div className="relative">
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-teal-500/60 via-teal-500/30 to-transparent" />
-
-          {visible.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.45 }}
-              className="relative flex gap-8 mb-8 last:mb-0"
-            >
-              <div className="relative flex-shrink-0 w-12 flex justify-center">
-                <div
-                  className={`relative z-10 w-9 h-9 rounded-full flex items-center justify-center border-2 ${
-                    exp.type === 'opensource'
-                      ? 'border-teal-500 bg-teal-900/40'
-                      : exp.type === 'community'
-                      ? 'border-purple-500 bg-purple-900/40'
-                      : 'border-blue-500 bg-blue-900/40'
-                  }`}
-                >
-                  <TypeIcon type={exp.type} />
-                </div>
-              </div>
-
-              <div className="flex-1 bg-white dark:bg-gray-800/60 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-md card-glow mb-2">
-                <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
-                  <h3 className="text-lg font-bold text-teal-600 dark:text-teal-400">
-                    {exp.title}
-                  </h3>
-                  <TypeBadge type={exp.type} />
-                </div>
-                <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">
-                  {exp.company}
-                </p>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 mb-3">
-                  {exp.period}
-                </p>
-                <ul className="space-y-1.5">
-                  {exp.description.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span aria-hidden="true" className="mt-1.5 w-2 h-2 rounded-full bg-teal-500/60 flex-shrink-0" />
-                      <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                {exp.link && (
-                  <a
-                    href={exp.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 mt-4 text-xs font-medium text-teal-500 hover:text-teal-400 transition-colors"
-                  >
-                    <FaExternalLinkAlt className="h-3 w-3" />
-                    {exp.link.replace('https://', '')}
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="text-center mt-8">
-          <button
-            onClick={() => setShowAll((s) => !s)}
-            aria-expanded={showAll}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium border border-teal-500/40 text-teal-600 dark:text-teal-400 hover:bg-teal-500/10 transition-colors"
-          >
-            {showAll ? (
-              <>
-                Show less
-                <FaChevronUp className="h-3 w-3" aria-hidden="true" />
-              </>
-            ) : (
-              <>
-                Show all {experiences.length} roles
-                <FaChevronDown className="h-3 w-3" aria-hidden="true" />
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-    </section>
+          {showAll ? (
+            <>
+              Show less <FaChevronUp className="h-3 w-3" aria-hidden="true" />
+            </>
+          ) : (
+            <>
+              Show all {experiences.length} entries <FaChevronDown className="h-3 w-3" aria-hidden="true" />
+            </>
+          )}
+        </button>
+      )}
+    </div>
   );
 }
