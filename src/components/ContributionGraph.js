@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 
 const LEVEL_COLORS = [
-  'bg-gray-800',
-  'bg-teal-900',
-  'bg-teal-700',
-  'bg-teal-500',
-  'bg-teal-300',
+  'bg-line',
+  'bg-accent/30',
+  'bg-accent/55',
+  'bg-accent/80',
+  'bg-accent',
 ];
 
 export default function ContributionGraph() {
@@ -32,18 +32,18 @@ export default function ContributionGraph() {
   }, []);
 
   if (loading) {
-    return <div className="h-20 bg-gray-800/50 animate-pulse rounded-md" />;
+    return <div className="h-20 bg-raised animate-pulse rounded-md" />;
   }
 
   if (weeks.length === 0) {
     return (
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-muted">
         GitHub activity unavailable &mdash; view at{' '}
         <a
           href="https://github.com/mwihoti"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-teal-400 hover:underline"
+          className="text-accent hover:underline"
         >
           github.com/mwihoti
         </a>
@@ -53,8 +53,8 @@ export default function ContributionGraph() {
 
   return (
     <div className="mt-2">
-      <p className="text-xs text-gray-500 mb-3">
-        <span className="text-teal-400 font-semibold">{total}</span>{' '}
+      <p className="text-xs text-muted mb-3">
+        <span className="text-accent font-semibold">{total}</span>{' '}
         contributions in the last year
       </p>
       <div className="flex gap-[3px] overflow-x-auto pb-1">
@@ -71,11 +71,11 @@ export default function ContributionGraph() {
         ))}
       </div>
       <div className="flex items-center gap-1 mt-2">
-        <span className="text-xs text-gray-600">Less</span>
+        <span className="text-xs text-faint">Less</span>
         {LEVEL_COLORS.map((cls, i) => (
           <div key={i} className={`w-[10px] h-[10px] rounded-[2px] ${cls}`} />
         ))}
-        <span className="text-xs text-gray-600">More</span>
+        <span className="text-xs text-faint">More</span>
       </div>
     </div>
   );

@@ -1,39 +1,57 @@
-'use client';
-
 import React from 'react';
 
+const roles = [
+  'Full-stack engineer',
+  'Bitcoin builder (Rust)',
+  'Cardano builder & contributor',
+  'Avalanche builder · Team1',
+  'Midnight explorer',
+  'AI automation tinkerer',
+];
+
+const merged = ['payjoin/rust-payjoin', 'IntersectMBO/lsm-tree #818', 'cardano-foundation/cardano-org'];
+
+// The "$ whoami" window from the case study. Decorative, so it's plain text
+// rather than an interactive terminal.
 export default function TerminalCard() {
   return (
-    <div className="terminal-card w-full max-w-xs text-left flex-shrink-0">
-      <div className="terminal-header">
-        <span className="w-3 h-3 rounded-full bg-red-500 inline-block" />
-        <span className="w-3 h-3 rounded-full bg-yellow-500 inline-block" />
-        <span className="w-3 h-3 rounded-full bg-green-500 inline-block" />
-        <span className="ml-2 text-xs text-gray-500">daniel@nairobi: ~</span>
+    <div className="overflow-hidden rounded-xl border border-accent/30 bg-[#0a0f11] font-mono text-[13px] leading-relaxed text-[#d7dcd9] shadow-2xl shadow-black/40">
+      <div className="flex items-center gap-2 border-b border-white/5 px-4 py-3">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#3ecfbc]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#3ecfbc]/60" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#3ecfbc]/30" />
+        <span className="ml-2 text-xs text-white/40">daniel@nairobi: ~</span>
       </div>
-      <div className="terminal-body space-y-0.5">
+      <div className="space-y-3 px-5 py-4">
         <div>
-          <span className="text-teal-400">❯ </span>
-          <span className="text-gray-400">whoami</span>
+          <p>
+            <span className="text-[#3ecfbc]">$</span> whoami
+          </p>
+          <p className="mt-1 text-[#3ecfbc]">Daniel Mwihoti</p>
+          <ul className="mt-1 text-white/70">
+            {roles.map((r) => (
+              <li key={r}>&gt; {r}</li>
+            ))}
+          </ul>
         </div>
-        <div className="text-white pl-2">Bitcoin · Cardano · Rust engineer, Nairobi</div>
-        <div className="mt-1">
-          <span className="text-teal-400">❯ </span>
-          <span className="text-gray-400">cat stats.txt</span>
+        <div>
+          <p>
+            <span className="text-[#3ecfbc]">$</span> git log --merged --upstream
+          </p>
+          <ul className="mt-1 text-white/70">
+            {merged.map((m) => (
+              <li key={m}>
+                <span className="text-[#3ecfbc]">✓</span> {m}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="text-green-400 pl-2">3+ years experience</div>
-        <div className="text-green-400 pl-2">20+ projects shipped</div>
-        <div className="mt-1">
-          <span className="text-teal-400">❯ </span>
-          <span className="text-gray-400">git log --merged</span>
-        </div>
-        <div className="text-yellow-400 pl-2 text-xs">&#x2713; IntersectMBO/lsm-tree #818</div>
-        <div className="text-yellow-400 pl-2 text-xs">&#x2713; cardano-foundation/cardano-org</div>
-        <div className="text-yellow-400 pl-2 text-xs">&#x2713; payjoin/rust-payjoin</div>
-        <div className="mt-1">
-          <span className="text-teal-400">❯ </span>
-          <span className="blink-cursor text-teal-400">&#x2588;</span>
-        </div>
+        <p>
+          <span className="text-[#3ecfbc]">$</span>{' '}
+          <span className="blink-cursor text-[#3ecfbc]" aria-hidden="true">
+            ▍
+          </span>
+        </p>
       </div>
     </div>
   );

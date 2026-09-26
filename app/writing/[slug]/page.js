@@ -4,7 +4,6 @@ import ReactMarkdown from 'react-markdown';
 import { FaArrowLeft } from 'react-icons/fa';
 import { getAllPosts, getPostBySlug, formatPostDate } from '../../../src/lib/posts';
 import { SITE_URL } from '../../../src/data/site';
-import ThemeWrapper from '../../../src/components/ThemeWrapper';
 import Navbar from '../../../src/components/navbar';
 import Footer from '../../../src/components/footer';
 
@@ -53,54 +52,46 @@ export default function PostPage({ params }) {
   };
 
   return (
-    <ThemeWrapper>
-      <div className="bg-white dark:bg-[#0a0a0f] transition-colors duration-300">
-        <Navbar />
-        <main className="min-h-screen bg-gray-50 dark:bg-[#0a0a0f] text-gray-800 dark:text-gray-200 pt-16">
-          <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <Link
-              href="/writing"
-              className="inline-flex items-center gap-2 text-sm text-teal-600 dark:text-teal-400 hover:underline mb-10"
-            >
-              <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
-              All writing
-            </Link>
+    <>
+      <Navbar />
+      <main id="main" className="min-h-screen pt-16">
+        <article className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
+          <Link href="/writing" className="link-arrow mb-10">
+            <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
+            All writing
+          </Link>
 
-            <header className="mb-10">
-              <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-3">
-                {formatPostDate(post.date)}
-                {post.draft && (
-                  <span className="ml-3 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 normal-case">
-                    Draft — only visible in dev
-                  </span>
-                )}
-              </p>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight mb-4">
-                {post.title}
-              </h1>
-              <div className="flex flex-wrap gap-1.5">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-0.5 text-xs bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300 rounded-full border border-teal-200 dark:border-teal-800/50"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </header>
+          <header className="mb-12 mt-10 border-b border-line pb-10">
+            <p className="font-mono text-xs text-faint">
+              {formatPostDate(post.date)} · Daniel Mwihoti
+              {post.draft && (
+                <span className="ml-3 rounded-md bg-amber-500/15 px-2 py-0.5 text-amber-600 dark:text-amber-300">
+                  Draft — only visible in dev
+                </span>
+              )}
+            </p>
+            <h1 className="mt-3 font-serif text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl">
+              {post.title}
+            </h1>
+            <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Tags">
+              {post.tags.map((tag) => (
+                <li key={tag} className="chip">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </header>
 
-            <div className="prose prose-gray dark:prose-invert max-w-none prose-a:text-teal-600 dark:prose-a:text-teal-400 prose-headings:scroll-mt-24">
-              <ReactMarkdown>{post.content}</ReactMarkdown>
-            </div>
-          </article>
-        </main>
-        <Footer />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-        />
-      </div>
-    </ThemeWrapper>
+          <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-serif prose-headings:scroll-mt-24 prose-a:text-accent prose-code:font-mono">
+            <ReactMarkdown>{post.content}</ReactMarkdown>
+          </div>
+        </article>
+      </main>
+      <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+    </>
   );
 }

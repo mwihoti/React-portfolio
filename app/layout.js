@@ -1,10 +1,16 @@
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ThemeProvider } from '../src/context/theme';
+import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google';
 import '../src/index.css';
-import '../src/App.css';
-import '../src/components/floatingElements.css';
 import { SITE_URL } from '../src/data/site';
+
+const serif = Fraunces({ subsets: ['latin'], variable: '--font-serif', display: 'swap' });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
+const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' });
+
+// Runs before paint so a saved light-mode preference never flashes dark.
+const themeScript = `try{if(localStorage.getItem('darkTheme')==='false')document.documentElement.classList.remove('dark')}catch(e){}`;
 
 const SITE_TITLE = 'Daniel Mwihoti - Global Bitcoin, Cardano, AI and Rust Developer';
 
@@ -78,7 +84,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#000000',
+  themeColor: '#070a0c',
   width: 'device-width',
   initialScale: 1,
 };
@@ -173,7 +179,14 @@ const botsGraph = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`dark ${serif.variable} ${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
         <Analytics />
