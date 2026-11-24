@@ -81,25 +81,34 @@ function Message({ msg }) {
   );
 }
 
+// Opacity-only wave instead of a bounce: still reads as "working", carries no
+// movement, so it stays on under reduced motion like any loading indicator.
+// Purely visual: the state is announced by the panel's persistent live
+// region (see `liveMsg`), which exists before the indicator mounts.
+const TYPING_DOT = {
+  animate: { opacity: [0.3, 1, 0.3] },
+  transition: { duration: 1.2, repeat: Infinity, ease: "easeInOut" },
+};
+
 function TypingIndicator() {
   return (
-    <div className="flex gap-2 mb-3">
+    <div className="flex gap-2 mb-3" aria-hidden="true">
       <div className="flex-shrink-0 w-7 h-7 rounded-full bg-raised flex items-center justify-center">
         <FaRobot className="w-3 h-3 text-accent" />
       </div>
-      <div className="bg-raised rounded-xl rounded-tl-none px-3 py-2 flex gap-1 items-center">
-        <span
-          className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce"
-          style={{ animationDelay: "0ms" }}
-        />
-        <span
-          className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce"
-          style={{ animationDelay: "150ms" }}
-        />
-        <span
-          className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce"
-          style={{ animationDelay: "300ms" }}
-        />
+      <div
+        className="bg-raised rounded-xl rounded-tl-none px-3 py-2.5 flex gap-1 items-center"
+        aria-hidden="true"
+      >
+        {[0, 1, 2].map((i) => (
+          <motion.span
+            key={i}
+            className="w-1.5 h-1.5 bg-accent rounded-full"
+            initial={{ opacity: 0.3 }}
+            animate={TYPING_DOT.animate}
+            transition={{ ...TYPING_DOT.transition, delay: i * 0.18 }}
+          />
+        ))}
       </div>
     </div>
   );
