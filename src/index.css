@@ -247,6 +247,12 @@
   }
 }
 
+/* Theme toggle: swap colors in one frame (see toggleTheme in
+   src/context/theme.js). The sun/moon icon keeps its own crossfade. */
+html.theme-switching *:not(.theme-icon) {
+  transition: none !important;
+}
+
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
