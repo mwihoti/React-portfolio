@@ -39,7 +39,7 @@ export default function About() {
               If you have a product to ship or a feature that&apos;s stuck, I&apos;d like to hear
               about it.{' '}
               <a href="#contact" className="link-arrow text-base">
-                Say hello <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+                Say hello <FaArrowRight className="arrow-nudge h-3 w-3" aria-hidden="true" />
               </a>
             </p>
 
@@ -51,7 +51,7 @@ export default function About() {
                     <dt className="font-mono text-sm text-faint">{label}</dt>
                     <dd className="text-ink">
                       {href ? (
-                        <a href={href} target="_blank" rel="noopener noreferrer" className="underline decoration-accent/50 underline-offset-4 hover:decoration-accent">
+                        <a href={href} target="_blank" rel="noopener noreferrer" className="underline decoration-accent/50 underline-offset-4 transition-[text-decoration-color] duration-base ease-enter hover:decoration-accent focus-visible:decoration-accent">
                           {text}
                         </a>
                       ) : (
@@ -99,11 +99,14 @@ export default function About() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-20">
-          <h3 className="font-serif text-2xl font-semibold text-ink">What I&apos;ve been up to</h3>
-          <p className="mt-2 mb-6 text-sm text-muted">Work, open source and community, most recent first.</p>
+        {/* The heading reveals on its own; Experience staggers its rows. */}
+        <div className="mt-20">
+          <Reveal>
+            <h3 className="font-serif text-2xl font-semibold text-ink">What I&apos;ve been up to</h3>
+            <p className="mt-2 mb-6 text-sm text-muted">Work, open source and community, most recent first.</p>
+          </Reveal>
           <Experience />
-        </Reveal>
+        </div>
 
         <Reveal className="panel mt-16 p-6">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">

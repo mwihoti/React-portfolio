@@ -19,15 +19,17 @@ export default function GitHubStats() {
 
   if (!stats) return null;
 
+  // Data arrives client-side, so the row fades in (opacity only, Tier 3) when
+  // it mounts.
   return (
-    <div className="flex gap-6 font-mono text-xs text-muted">
+    <div className="flex animate-fade-in gap-6 font-mono text-xs text-muted">
       <span className="flex items-center gap-1.5">
         <FaCodeBranch className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-        <span className="text-accent font-semibold">{stats.repos}</span> public repos
+        <span className="font-semibold tabular-nums text-accent">{stats.repos}</span> public repos
       </span>
       <span className="flex items-center gap-1.5">
         <FaStar className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-        <span className="text-accent font-semibold">{stats.followers}</span> followers
+        <span className="font-semibold tabular-nums text-accent">{stats.followers}</span> followers
       </span>
     </div>
   );
