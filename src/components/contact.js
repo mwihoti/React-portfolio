@@ -233,95 +233,120 @@ export default function Contact() {
               ))}
             </div>
 
-            {tab === "call" && (
-              <div id="panel-call" role="tabpanel" aria-labelledby="tab-call" className="p-3 sm:p-4">
-                <p className="mb-4 text-sm text-muted">
-                  15 minutes to talk through your idea. No pitch, no obligation.
-                </p>
-                <div className="overflow-hidden rounded-lg border border-line" style={{ height: "min(630px, 75vh)" }}>
-                  <iframe
-                    src={`${CAL_URL}?embed=true&embedType=inline`}
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    loading="lazy"
-                    title="Schedule a call with Daniel"
-                  />
-                </div>
-                <p className="mt-3 text-center text-xs text-faint">
-                  Calendar not loading?{" "}
-                  <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                    Open it on cal.com
-                  </a>
-                  .
-                </p>
-              </div>
-            )}
-
-            {tab === "message" && (
-              <div id="panel-message" role="tabpanel" aria-labelledby="tab-message" className="p-3 sm:p-4">
-                {status === "success" ? (
-                  <div className="flex flex-col items-center py-16 text-center">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
-                      <FaCheck className="h-5 w-5" />
-                    </span>
-                    <p className="mt-4 font-serif text-2xl text-ink">Thanks, got it.</p>
-                    <p className="mt-2 max-w-sm text-sm text-muted">
-                      I&apos;ll read it properly and reply to the email you gave.
-                    </p>
-                    <button onClick={() => setStatus(null)} className="link-arrow mt-6">
-                      Send another
-                    </button>
+            <AnimatePresence mode="wait" initial={false}>
+              {tab === "call" && (
+                <motion.div key="call" id="panel-call" role="tabpanel" aria-labelledby="tab-call" className="p-3 sm:p-4" {...PANEL_FADE}>
+                  <p className="mb-4 text-sm text-muted">
+                    15 minutes to talk through your idea. No pitch, no obligation.
+                  </p>
+                  <div className="overflow-hidden rounded-lg border border-line" style={{ height: "min(630px, 75vh)" }}>
+                    <iframe
+                      src={`${CAL_URL}?embed=true&embedType=inline`}
+                      width="100%"
+                      height="100%"
+                      frameBorder="0"
+                      loading="lazy"
+                      title="Schedule a call with Daniel"
+                    />
                   </div>
-                ) : (
-                  <form ref={form} onSubmit={sendEmail} className="space-y-5">
-                    <div className="grid gap-5 sm:grid-cols-2">
-                      <div>
-                        <label htmlFor="contact-name" className={labelClass}>
-                          Your name
-                        </label>
-                        <input id="contact-name" type="text" name="from_name" required autoComplete="name" className={inputClass} />
-                      </div>
-                      <div>
-                        <label htmlFor="contact-email" className={labelClass}>
-                          Your email
-                        </label>
-                        {/* EmailJS template reads the sender's address from `to_name` */}
-                        <input id="contact-email" type="email" name="to_name" required autoComplete="email" className={inputClass} />
-                      </div>
-                    </div>
-                    <div>
-                      <label htmlFor="contact-message" className={labelClass}>
-                        What are you working on?
-                      </label>
-                      <textarea
-                        id="contact-message"
-                        name="message"
-                        rows="8"
-                        required
-                        placeholder="What you're building, what's blocking you, and what a good outcome looks like."
-                        className={inputClass}
-                      />
-                    </div>
+                  <p className="mt-3 text-center text-xs text-faint">
+                    Calendar not loading?{" "}
+                    <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className="text-accent link-underline">
+                      Open it on cal.com
+                    </a>
+                    .
+                  </p>
+                </motion.div>
+              )}
 
-                    {status === "error" && (
-                      <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-300" role="alert">
-                        That didn&apos;t send, sorry. Please email me directly at{" "}
-                        <a href={`mailto:${EMAIL}`} className="underline">
-                          {EMAIL}
-                        </a>
-                        .
-                      </p>
+              {tab === "message" && (
+                <motion.div key="message" id="panel-message" role="tabpanel" aria-labelledby="tab-message" className="p-3 sm:p-4" {...PANEL_FADE}>
+                  <AnimatePresence mode="wait" initial={false}>
+                    {status === "success" ? (
+                      <SentMessage key="success" onReset={sendAnother} reduce={reduce} />
+                    ) : (
+                      <motion.form
+                        key="form"
+                        ref={form}
+                        onSubmit={sendEmail}
+                        className="space-y-5"
+                        {...presence("fade", { reduce })}
+                      >
+                        <div className="grid gap-5 sm:grid-cols-2">
+                          <div className="group">
+                            <label htmlFor="contact-name" className={labelClass}>
+                              Your name
+                            </label>
+                            <input
+                              ref={focusOnMount}
+                              id="contact-name"
+                              type="text"
+                              name="from_name"
+                              required
+                              autoComplete="name"
+                              className={inputClass}
+                            />
+                          </div>
+                          <div className="group">
+                            <label htmlFor="contact-email" className={labelClass}>
+                              Your email
+                            </label>
+                            {/* EmailJS template reads the sender's address from `to_name` */}
+                            <input id="contact-email" type="email" name="to_name" required autoComplete="email" className={inputClass} />
+                          </div>
+                        </div>
+                        <div className="group">
+                          <label htmlFor="contact-message" className={labelClass}>
+                            What are you working on?
+                          </label>
+                          <textarea
+                            id="contact-message"
+                            name="message"
+                            rows="8"
+                            required
+                            placeholder="What you're building, what's blocking you, and what a good outcome looks like."
+                            className={inputClass}
+                          />
+                        </div>
+
+                        <AnimatePresence initial={false}>
+                          {status === "error" && (
+                            <motion.p
+                              key="error"
+                              className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-300"
+                              role="alert"
+                              {...presence("fadeDown", { reduce })}
+                            >
+                              That didn&apos;t send, sorry. Please email me directly at{" "}
+                              <a href={`mailto:${EMAIL}`} className="underline">
+                                {EMAIL}
+                              </a>
+                              .
+                            </motion.p>
+                          )}
+                        </AnimatePresence>
+
+                        <button type="submit" disabled={sending} className="btn-primary w-full disabled:cursor-wait disabled:opacity-60">
+                          {/* One button, two states: the label and icon swap in place. */}
+                          <AnimatePresence mode="wait" initial={false}>
+                            {sending ? (
+                              <motion.span key="sending" className="inline-flex items-center gap-2" {...LABEL_SWAP}>
+                                Sending… <Spinner />
+                              </motion.span>
+                            ) : (
+                              <motion.span key="idle" className="inline-flex items-center gap-2" {...LABEL_SWAP}>
+                                Send message
+                                <FaArrowRight className="arrow-nudge h-3.5 w-3.5" aria-hidden="true" />
+                              </motion.span>
+                            )}
+                          </AnimatePresence>
+                        </button>
+                      </motion.form>
                     )}
-
-                    <button type="submit" disabled={status === "sending"} className="btn-primary w-full disabled:opacity-60">
-                      {status === "sending" ? "Sending…" : "Send message"}
-                      <FaArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                    </button>
-                  </form>
-                )}
-              </div>
-            )}
+                  </AnimatePresence>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </Reveal>
         </div>
       </div>
