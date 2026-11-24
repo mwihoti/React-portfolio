@@ -253,6 +253,18 @@ html.theme-switching *:not(.theme-icon) {
   transition: none !important;
 }
 
+/* Keyboard parity for cards with stretched links: the arrow nudges when any
+   descendant of the .group card has keyboard focus, not only on hover. */
+.group:has(:focus-visible) .arrow-nudge {
+  translate: 3px 0;
+}
+.group:has(:focus-visible) .arrow-nudge-back {
+  translate: -3px 0;
+}
+.group:has(:focus-visible) .arrow-nudge-up {
+  translate: 2px -2px;
+}
+
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
