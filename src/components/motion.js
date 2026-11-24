@@ -130,3 +130,44 @@ export function StaggerItem({
   );
 }
 
+// The teal vertical rule from the case study, drawn top-to-bottom on reveal.
+// Place inside a `relative` parent with left padding (e.g. "relative pl-5"),
+// replacing a static `border-l-2 border-accent`.
+export function AccentRule({ className = '', delay = 0.1 }) {
+  return (
+    <motion.span
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-y-0 left-0 w-0.5 origin-top bg-accent ${className}`}
+      initial={{ scaleY: 0 }}
+      whileInView={{ scaleY: 1 }}
+      viewport={VIEWPORT}
+      transition={{ duration: DURATION.slower, delay, ease: EASE.out }}
+      data-reveal=""
+    />
+  );
+}
+
+// SVG stroke draw-on when scrolled into view. Use inside an <svg> with
+// fill="none" and a stroke. Reduced motion: no drawing, a 150ms fade.
+export function DrawPath({ delay = 0, duration = DURATION.slower, className, ...pathProps }) {
+  const reduce = useReduceMotion();
+  return (
+    <motion.path
+      {...pathProps}
+      className={className}
+      initial={{ pathLength: 0, opacity: 0 }}
+      whileInView={{ pathLength: 1, opacity: 1 }}
+      viewport={VIEWPORT}
+      transition={
+        reduce
+          ? { pathLength: { duration: 0 }, opacity: { duration: REDUCED.duration } }
+          : {
+              pathLength: { duration, delay, ease: EASE.out },
+              opacity: { duration: 0.01, delay },
+            }
+      }
+      data-reveal=""
+    />
+  );
+}
+
