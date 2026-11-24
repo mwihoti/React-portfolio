@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaMoon, FaSun, FaBars, FaTimes, FaArrowRight } from 'react-icons/fa';
+import { FaMoon, FaSun, FaArrowRight } from 'react-icons/fa';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme, useThemeUpdate } from '../context/theme';
@@ -19,6 +19,8 @@ const NAV_ITEMS = [
   { label: 'Writing', href: '/writing' },
   { label: 'Contact', id: 'contact' },
 ];
+
+const MotionLink = motion.create(NextLink);
 
 // Highlights the nav item for whichever homepage section is in view.
 function useActiveSection(enabled) {
@@ -111,6 +113,7 @@ export default function Navbar() {
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
   const [isOpen, setIsOpen] = useState(false);
+  const menuButtonRef = useRef(null);
   const pathname = usePathname();
   const onHome = pathname === '/';
   const active = useActiveSection(onHome);
@@ -119,7 +122,12 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!isOpen) return undefined;
-    const onKey = (e) => e.key === 'Escape' && setIsOpen(false);
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      setIsOpen(false);
+      // The menu is about to unmount; keep keyboard focus on its trigger.
+      menuButtonRef.current?.focus();
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [isOpen]);
@@ -127,6 +135,31 @@ export default function Navbar() {
   const hrefFor = (item) => item.href ?? (onHome ? `#${item.id}` : `/#${item.id}`);
   const isActive = (item) =>
     item.href ? pathname.startsWith(item.href) : onHome && active === item.id;
+
+  // Mobile menu: a dropdown anchored under the bar (opacity + 4px, transform
+  // only, no height tween), links settling in a tight stagger. Exit is a quick
+  // fade with no stagger. Reduced motion: a 150ms fade of the whole panel.
+  const menuVariants = reduce
+    ? {
+        hidden: { opacity: 0 },
+        show: { opacity: 1, transition: TRANSITION.reduced },
+        exit: { opacity: 0, transition: TRANSITION.reduced },
+      }
+    : {
+        hidden: { opacity: 0, y: -DISTANCE.xs },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { ...TRANSITION.ui, staggerChildren: STAGGER.tight, delayChildren: 0.04 },
+        },
+        exit: { opacity: 0, y: -DISTANCE.xs, transition: TRANSITION.exit },
+      };
+  const itemVariants = reduce
+    ? undefined
+    : {
+        hidden: { opacity: 0, y: -DISTANCE.xs },
+        show: { opacity: 1, y: 0, transition: { duration: DURATION.base, ease: EASE.out } },
+      };
 
   const ThemeButton = (
     <button
@@ -201,13 +234,14 @@ export default function Navbar() {
         <div className="flex items-center gap-1 lg:hidden">
           {ThemeButton}
           <button
+            ref={menuButtonRef}
             onClick={() => setIsOpen((o) => !o)}
-            className="rounded-lg p-2 text-ink hover:bg-raised"
+            className={`${ICON_BUTTON} text-ink`}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
-            {isOpen ? <FaTimes className="h-5 w-5" /> : <FaBars className="h-5 w-5" />}
+            <MenuIcon open={isOpen} />
           </button>
         </div>
       </div>
@@ -215,35 +249,38 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            key="mobile-menu"
             id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-line bg-canvas lg:hidden"
+            variants={menuVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="absolute inset-x-0 top-full mt-px max-h-[calc(100dvh-4rem)] origin-top overflow-y-auto border-b border-line bg-canvas shadow-lg shadow-black/10 lg:hidden"
           >
             <div className="space-y-1 px-4 py-4">
               {NAV_ITEMS.map((item) => (
-                <NextLink
+                <MotionLink
                   key={item.label}
+                  variants={itemVariants}
                   href={hrefFor(item)}
                   onClick={() => setIsOpen(false)}
-                  className={`block rounded-lg px-3 py-2.5 font-mono text-sm ${
+                  className={`block rounded-lg px-3 py-2.5 font-mono text-sm transition-colors duration-base ease-enter ${
                     isActive(item) ? 'bg-raised text-accent' : 'text-ink hover:bg-raised'
                   }`}
                 >
                   {item.label}
-                </NextLink>
+                </MotionLink>
               ))}
-              <a
+              <motion.a
+                variants={itemVariants}
                 href={CAL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
                 className="btn-primary mt-3 w-full"
               >
-                Book a Call <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-              </a>
+                Book a Call <FaArrowRight className="arrow-nudge h-3 w-3" aria-hidden="true" />
+              </motion.a>
             </div>
           </motion.div>
         )}
