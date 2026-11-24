@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import {
   FaArrowRight,
@@ -13,6 +14,81 @@ import {
 } from "react-icons/fa";
 import { EMAIL, CAL_URL, GITHUB_URL, LINKEDIN_URL, LOCATION } from "../data/site";
 import { Reveal } from "./ui";
+import { DrawPath, useReduceMotion } from "./motion";
+import { DURATION, EASE, TRANSITION, presence } from "../lib/motion";
+
+// Motion in this section (micro-interaction + accessible-animation skills):
+//  - tabs: the active "pill" slides between tabs (shared layoutId, transform
+//    only); panels cross-fade (opacity only, quick exit so tabs feel instant);
+//  - fields: border + soft focus ring ease in, and the label turns accent while
+//    its field has focus;
+//  - submit: label/icon swap Send message -> Sending… + spinner, same button,
+//    so the eye tracks one object; the arrow nudges on hover;
+//  - error: slides in a few px (role="alert" kept); success: form fades out,
+//    the confirmation fades up, its check draws on, and focus moves to it;
+//  - copy email: "Copy" rolls to "Copied" inside the existing live region.
+// Reduced motion: MotionConfig drops the y shifts and the pill slide; what is
+// left is short opacity fades, color changes, and the (pulsing) spinner.
+
+// Small in-place label swap (button text, copy state). Every element using it
+// either renders through <AnimatePresence initial={false}> or mounts after an
+// interaction, so `initial` never applies to server-rendered markup.
+const LABEL_SWAP = {
+  initial: { opacity: 0, y: 4 },
+  animate: { opacity: 1, y: 0, transition: { duration: DURATION.fast, ease: EASE.out } },
+  exit: { opacity: 0, y: -4, transition: { duration: DURATION.instant, ease: EASE.in } },
+};
+
+// Tab panels: opacity only, fast exit (mode="wait" waits for it).
+const PANEL_FADE = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: DURATION.base, ease: EASE.out } },
+  exit: { opacity: 0, transition: { duration: DURATION.instant, ease: EASE.in } },
+};
+
+function Spinner() {
+  // Loading indicator (Tier 3, kept): spins normally, pulses with reduced motion.
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-3.5 w-3.5 motion-safe:animate-spin motion-reduce:animate-pulse"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity="0.3" strokeWidth="3" />
+      <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+// Confirmation shown after a successful send. It mounts only after the user
+// submits, and takes focus so keyboard and screen-reader users land on it
+// instead of on <body> (the submit button they were on has just unmounted).
+function SentMessage({ onReset, reduce }) {
+  const heading = useRef(null);
+  useEffect(() => {
+    heading.current?.focus();
+  }, []);
+
+  return (
+    <motion.div className="flex flex-col items-center py-16 text-center" {...presence("fadeUp", { reduce })}>
+      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+          <DrawPath d="M5 12.5l4.5 4.5L19 7.5" strokeLinecap="round" strokeLinejoin="round" delay={0.15} duration={0.4} />
+        </svg>
+      </span>
+      <p ref={heading} tabIndex={-1} className="mt-4 font-serif text-2xl text-ink outline-none">
+        Thanks, got it.
+      </p>
+      <p className="mt-2 max-w-sm text-sm text-muted">
+        I&apos;ll read it properly and reply to the email you gave.
+      </p>
+      <button onClick={onReset} className="link-arrow mt-6">
+        Send another
+      </button>
+    </motion.div>
+  );
+}
 
 const TABS = [
   { id: "call", label: "Book a call", icon: FaCalendarAlt },
@@ -24,6 +100,21 @@ export default function Contact() {
   const [status, setStatus] = useState(null); // 'sending' | 'success' | 'error' | null
   const [copied, setCopied] = useState(false);
   const form = useRef();
+  const refocusForm = useRef(false);
+  const reduce = useReduceMotion();
+  const sending = status === "sending";
+
+  // "Send another": once the fresh form has mounted, put focus back in it.
+  const focusOnMount = (el) => {
+    if (el && refocusForm.current) {
+      refocusForm.current = false;
+      el.focus();
+    }
+  };
+  const sendAnother = () => {
+    refocusForm.current = true;
+    setStatus(null);
+  };
 
   const copyEmail = () => {
     navigator.clipboard
@@ -53,8 +144,10 @@ export default function Contact() {
   };
 
   const inputClass =
-    "w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none transition-colors";
-  const labelClass = "mb-1.5 block font-mono text-xs text-muted";
+    "w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15 transition-[border-color,box-shadow] duration-base ease-enter";
+  // Wrap each field in a `group` so its label can follow the field's focus.
+  const labelClass =
+    "mb-1.5 block font-mono text-xs text-muted transition-colors duration-base ease-enter group-focus-within:text-accent";
 
   return (
     <section id="contact" aria-labelledby="contact-title" className="border-t border-line py-24">
@@ -81,15 +174,19 @@ export default function Contact() {
                   <span className="text-ink">{EMAIL}</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 font-mono text-xs text-accent" aria-live="polite">
-                  {copied ? (
-                    <>
-                      <FaCheck className="h-3 w-3" /> Copied
-                    </>
-                  ) : (
-                    <>
-                      <FaCopy className="h-3 w-3" /> Copy
-                    </>
-                  )}
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span key={copied ? "copied" : "copy"} className="inline-flex items-center gap-1.5" {...LABEL_SWAP}>
+                      {copied ? (
+                        <>
+                          <FaCheck className="h-3 w-3" /> Copied
+                        </>
+                      ) : (
+                        <>
+                          <FaCopy className="h-3 w-3" /> Copy
+                        </>
+                      )}
+                    </motion.span>
+                  </AnimatePresence>
                 </span>
               </button>
               <div className="grid grid-cols-2 gap-3">
@@ -117,12 +214,21 @@ export default function Contact() {
                   aria-selected={tab === id}
                   aria-controls={`panel-${id}`}
                   onClick={() => setTab(id)}
-                  className={`flex flex-1 items-center justify-center gap-2 rounded-md px-4 py-2.5 font-mono text-sm transition-colors ${
-                    tab === id ? "bg-surface text-accent shadow-sm" : "text-muted hover:text-ink"
+                  className={`relative flex flex-1 items-center justify-center gap-2 rounded-md px-4 py-2.5 font-mono text-sm transition-colors duration-base ease-enter ${
+                    tab === id ? "text-accent" : "text-muted hover:text-ink"
                   }`}
                 >
-                  <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-                  {label}
+                  {tab === id && (
+                    // Slides to the newly selected tab (A -> B move, transform only).
+                    <motion.span
+                      layoutId="contact-tab-indicator"
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-md bg-surface shadow-sm"
+                      transition={TRANSITION.move}
+                    />
+                  )}
+                  <Icon className="relative h-3.5 w-3.5" aria-hidden="true" />
+                  <span className="relative">{label}</span>
                 </button>
               ))}
             </div>
