@@ -7,7 +7,9 @@ import { FaArrowRight, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { SiBitcoin, SiCardano } from 'react-icons/si';
 import { projects } from '../data/projects';
 import { GITHUB_URL } from '../data/site';
-import { Reveal, AvalancheIcon, MidnightIcon } from './ui';
+import { AvalancheIcon, MidnightIcon } from './ui';
+import { AccentRule, Reveal, Stagger, StaggerItem } from './motion';
+import { STAGGER } from '../lib/motion';
 
 const featured = projects.filter((p) => p.featured);
 
@@ -18,9 +20,14 @@ const ecosystemIcons = [
   { Icon: MidnightIcon, label: 'Midnight' },
 ];
 
+// Motion notes (see .claude/skills): each case study is a large card that
+// enters the viewport on its own, so it gets its own scroll reveal rather than
+// a stagger. Hover only changes the border (no-lift): the card itself is not a
+// link, so lifting it would suggest a click target that isn't there. Feedback
+// lives on the real links instead (underline fade + arrow nudge).
 function CaseStudy({ project, index, hasWriteup }) {
   return (
-    <Reveal as="article" delay={index * 0.05} className="panel panel-hover overflow-hidden">
+    <Reveal as="article" delay={index * 0.05} className="panel panel-hover no-lift overflow-hidden">
       {project.image && (
         <div className="relative aspect-[2/1] border-b border-line">
           <Image
@@ -64,7 +71,7 @@ function CaseStudy({ project, index, hasWriteup }) {
         <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-5">
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer" className="link-arrow">
-              <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" /> Live site
+              <FaExternalLinkAlt className="arrow-nudge-up h-3 w-3" aria-hidden="true" /> Live site
             </a>
           )}
           {project.github && (
@@ -72,14 +79,14 @@ function CaseStudy({ project, index, hasWriteup }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-sm text-muted hover:text-ink"
+              className="inline-flex items-center gap-1.5 font-mono text-sm text-muted transition-colors duration-base ease-enter hover:text-ink"
             >
               <FaGithub className="h-4 w-4" aria-hidden="true" /> GitHub
             </a>
           )}
           {hasWriteup && (
             <NextLink href={`/writing/${project.writeup}`} className="link-arrow ml-auto">
-              Read the write-up <FaArrowRight className="h-3 w-3" aria-hidden="true" />
+              Read the write-up <FaArrowRight className="arrow-nudge h-3 w-3" aria-hidden="true" />
             </NextLink>
           )}
         </div>
@@ -93,7 +100,8 @@ export default function CaseStudies({ publishedSlugs = [] }) {
     <section id="case-studies" aria-labelledby="case-studies-title" className="border-t border-line py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.34fr_0.66fr] lg:px-8">
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
-          <div className="border-l-2 border-accent pl-5">
+          <div className="relative pl-5">
+            <AccentRule />
             <p className="eyebrow mb-3">Case studies</p>
             <h2 id="case-studies-title" className="font-serif text-5xl font-semibold leading-[1.05] tracking-tight text-ink">
               Things I&apos;ve <span className="italic text-accent">built</span>, and why.
@@ -104,25 +112,33 @@ export default function CaseStudies({ publishedSlugs = [] }) {
             one starts with the problem, because that&apos;s where I start too.
           </p>
 
-          <ul className="mt-8 flex gap-2" aria-label="Ecosystems I build in">
+          <Stagger
+            as="ul"
+            stagger={STAGGER.base}
+            delay={0.15}
+            className="mt-8 flex gap-2"
+            aria-label="Ecosystems I build in"
+          >
             {ecosystemIcons.map(({ Icon, label }) => (
-              <li
+              <StaggerItem
+                as="li"
                 key={label}
+                y={8}
                 title={label}
                 className="flex h-12 w-12 items-center justify-center rounded-lg border border-line text-accent"
               >
                 <Icon className="h-5 w-5" />
                 <span className="sr-only">{label}</span>
-              </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
 
           <div className="panel mt-8 p-5">
             <p className="eyebrow !text-[11px]">Why build in public?</p>
             <p className="mt-2 text-sm leading-relaxed text-muted">
               It keeps me accountable, makes the work easy to review, and helps other people
               learn. Issues, ideas and pull requests are welcome on{' '}
-              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-accent link-underline">
                 any of my repos
               </a>
               .
