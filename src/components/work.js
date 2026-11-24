@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import Image from 'next/image';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { FaArrowUp, FaExternalLinkAlt, FaGithub, FaSearch, FaTelegramPlane, FaCode } from 'react-icons/fa';
 import { FILTERS, projects } from '../data/projects';
 import { GITHUB_URL } from '../data/site';
@@ -135,9 +136,55 @@ function ProjectCard({ project }) {
   );
 }
 
+// Grid cell. On first load it is a scroll reveal (same timing as <Reveal>,
+// same initial state on server and client). Once the visitor filters or
+// searches, cards that mount are a response to that input, so they use the
+// quicker UI timing instead. `interacted` is false during SSR and hydration,
+// so `initial` never differs between server and client. forwardRef is
+// required: AnimatePresence mode="popLayout" measures and pins exiting
+// children through a ref.
+const GridCell = forwardRef(function GridCell({ index, interacted, reduce, children }, ref) {
+  let transition;
+  if (reduce) {
+    transition = TRANSITION.reduced;
+  } else if (interacted) {
+    transition = { ...TRANSITION.ui, layout: TRANSITION.move };
+  } else {
+    transition = {
+      duration: DURATION.slow,
+      delay: Math.min(index, 5) * STAGGER.tight,
+      ease: EASE.out,
+      layout: TRANSITION.move,
+    };
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      layout="position"
+      initial={interacted ? { opacity: 0, scale: 0.98 } : { opacity: 0, y: DISTANCE.md }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={VIEWPORT}
+      exit={{ opacity: 0, scale: 0.98, transition: reduce ? TRANSITION.reduced : TRANSITION.exit }}
+      transition={transition}
+      className="h-full"
+      data-reveal=""
+    >
+      {children}
+    </motion.div>
+  );
+});
+
 export default function Work() {
   const [filter, setFilter] = useState('All');
   const [query, setQuery] = useState('');
+  const [interacted, setInteracted] = useState(false);
+  const reduce = useReduceMotion();
+
+  const applyFilter = (f) => {
+    setInteracted(true);
+    setFilter(f);
+  };
 
   const visible = useMemo(
     () =>
@@ -166,68 +213,102 @@ export default function Work() {
             <input
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setInteracted(true);
+                setQuery(e.target.value);
+              }}
               placeholder="Search: Rust, Cardano, agents…"
-              className="w-full rounded-lg border border-line bg-surface py-2.5 pl-10 pr-3 font-mono text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none"
+              className="w-full rounded-lg border border-line bg-surface py-2.5 pl-10 pr-3 font-mono text-sm text-ink transition-colors duration-base ease-enter placeholder:text-faint focus:border-accent focus:outline-none"
             />
           </label>
         </SectionHeader>
 
-        <div className="mb-8 flex flex-wrap items-center gap-2" role="group" aria-label="Filter projects by topic">
-          {FILTERS.map((f) => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              aria-pressed={filter === f}
-              className={`rounded-lg border px-3.5 py-1.5 font-mono text-xs transition-colors ${
-                filter === f
-                  ? 'border-accent bg-accent/10 text-accent'
-                  : 'border-line text-muted hover:border-accent/50 hover:text-ink'
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-          <p className="ml-auto font-mono text-xs text-faint" aria-live="polite">
-            {visible.length} of {projects.length}
-          </p>
-        </div>
-
-        {visible.length > 0 ? (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {visible.map((project, i) => (
-              <Reveal key={project.title} delay={Math.min(i, 5) * 0.04} className="h-full">
-                <ProjectCard project={project} />
-              </Reveal>
-            ))}
-          </div>
-        ) : (
-          <div className="panel p-10 text-center">
-            <p className="text-ink">Nothing here matches &ldquo;{query}&rdquo;.</p>
-            <p className="mt-2 text-sm text-muted">
-              Try a different word, or{' '}
-              <button
-                onClick={() => {
-                  setQuery('');
-                  setFilter('All');
-                }}
-                className="text-accent hover:underline"
-              >
-                show everything
-              </button>
-              .
+        <LayoutGroup id="work-filter">
+          <div className="mb-8 flex flex-wrap items-center gap-2" role="group" aria-label="Filter projects by topic">
+            {FILTERS.map((f) => {
+              const active = filter === f;
+              return (
+                <button
+                  key={f}
+                  onClick={() => applyFilter(f)}
+                  aria-pressed={active}
+                  className={`relative rounded-lg border px-3.5 py-1.5 font-mono text-xs [transition-property:color,border-color,scale] duration-fast ease-enter active:[scale:0.97] active:duration-instant motion-reduce:active:[scale:none] ${
+                    active ? 'border-transparent text-accent' : 'border-line text-muted hover:border-accent/50 hover:text-ink'
+                  }`}
+                >
+                  {/* The selected state, drawn once and moved between buttons.
+                      inset -1px covers the button's own (transparent) border;
+                      borderRadius in style so framer scale-corrects it while
+                      the pill resizes. */}
+                  {active && (
+                    <motion.span
+                      layoutId="work-filter-pill"
+                      aria-hidden="true"
+                      className="absolute -inset-px border border-accent bg-accent/10"
+                      style={{ borderRadius: 8 }}
+                      transition={TRANSITION.move}
+                    />
+                  )}
+                  <span className="relative">{f}</span>
+                </button>
+              );
+            })}
+            <p className="ml-auto font-mono text-xs tabular-nums text-faint" aria-live="polite">
+              {visible.length} of {projects.length}
             </p>
           </div>
-        )}
+        </LayoutGroup>
 
-        <div className="panel mt-10 flex flex-col items-start justify-between gap-4 p-5 sm:flex-row sm:items-center">
+        {/* Always mounted so AnimatePresence can run exits; it collapses to
+            nothing when no project matches. `relative` is required by
+            popLayout, which positions exiting cards absolutely. */}
+        <div className="relative grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {visible.map((project, i) => (
+              <GridCell key={project.title} index={i} interacted={interacted} reduce={reduce}>
+                <ProjectCard project={project} />
+              </GridCell>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Only reachable after the visitor searches/filters, never in SSR.
+            Its enter waits for the popLayout card exits (150ms) so the
+            fading cards are never drawn over it. */}
+        <AnimatePresence initial={false}>
+          {visible.length === 0 && (
+            <motion.div
+              key="empty"
+              {...presence('fadeUp', { reduce })}
+              transition={{ ...(reduce ? TRANSITION.reduced : TRANSITION.ui), delay: TRANSITION.exit.duration }}
+              className="panel p-10 text-center"
+            >
+              <p className="text-ink">Nothing here matches &ldquo;{query}&rdquo;.</p>
+              <p className="mt-2 text-sm text-muted">
+                Try a different word, or{' '}
+                <button
+                  onClick={() => {
+                    setQuery('');
+                    setFilter('All');
+                  }}
+                  className="text-accent link-underline"
+                >
+                  show everything
+                </button>
+                .
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <Reveal y={DISTANCE.sm} className="panel mt-10 flex flex-col items-start justify-between gap-4 p-5 sm:flex-row sm:items-center">
           <p className="font-mono text-sm text-muted">
             <span className="text-accent">&gt;_</span> There&apos;s more on GitHub: experiments, forks, half-finished ideas.
           </p>
           <a href={`${GITHUB_URL}?tab=repositories`} target="_blank" rel="noopener noreferrer" className="btn-outline !py-2">
             <FaGithub className="h-4 w-4" aria-hidden="true" /> Browse repos
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
