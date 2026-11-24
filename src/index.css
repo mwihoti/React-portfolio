@@ -133,6 +133,42 @@
   }
 }
 
+/* ------------------------------------------------------------------------ */
+/* Micro-interactions (transform/opacity/color only; see .claude/skills)     */
+/* ------------------------------------------------------------------------ */
+
+/* Press feedback for every button style. `scale` (not `transform`) so it never
+   fights inline transforms from framer-motion or Tailwind translate utilities. */
+:is(.btn, .btn-primary, .btn-outline):active:not(:disabled) {
+  scale: 0.97;
+  transition-duration: 60ms;
+}
+
+/* Lift only where hover is real; avoids sticky hover on touch screens. */
+@media (hover: hover) and (pointer: fine) {
+  .panel-hover:not(.no-lift):hover,
+  .hover-lift:hover {
+    translate: 0 -2px;
+  }
+}
+.panel-hover:not(.no-lift):is(a, button):active,
+.hover-lift:is(a, button):active {
+  translate: 0 0;
+  scale: 0.99;
+  transition-duration: 60ms;
+}
+.panel-hover:not(.no-lift):has(:focus-visible),
+.hover-lift:has(:focus-visible) {
+  translate: 0 -2px;
+}
+
+/* Generic lift for non-panel elements (icon buttons, chips, avatars). */
+.hover-lift {
+  transition-property: translate, scale, color, background-color, border-color;
+  transition-duration: var(--dur-base);
+  transition-timing-function: var(--ease-out);
+}
+
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
