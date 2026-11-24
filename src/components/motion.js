@@ -60,3 +60,73 @@ export function Reveal({
   );
 }
 
+// Container that reveals its <StaggerItem> descendants one after another when
+// it scrolls into view. The container itself does not fade.
+export function Stagger({
+  children,
+  as = 'div',
+  className = '',
+  stagger = STAGGER.base,
+  delay = 0,
+  once = VIEWPORT.once,
+  margin = VIEWPORT.margin,
+  amount,
+  ...rest
+}) {
+  const reduce = useReduceMotion();
+  const Tag = motion[as];
+  return (
+    <Tag
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once, margin, amount }}
+      variants={{
+        hidden: {},
+        show: {
+          transition: {
+            staggerChildren: reduce ? REDUCED.stagger : stagger,
+            delayChildren: reduce ? 0 : delay,
+          },
+        },
+      }}
+      className={className}
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+// Child of <Stagger>. May sit at any depth below it, as long as no other
+// motion component with its own initial/animate sits in between.
+export function StaggerItem({
+  children,
+  as = 'div',
+  className = '',
+  y = 12,
+  duration = DURATION.slow,
+  ...rest
+}) {
+  const reduce = useReduceMotion();
+  const Tag = motion[as];
+  return (
+    <Tag
+      variants={{
+        hidden: { opacity: 0, y },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: reduce
+            ? { duration: REDUCED.duration, ease: 'linear' }
+            : { duration, ease: EASE.out },
+        },
+      }}
+      className={className}
+      data-reveal=""
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
+
