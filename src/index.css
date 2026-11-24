@@ -232,6 +232,21 @@
   transform-origin: left center;
 }
 
+/* SVG stroke draw-on, CSS only (works in server components and without JS).
+   Put pathLength="1" on the <path>/<line>/<circle>. Stagger with
+   style={{ '--draw-delay': '120ms' }}. Plays on mount, not on scroll; for
+   in-view drawing use <DrawPath> from src/components/motion.js. */
+.draw-on {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-on var(--dur-slower) var(--ease-out) var(--draw-delay, 0ms) forwards;
+}
+@keyframes draw-on {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
