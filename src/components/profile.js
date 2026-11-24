@@ -60,7 +60,30 @@ export default function Profile() {
             className={`mt-5 font-serif text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[4.25rem] ${enter} [animation-delay:60ms]`}
           >
             I build open systems, automate work, and{' '}
-            <span className="italic text-accent">ship in public.</span>
+            <span className="relative inline-block italic text-accent">
+              ship in public.
+              {/* Hand-drawn emphasis stroke, drawn on once the line has
+                  settled. CSS-only (.draw-on), so it works before hydration;
+                  reduced motion shows it already drawn. */}
+              <svg
+                viewBox="0 0 200 12"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute -bottom-[0.14em] left-0 h-[0.24em] w-full overflow-visible text-accent/60"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  className="draw-on"
+                  pathLength="1"
+                  d="M3 8 C 48 3, 118 2, 197 6"
+                  style={{ '--draw-delay': '520ms' }}
+                />
+              </svg>
+            </span>
           </p>
 
           <p className={`mt-6 max-w-xl text-lg leading-relaxed text-muted ${enter} [animation-delay:120ms]`}>
