@@ -74,8 +74,21 @@
     @apply rounded-xl border border-line bg-surface;
   }
 
+  /* Card hover: accent border plus a 2px lift on real pointers. The lift uses
+     the individual `translate` property, not `transform`, so it composes with
+     framer-motion's inline transform when the card is also a <Reveal>.
+     Add .no-lift to keep only the border change (e.g. long reading cards). */
   .panel-hover {
-    @apply transition-colors duration-200 hover:border-accent/50;
+    transition-property: border-color, background-color, translate, scale;
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-out);
+  }
+  .panel-hover:hover,
+  .panel-hover:focus-visible {
+    border-color: rgb(var(--accent) / 0.5);
+  }
+  .panel-hover:has(:focus-visible) {
+    border-color: rgb(var(--accent) / 0.5);
   }
 
   /* Small uppercase mono label ("ENGINEER & BUILDER", "PUBLIC CASE STUDIES") */
@@ -87,8 +100,12 @@
     @apply inline-flex items-center rounded-md border border-line px-2 py-0.5 font-mono text-[11px] text-muted;
   }
 
+  /* Buttons: color transitions plus a quick tactile press (scale 0.97). */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-mono text-sm transition-colors;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-mono text-sm;
+    transition-property: color, background-color, border-color, text-decoration-color, opacity, scale;
+    transition-duration: var(--dur-fast);
+    transition-timing-function: var(--ease-out);
   }
 
   .btn-primary {
@@ -99,10 +116,23 @@
     @apply btn border border-accent/60 text-accent hover:bg-accent/10;
   }
 
+  /* Mono accent link. The underline fades in (color only) instead of snapping,
+     and works across line wraps. Pair with an .arrow-nudge icon. */
   .link-arrow {
-    @apply inline-flex items-center gap-1.5 font-mono text-sm text-accent hover:underline underline-offset-4;
+    @apply inline-flex items-center gap-1.5 font-mono text-sm text-accent;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition-property: color, text-decoration-color, opacity;
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-out);
+  }
+  .link-arrow:hover,
+  .link-arrow:focus-visible {
+    text-decoration-color: currentColor;
   }
 }
+
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
