@@ -169,6 +169,32 @@
   transition-timing-function: var(--ease-out);
 }
 
+/* Arrow icons nudge in their direction when the parent link/button/.group is
+   hovered or keyboard-focused. Put the class on the icon itself. */
+.arrow-nudge,
+.arrow-nudge-back,
+.arrow-nudge-up {
+  transition: translate var(--dur-base) var(--ease-out);
+}
+:is(a, button, .group):hover .arrow-nudge,
+:is(a, button):focus-visible .arrow-nudge {
+  translate: 3px 0;
+}
+:is(a, button, .group):hover .arrow-nudge-back,
+:is(a, button):focus-visible .arrow-nudge-back {
+  translate: -3px 0;
+}
+:is(a, button, .group):hover .arrow-nudge-up,
+:is(a, button):focus-visible .arrow-nudge-up {
+  translate: 2px -2px;
+}
+
+/* Existing markup uses `group-hover:underline` on .link-arrow inside cards;
+   give it a visible color now that the underline fades in. */
+.group:hover .group-hover\:underline {
+  text-decoration-color: currentColor;
+}
+
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
