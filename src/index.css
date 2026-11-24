@@ -265,6 +265,59 @@ html.theme-switching *:not(.theme-icon) {
   translate: 2px -2px;
 }
 
+/* Reduced motion, tiered (accessible-animation skill):
+   Tier 1 removed: lifts, nudges, press scale, stroke drawing.
+   Tier 3 kept: color, border, underline-color and opacity transitions, focus
+   rings, loading indicators. No blanket `*` kill-switch, on purpose. */
+@media (prefers-reduced-motion: reduce) {
+  .panel-hover,
+  .hover-lift {
+    transition-property: border-color, background-color, color, opacity;
+  }
+  .panel-hover:not(.no-lift):hover,
+  .panel-hover:not(.no-lift):has(:focus-visible),
+  .panel-hover:not(.no-lift):is(a, button):active,
+  .hover-lift:hover,
+  .hover-lift:has(:focus-visible),
+  .hover-lift:is(a, button):active {
+    translate: none;
+    scale: none;
+  }
+
+  /* Press feedback stays, as a brief dim instead of a scale. */
+  :is(.btn, .btn-primary, .btn-outline):active:not(:disabled) {
+    scale: none;
+    opacity: 0.85;
+  }
+
+  .arrow-nudge,
+  .arrow-nudge-back,
+  .arrow-nudge-up {
+    transition: none;
+    translate: none !important;
+  }
+
+  .link-draw::after {
+    transform: scaleX(1);
+    opacity: 0;
+    transition: opacity var(--dur-fast) linear;
+  }
+  .link-draw:hover::after,
+  .link-draw:focus-visible::after,
+  .link-draw[aria-current='page']::after {
+    opacity: 1;
+  }
+
+  .draw-on {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .animate-fade-up {
+    animation-name: fade-in;
+    animation-duration: var(--dur-fast);
+  }
+}
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
