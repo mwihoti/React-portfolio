@@ -12,6 +12,11 @@ const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', displ
 // Runs before paint so a saved light-mode preference never flashes dark.
 const themeScript = `try{if(localStorage.getItem('darkTheme')==='false')document.documentElement.classList.remove('dark')}catch(e){}`;
 
+// Without JS, framer-motion's server-rendered initial states (opacity: 0,
+// translate, pathLength: 0) would never animate in. Every motion primitive
+// carries data-reveal, so this rule shows it as-is.
+const noScriptStyles = `[data-reveal]{opacity:1!important;transform:none!important}path[data-reveal]{stroke-dasharray:none!important;stroke-dashoffset:0!important}`;
+
 const SITE_TITLE = 'Daniel Mwihoti - Global Bitcoin, Cardano, AI and Rust Developer';
 
 export const metadata = {
@@ -186,6 +191,7 @@ export default function RootLayout({ children }) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <noscript dangerouslySetInnerHTML={{ __html: `<style>${noScriptStyles}</style>` }} />
       </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
