@@ -6,6 +6,7 @@ import { getAllPosts, getPostBySlug, formatPostDate } from '../../../src/lib/pos
 import { SITE_URL } from '../../../src/data/site';
 import Navbar from '../../../src/components/navbar';
 import Footer from '../../../src/components/footer';
+import ReadingProgressArticle from '../../../src/components/ReadingProgress';
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
@@ -55,14 +56,18 @@ export default function PostPage({ params }) {
     <>
       <Navbar />
       <main id="main" className="min-h-screen pt-16">
-        <article className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
+        {/* Client wrapper: renders this <article> plus the reading-progress bar. */}
+        <ReadingProgressArticle className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
           <Link href="/writing" className="link-arrow mb-10">
-            <FaArrowLeft className="h-3 w-3" aria-hidden="true" />
+            <FaArrowLeft className="arrow-nudge-back h-3 w-3" aria-hidden="true" />
             All writing
           </Link>
 
+          {/* Header reveal: CSS-only fade-up on mount (plays before hydration,
+              no JS needed), staggered date -> title -> tags. Reduced motion:
+              a 150ms fade with no delays. */}
           <header className="mb-12 mt-10 border-b border-line pb-10">
-            <p className="font-mono text-xs text-faint">
+            <p className="animate-fade-up font-mono text-xs text-faint">
               {formatPostDate(post.date)} · Daniel Mwihoti
               {post.draft && (
                 <span className="ml-3 rounded-md bg-amber-500/15 px-2 py-0.5 text-amber-600 dark:text-amber-300">
@@ -70,10 +75,13 @@ export default function PostPage({ params }) {
                 </span>
               )}
             </p>
-            <h1 className="mt-3 font-serif text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl">
+            <h1 className="mt-3 animate-fade-up font-serif text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl [animation-delay:80ms] motion-reduce:[animation-delay:0ms]">
               {post.title}
             </h1>
-            <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Tags">
+            <ul
+              className="mt-5 flex animate-fade-up flex-wrap gap-1.5 [animation-delay:160ms] motion-reduce:[animation-delay:0ms]"
+              aria-label="Tags"
+            >
               {post.tags.map((tag) => (
                 <li key={tag} className="chip">
                   {tag}
@@ -82,10 +90,13 @@ export default function PostPage({ params }) {
             </ul>
           </header>
 
-          <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-serif prose-headings:scroll-mt-24 prose-a:text-accent prose-code:font-mono">
+          {/* Body: opacity-only fade after the header (no transform on a large
+              area). Links get a faint accent underline that strengthens on
+              hover/focus (color-only, Tier 3). */}
+          <div className="prose prose-lg max-w-none animate-fade-in dark:prose-invert prose-headings:font-serif prose-headings:scroll-mt-24 prose-a:text-accent prose-a:decoration-accent/40 prose-a:underline-offset-4 prose-a:transition-colors prose-a:duration-base prose-a:ease-enter hover:prose-a:decoration-current focus-visible:prose-a:decoration-current prose-code:font-mono [animation-delay:240ms] motion-reduce:[animation-delay:0ms]">
             <ReactMarkdown>{post.content}</ReactMarkdown>
           </div>
-        </article>
+        </ReadingProgressArticle>
       </main>
       <Footer />
       <script
