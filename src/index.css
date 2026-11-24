@@ -195,6 +195,43 @@
   text-decoration-color: currentColor;
 }
 
+/* Inline / prose links: underline fades in on hover. Wrap-safe. */
+.link-underline {
+  text-decoration-line: underline;
+  text-decoration-color: rgb(var(--accent) / 0.35);
+  text-underline-offset: 4px;
+  transition: color var(--dur-base) var(--ease-out), text-decoration-color var(--dur-base) var(--ease-out);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+/* Single-line links (nav, footer): underline draws in from the left and
+   leaves to the right. Element gets position: relative. */
+.link-draw {
+  position: relative;
+}
+.link-draw::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur-moderate) var(--ease-out);
+  pointer-events: none;
+}
+.link-draw:hover::after,
+.link-draw:focus-visible::after,
+.link-draw[aria-current='page']::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
 
 /* Faint grid behind the hero, echoing the case-study mockups */
 .bg-grid {
