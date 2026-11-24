@@ -1,30 +1,18 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AccentRule, Reveal } from './motion';
 
-// Gentle fade-up used for every section; runs once and respects reduced motion
-// through the MotionConfig in ThemeProvider.
-export function Reveal({ children, delay = 0, className = '', as = 'div' }) {
-  const Tag = motion[as];
-  return (
-    <Tag
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
-      className={className}
-    >
-      {children}
-    </Tag>
-  );
-}
+// Reveal now lives in ./motion with the other shared primitives; re-exported
+// here so existing `import { Reveal } from './ui'` keeps working.
+export { Reveal };
 
 // Section heading from the case study: teal rule on the left, serif title,
-// short plain-language intro.
+// short plain-language intro. The rule draws top-to-bottom as it reveals.
 export function SectionHeader({ eyebrow, title, intro, id, children }) {
   return (
     <Reveal className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-      <div className="max-w-2xl border-l-2 border-accent pl-5">
+      <div className="relative max-w-2xl pl-5">
+        <AccentRule />
         {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
         <h2 id={id} className="font-serif text-4xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl">
           {title}

@@ -1,7 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { FaChevronDown, FaChevronUp, FaExternalLinkAlt } from 'react-icons/fa';
+import React, { useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FaChevronDown, FaExternalLinkAlt } from 'react-icons/fa';
+import { DURATION, EASE, REDUCED, STAGGER } from '../lib/motion';
+import { Stagger, StaggerItem, useReduceMotion } from './motion';
 
 const experiences = [
   {
@@ -119,58 +122,113 @@ const TYPE_LABEL = {
 };
 
 const INITIAL_COUNT = 4;
+const LIST_ID = 'experience-list';
+
+// One timeline row. The divider lives on the row (not the <li>) so a
+// collapsing <li> at height 0 hides it too.
+function ExperienceRow({ exp, divided }) {
+  return (
+    <div
+      className={`grid gap-2 py-6 md:grid-cols-[13rem_1fr] md:gap-8 ${divided ? 'border-t border-line' : ''}`}
+    >
+      <div className="font-mono text-xs text-faint">
+        <p>{exp.period}</p>
+        <p className="mt-1 text-accent">{TYPE_LABEL[exp.type]}</p>
+      </div>
+      <div className="max-w-3xl">
+        <h4 className="font-semibold text-ink">{exp.title}</h4>
+        <p className="text-sm text-muted">{exp.company}</p>
+        <ul className="mt-3 space-y-1.5">
+          {exp.description.map((item) => (
+            <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
+              <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        {exp.link && (
+          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="link-arrow mt-3 text-xs">
+            <FaExternalLinkAlt className="arrow-nudge-up h-3 w-3" aria-hidden="true" />
+            {exp.link.replace('https://', '')}
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Expand/collapse for the extra entries (micro-interaction + 60fps skills):
+// height:auto + opacity on a handful of rows, only on user click, so the
+// layout cost is bounded and justified (content below must move anyway).
+// overflow is hidden only while animating, then restored, so keyboard focus
+// rings on links inside the row are never clipped.
+// Reduced motion: MotionConfig snaps height; what is left is a 150ms fade.
+function collapseMotion(reduce) {
+  const open = reduce ? { duration: REDUCED.duration, ease: 'linear' } : { duration: DURATION.moderate, ease: EASE.out };
+  const close = reduce ? { duration: REDUCED.duration, ease: 'linear' } : { duration: DURATION.base, ease: EASE.in };
+  return {
+    initial: { height: 0, opacity: 0, overflow: 'hidden' },
+    animate: { height: 'auto', opacity: 1, transition: open, transitionEnd: { overflow: 'visible' } },
+    exit: { height: 0, opacity: 0, overflow: 'hidden', transition: close },
+  };
+}
 
 // Compact timeline rendered inside the About section.
 export default function Experience() {
   const [showAll, setShowAll] = useState(false);
-  const visible = showAll ? experiences : experiences.slice(0, INITIAL_COUNT);
+  const reduce = useReduceMotion();
+  const buttonRef = useRef(null);
+  const first = experiences.slice(0, INITIAL_COUNT);
+  const extra = experiences.slice(INITIAL_COUNT);
+  const rowMotion = collapseMotion(reduce);
+
+  // After "Show less" the list shrinks above the button; bring the button
+  // (which keeps focus) back into view so keyboard users are not stranded.
+  // scrollIntoView honors scroll-padding-top and the reduced-motion
+  // scroll-behavior set in index.css.
+  const keepButtonInView = () => {
+    const btn = buttonRef.current;
+    if (!btn || showAll) return;
+    // The fixed navbar covers the top scroll-padding (5rem) of the viewport.
+    const navOffset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const { top, bottom } = btn.getBoundingClientRect();
+    if (top < navOffset || bottom > window.innerHeight) btn.scrollIntoView({ block: 'nearest' });
+  };
 
   return (
     <div id="experience">
-      <ol className="divide-y divide-line border-y border-line">
-        {visible.map((exp) => (
-          <li key={exp.title + exp.period} className="grid gap-2 py-6 md:grid-cols-[13rem_1fr] md:gap-8">
-            <div className="font-mono text-xs text-faint">
-              <p>{exp.period}</p>
-              <p className="mt-1 text-accent">{TYPE_LABEL[exp.type]}</p>
-            </div>
-            <div className="max-w-3xl">
-              <h4 className="font-semibold text-ink">{exp.title}</h4>
-              <p className="text-sm text-muted">{exp.company}</p>
-              <ul className="mt-3 space-y-1.5">
-                {exp.description.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
-                    <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              {exp.link && (
-                <a href={exp.link} target="_blank" rel="noopener noreferrer" className="link-arrow mt-3 text-xs">
-                  <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" />
-                  {exp.link.replace('https://', '')}
-                </a>
-              )}
-            </div>
-          </li>
+      {/* Rows rise in one after another the first time the list is seen. */}
+      <Stagger as="ol" id={LIST_ID} stagger={STAGGER.base} className="border-y border-line">
+        {first.map((exp, i) => (
+          <StaggerItem as="li" key={exp.title + exp.period}>
+            <ExperienceRow exp={exp} divided={i > 0} />
+          </StaggerItem>
         ))}
-      </ol>
+        <AnimatePresence initial={false} onExitComplete={keepButtonInView}>
+          {showAll &&
+            extra.map((exp) => (
+              <motion.li key={exp.title + exp.period} {...rowMotion}>
+                <ExperienceRow exp={exp} divided />
+              </motion.li>
+            ))}
+        </AnimatePresence>
+      </Stagger>
 
-      {experiences.length > INITIAL_COUNT && (
+      {extra.length > 0 && (
         <button
+          ref={buttonRef}
+          type="button"
           onClick={() => setShowAll((s) => !s)}
           aria-expanded={showAll}
+          aria-controls={LIST_ID}
           className="btn-outline mt-6 !py-2"
         >
-          {showAll ? (
-            <>
-              Show less <FaChevronUp className="h-3 w-3" aria-hidden="true" />
-            </>
-          ) : (
-            <>
-              Show all {experiences.length} entries <FaChevronDown className="h-3 w-3" aria-hidden="true" />
-            </>
-          )}
+          {showAll ? 'Show less' : `Show all ${experiences.length} entries`}
+          {/* One chevron that turns over, instead of swapping icons. */}
+          <FaChevronDown
+            className={`h-3 w-3 transition-transform duration-moderate ease-move motion-reduce:transition-none ${showAll ? 'rotate-180' : ''}`}
+            aria-hidden="true"
+          />
         </button>
       )}
     </div>

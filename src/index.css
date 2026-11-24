@@ -16,6 +16,17 @@
     --accent: 13 128 118;
     --accent-ink: 255 255 255;
     color-scheme: light;
+
+    /* Motion tokens, mirrored in src/lib/motion.js and tailwind.config.js */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-instant: 100ms;
+    --dur-fast: 150ms;
+    --dur-base: 200ms;
+    --dur-moderate: 300ms;
+    --dur-slow: 500ms;
+    --dur-slower: 600ms;
   }
 
   .dark {
@@ -63,8 +74,21 @@
     @apply rounded-xl border border-line bg-surface;
   }
 
+  /* Card hover: accent border plus a 2px lift on real pointers. The lift uses
+     the individual `translate` property, not `transform`, so it composes with
+     framer-motion's inline transform when the card is also a <Reveal>.
+     Add .no-lift to keep only the border change (e.g. long reading cards). */
   .panel-hover {
-    @apply transition-colors duration-200 hover:border-accent/50;
+    transition-property: border-color, background-color, translate, scale;
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-out);
+  }
+  .panel-hover:hover,
+  .panel-hover:focus-visible {
+    border-color: rgb(var(--accent) / 0.5);
+  }
+  .panel-hover:has(:focus-visible) {
+    border-color: rgb(var(--accent) / 0.5);
   }
 
   /* Small uppercase mono label ("ENGINEER & BUILDER", "PUBLIC CASE STUDIES") */
@@ -76,8 +100,12 @@
     @apply inline-flex items-center rounded-md border border-line px-2 py-0.5 font-mono text-[11px] text-muted;
   }
 
+  /* Buttons: color transitions plus a quick tactile press (scale 0.97). */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-mono text-sm transition-colors;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-mono text-sm;
+    transition-property: color, background-color, border-color, text-decoration-color, opacity, scale;
+    transition-duration: var(--dur-fast);
+    transition-timing-function: var(--ease-out);
   }
 
   .btn-primary {
@@ -88,8 +116,206 @@
     @apply btn border border-accent/60 text-accent hover:bg-accent/10;
   }
 
+  /* Mono accent link. The underline fades in (color only) instead of snapping,
+     and works across line wraps. Pair with an .arrow-nudge icon. */
   .link-arrow {
-    @apply inline-flex items-center gap-1.5 font-mono text-sm text-accent hover:underline underline-offset-4;
+    @apply inline-flex items-center gap-1.5 font-mono text-sm text-accent;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition-property: color, text-decoration-color, opacity;
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-out);
+  }
+  .link-arrow:hover,
+  .link-arrow:focus-visible {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* Micro-interactions (transform/opacity/color only; see .claude/skills)     */
+/* ------------------------------------------------------------------------ */
+
+/* Press feedback for every button style. `scale` (not `transform`) so it never
+   fights inline transforms from framer-motion or Tailwind translate utilities. */
+:is(.btn, .btn-primary, .btn-outline):active:not(:disabled) {
+  scale: 0.97;
+  transition-duration: 60ms;
+}
+
+/* Lift only where hover is real; avoids sticky hover on touch screens. */
+@media (hover: hover) and (pointer: fine) {
+  .panel-hover:not(.no-lift):hover,
+  .hover-lift:hover {
+    translate: 0 -2px;
+  }
+}
+.panel-hover:not(.no-lift):is(a, button):active,
+.hover-lift:is(a, button):active {
+  translate: 0 0;
+  scale: 0.99;
+  transition-duration: 60ms;
+}
+.panel-hover:not(.no-lift):has(:focus-visible),
+.hover-lift:has(:focus-visible) {
+  translate: 0 -2px;
+}
+
+/* Generic lift for non-panel elements (icon buttons, chips, avatars). */
+.hover-lift {
+  transition-property: translate, scale, color, background-color, border-color;
+  transition-duration: var(--dur-base);
+  transition-timing-function: var(--ease-out);
+}
+
+/* Arrow icons nudge in their direction when the parent link/button/.group is
+   hovered or keyboard-focused. Put the class on the icon itself. */
+.arrow-nudge,
+.arrow-nudge-back,
+.arrow-nudge-up {
+  transition: translate var(--dur-base) var(--ease-out);
+}
+:is(a, button, .group):hover .arrow-nudge,
+:is(a, button):focus-visible .arrow-nudge {
+  translate: 3px 0;
+}
+:is(a, button, .group):hover .arrow-nudge-back,
+:is(a, button):focus-visible .arrow-nudge-back {
+  translate: -3px 0;
+}
+:is(a, button, .group):hover .arrow-nudge-up,
+:is(a, button):focus-visible .arrow-nudge-up {
+  translate: 2px -2px;
+}
+
+/* Existing markup uses `group-hover:underline` on .link-arrow inside cards;
+   give it a visible color now that the underline fades in. */
+.group:hover .group-hover\:underline {
+  text-decoration-color: currentColor;
+}
+
+/* Inline / prose links: underline fades in on hover. Wrap-safe. */
+.link-underline {
+  text-decoration-line: underline;
+  text-decoration-color: rgb(var(--accent) / 0.35);
+  text-underline-offset: 4px;
+  transition: color var(--dur-base) var(--ease-out), text-decoration-color var(--dur-base) var(--ease-out);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+/* Single-line links (nav, footer): underline draws in from the left and
+   leaves to the right. Element gets position: relative. */
+.link-draw {
+  position: relative;
+}
+.link-draw::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur-moderate) var(--ease-out);
+  pointer-events: none;
+}
+.link-draw:hover::after,
+.link-draw:focus-visible::after,
+.link-draw[aria-current='page']::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* SVG stroke draw-on, CSS only (works in server components and without JS).
+   Put pathLength="1" on the <path>/<line>/<circle>. Stagger with
+   style={{ '--draw-delay': '120ms' }}. Plays on mount, not on scroll; for
+   in-view drawing use <DrawPath> from src/components/motion.js. */
+.draw-on {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-on var(--dur-slower) var(--ease-out) var(--draw-delay, 0ms) forwards;
+}
+@keyframes draw-on {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Theme toggle: swap colors in one frame (see toggleTheme in
+   src/context/theme.js). The sun/moon icon keeps its own crossfade. */
+html.theme-switching *:not(.theme-icon) {
+  transition: none !important;
+}
+
+/* Keyboard parity for cards with stretched links: the arrow nudges when any
+   descendant of the .group card has keyboard focus, not only on hover. */
+.group:has(:focus-visible) .arrow-nudge {
+  translate: 3px 0;
+}
+.group:has(:focus-visible) .arrow-nudge-back {
+  translate: -3px 0;
+}
+.group:has(:focus-visible) .arrow-nudge-up {
+  translate: 2px -2px;
+}
+
+/* Reduced motion, tiered (accessible-animation skill):
+   Tier 1 removed: lifts, nudges, press scale, stroke drawing.
+   Tier 3 kept: color, border, underline-color and opacity transitions, focus
+   rings, loading indicators. No blanket `*` kill-switch, on purpose. */
+@media (prefers-reduced-motion: reduce) {
+  .panel-hover,
+  .hover-lift {
+    transition-property: border-color, background-color, color, opacity;
+  }
+  .panel-hover:not(.no-lift):hover,
+  .panel-hover:not(.no-lift):has(:focus-visible),
+  .panel-hover:not(.no-lift):is(a, button):active,
+  .hover-lift:hover,
+  .hover-lift:has(:focus-visible),
+  .hover-lift:is(a, button):active {
+    translate: none;
+    scale: none;
+  }
+
+  /* Press feedback stays, as a brief dim instead of a scale. */
+  :is(.btn, .btn-primary, .btn-outline):active:not(:disabled) {
+    scale: none;
+    opacity: 0.85;
+  }
+
+  .arrow-nudge,
+  .arrow-nudge-back,
+  .arrow-nudge-up {
+    transition: none;
+    translate: none !important;
+  }
+
+  .link-draw::after {
+    transform: scaleX(1);
+    opacity: 0;
+    transition: opacity var(--dur-fast) linear;
+  }
+  .link-draw:hover::after,
+  .link-draw:focus-visible::after,
+  .link-draw[aria-current='page']::after {
+    opacity: 1;
+  }
+
+  .draw-on {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .animate-fade-up {
+    animation-name: fade-in;
+    animation-duration: var(--dur-fast);
   }
 }
 

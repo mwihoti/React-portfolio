@@ -5,6 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaRobot, FaTimes, FaPaperPlane, FaUser, FaCommentDots } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import { EMAIL } from "../data/site";
+import { DISTANCE, DURATION, EASE, TRANSITION, presence } from "../lib/motion";
+import { useReduceMotion } from "./motion";
+
+// Motion notes (micro-interaction + accessible-animation skills):
+//  - Panel grows out of its trigger corner (origin bottom-right): 200ms
+//    ease-out in, 150ms ease-in out. Reduced motion: 150ms fade.
+//  - New messages fade up 8px; messages already there when the panel opens
+//    don't replay. Reduced motion: short fade.
+//  - Typing dots pulse in opacity only (a loading indicator, Tier 3: kept).
+//  - Press feedback on buttons is a small scale, dropped under reduced motion.
 
 const markdownComponents = {
   p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
@@ -71,25 +81,34 @@ function Message({ msg }) {
   );
 }
 
+// Opacity-only wave instead of a bounce: still reads as "working", carries no
+// movement, so it stays on under reduced motion like any loading indicator.
+// Purely visual: the state is announced by the panel's persistent live
+// region (see `liveMsg`), which exists before the indicator mounts.
+const TYPING_DOT = {
+  animate: { opacity: [0.3, 1, 0.3] },
+  transition: { duration: 1.2, repeat: Infinity, ease: "easeInOut" },
+};
+
 function TypingIndicator() {
   return (
-    <div className="flex gap-2 mb-3">
+    <div className="flex gap-2 mb-3" aria-hidden="true">
       <div className="flex-shrink-0 w-7 h-7 rounded-full bg-raised flex items-center justify-center">
         <FaRobot className="w-3 h-3 text-accent" />
       </div>
-      <div className="bg-raised rounded-xl rounded-tl-none px-3 py-2 flex gap-1 items-center">
-        <span
-          className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce"
-          style={{ animationDelay: "0ms" }}
-        />
-        <span
-          className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce"
-          style={{ animationDelay: "150ms" }}
-        />
-        <span
-          className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce"
-          style={{ animationDelay: "300ms" }}
-        />
+      <div
+        className="bg-raised rounded-xl rounded-tl-none px-3 py-2.5 flex gap-1 items-center"
+        aria-hidden="true"
+      >
+        {[0, 1, 2].map((i) => (
+          <motion.span
+            key={i}
+            className="w-1.5 h-1.5 bg-accent rounded-full"
+            initial={{ opacity: 0.3 }}
+            animate={TYPING_DOT.animate}
+            transition={{ ...TYPING_DOT.transition, delay: i * 0.18 }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -113,12 +132,18 @@ export default function ChatBot() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  // Status line for screen readers. The live region stays mounted while the
+  // panel is open, so changes to this text are reliably announced; the
+  // streamed reply itself is not a live region (it would read out every chunk).
+  const [liveMsg, setLiveMsg] = useState("");
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
+  const reduce = useReduceMotion();
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+    // Smooth scrolling is vestibular motion: jump instead when reduced.
+    bottomRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  }, [messages, loading, reduce]);
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 300);
@@ -133,6 +158,7 @@ export default function ChatBot() {
     setMessages(history);
     setInput("");
     setLoading(true);
+    setLiveMsg("Assistant is typing");
 
     // Add empty streaming message placeholder
     setMessages([...history, { role: "assistant", content: "", streaming: true }]);
@@ -170,6 +196,7 @@ export default function ChatBot() {
         ...history,
         { role: "assistant", content: fullContent, streaming: false },
       ]);
+      setLiveMsg("Assistant replied");
     } catch (err) {
       console.error("ChatBot error:", err);
       const errMsg = `${err?.message || "Something went wrong"}. Try emailing ${EMAIL}`;
@@ -177,10 +204,33 @@ export default function ChatBot() {
         ...history,
         { role: "assistant", content: errMsg, streaming: false },
       ]);
+      setLiveMsg("Assistant could not reply");
     } finally {
       setLoading(false);
     }
   };
+
+  // Panel: scale/fade from the trigger corner. Mounts only after a click, so
+  // varying `initial` with the reduced-motion flag is hydration-safe.
+  const panelMotion = reduce
+    ? presence("fade", { reduce: true })
+    : {
+        initial: { opacity: 0, y: DISTANCE.sm, scale: 0.96 },
+        animate: { opacity: 1, y: 0, scale: 1 },
+        exit: { opacity: 0, y: DISTANCE.sm, scale: 0.96, transition: TRANSITION.exit },
+        transition: TRANSITION.ui,
+      };
+
+  // New message bubbles.
+  const messageMotion = reduce
+    ? presence("fade", { reduce: true })
+    : {
+        initial: { opacity: 0, y: DISTANCE.sm },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: DURATION.moderate, ease: EASE.out },
+      };
+
+  const canSend = Boolean(input.trim()) && !loading;
 
   const handleKey = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -192,30 +242,42 @@ export default function ChatBot() {
   return (
     <>
       {/* Floating button */}
+      {/* Floating button. Hover/press scale is small and skipped under
+          reduced motion (gesture props never reach the server HTML, so this
+          can't cause a hydration mismatch). */}
       <motion.button
-        onClick={() => setOpen((o) => !o)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent hover:bg-accent/85 shadow-lg shadow-black/30 flex items-center justify-center transition-colors"
+        onClick={() => {
+          setOpen((o) => !o);
+          setLiveMsg(""); // the region remounts empty with the panel
+        }}
+        whileHover={reduce ? undefined : { scale: 1.04 }}
+        whileTap={reduce ? undefined : { scale: 0.95 }}
+        transition={{ duration: DURATION.fast, ease: EASE.out }}
+        className="fixed bottom-6 right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent hover:bg-accent/85 shadow-lg shadow-black/30 grid place-items-center transition-colors"
         aria-label={open ? "Close chat" : "Open chat"}
         aria-expanded={open}
       >
-        <AnimatePresence mode="wait">
+        {/* Icons crossfade in place (stacked in one grid cell) with a small
+            turn; initial={false} keeps the icon visible in the server HTML.
+            Reduced motion: MotionConfig drops the turn, the fade remains. */}
+        <AnimatePresence initial={false}>
           {open ? (
             <motion.span
               key="close"
-              initial={{ rotate: -90, opacity: 0 }}
+              className="[grid-area:1/1] flex"
+              initial={{ rotate: -45, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
+              exit={{ rotate: 45, opacity: 0, transition: TRANSITION.exit }}
             >
               <FaTimes className="w-5 h-5 text-accent-ink" />
             </motion.span>
           ) : (
             <motion.span
               key="open"
-              initial={{ rotate: 90, opacity: 0 }}
+              className="[grid-area:1/1] flex"
+              initial={{ rotate: 45, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
+              exit={{ rotate: -45, opacity: 0, transition: TRANSITION.exit }}
             >
               <FaCommentDots className="w-6 h-6 text-accent-ink" />
             </motion.span>
@@ -227,11 +289,9 @@ export default function ChatBot() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] max-w-96 sm:w-96 flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-line"
+            key="chat-panel"
+            {...panelMotion}
+            className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] max-w-96 sm:w-96 flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-line origin-bottom-right"
             style={{ maxHeight: "70vh" }}
           >
             {/* Header */}
@@ -255,13 +315,26 @@ export default function ChatBot() {
               className="flex-1 overflow-y-auto bg-canvas p-4"
               style={{ minHeight: 0 }}
             >
-              {messages.map((msg, i) => (
-                <Message key={i} msg={msg} />
-              ))}
-              {loading && messages[messages.length - 1]?.content === "" && (
-                <TypingIndicator />
-              )}
+              {/* initial={false}: the history present when the panel opens
+                  arrives with the panel; only new bubbles animate. The empty
+                  streaming placeholder shows as the typing indicator and is
+                  replaced in place by the reply as it streams in (same key,
+                  so it doesn't animate twice). */}
+              <AnimatePresence initial={false}>
+                {messages.map((msg, i) => (
+                  <motion.div key={i} {...messageMotion}>
+                    {msg.streaming && msg.content === "" ? (
+                      <TypingIndicator />
+                    ) : (
+                      <Message msg={msg} />
+                    )}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
               <div ref={bottomRef} />
+              <p className="sr-only" role="status" aria-live="polite">
+                {liveMsg}
+              </p>
             </div>
 
             {/* Suggested questions — show only at start */}
@@ -271,7 +344,7 @@ export default function ChatBot() {
                   <button
                     key={q}
                     onClick={() => send(q)}
-                    className="text-xs px-2.5 py-1 rounded-full border border-line text-accent hover:bg-accent/10 transition-colors"
+                    className="text-xs px-2.5 py-1 rounded-full border border-line text-accent hover:bg-accent/10 hover:border-accent/40 transition-[color,background-color,border-color,scale] duration-base ease-enter active:[scale:0.97] motion-reduce:active:[scale:1]"
                   >
                     {q}
                   </button>
@@ -292,9 +365,10 @@ export default function ChatBot() {
                 className="flex-1 bg-canvas text-sm text-ink placeholder:text-faint rounded-lg px-3 py-2 border border-line focus:outline-none focus:border-accent transition-colors"
               />
               <motion.button
-                whileTap={{ scale: 0.9 }}
+                whileTap={canSend && !reduce ? { scale: 0.92 } : undefined}
+                transition={{ duration: DURATION.instant, ease: EASE.out }}
                 onClick={() => send()}
-                disabled={!input.trim() || loading}
+                disabled={!canSend}
                 aria-label="Send message"
                 className="w-9 h-9 flex-shrink-0 rounded-lg bg-accent hover:bg-accent/85 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
               >

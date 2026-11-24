@@ -4,6 +4,8 @@ import React from 'react';
 import { FaArrowRight, FaCode, FaRobot, FaTools } from 'react-icons/fa';
 import { SiBitcoin, SiCardano } from 'react-icons/si';
 import { Reveal, SectionHeader, AvalancheIcon, MidnightIcon } from './ui';
+import { Stagger, StaggerItem } from './motion';
+import { STAGGER } from '../lib/motion';
 
 // `stage` is deliberately honest: it tells visitors how deep I am in each area.
 const ecosystems = [
@@ -48,48 +50,64 @@ export default function Focus() {
           intro="I'd rather tell you where I'm deep and where I'm still learning than hand you a wall of logos."
         />
 
-        <Reveal as="ul" className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        {/* The grid frame is static; each cell's content fades up in reading
+            order. The <li> keeps its opaque bg-surface (only the inner content
+            animates) so the gap-px bg-line never shows as a solid block. */}
+        <Stagger
+          as="ul"
+          stagger={STAGGER.tight}
+          className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4"
+        >
           {ecosystems.map(({ Icon, name, stage, text }) => (
-            <li key={name} className="flex gap-4 bg-surface p-5">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-accent/30 text-accent">
-                <Icon className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="font-semibold text-ink">{name}</p>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-accent">{stage}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{text}</p>
-              </div>
+            <li key={name} className="bg-surface">
+              <StaggerItem y={8} className="flex h-full gap-4 p-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-accent/30 text-accent">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="font-semibold text-ink">{name}</p>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-accent">{stage}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{text}</p>
+                </div>
+              </StaggerItem>
             </li>
           ))}
-          <li className="flex flex-col justify-center bg-surface p-5">
-            <p className="text-sm text-muted">Working in one of these?</p>
-            <a href="#contact" className="link-arrow mt-2">
-              Let&apos;s talk <FaArrowRight className="h-3 w-3" aria-hidden="true" />
-            </a>
+          <li className="bg-surface">
+            <StaggerItem y={8} className="flex h-full flex-col justify-center p-5">
+              <p className="text-sm text-muted">Working in one of these?</p>
+              <a href="#contact" className="link-arrow mt-2">
+                Let&apos;s talk <FaArrowRight className="arrow-nudge h-3 w-3" aria-hidden="true" />
+              </a>
+            </StaggerItem>
           </li>
-        </Reveal>
+        </Stagger>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2">
-          <Reveal>
-            <h3 className="font-serif text-2xl font-semibold text-ink">How I can help</h3>
-            <dl className="mt-6 divide-y divide-line border-y border-line">
+          {/* Each column: heading reveals, then its rows follow in order. */}
+          <div>
+            <Reveal as="h3" className="font-serif text-2xl font-semibold text-ink">
+              How I can help
+            </Reveal>
+            <Stagger as="dl" delay={0.08} className="mt-6 divide-y divide-line border-y border-line">
               {help.map(({ title, text }) => (
-                <div key={title} className="grid gap-1 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
+                <StaggerItem key={title} y={8} className="grid gap-1 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
                   <dt className="font-mono text-sm text-accent">{title}</dt>
                   <dd className="text-sm leading-relaxed text-muted">{text}</dd>
-                </div>
+                </StaggerItem>
               ))}
-            </dl>
-          </Reveal>
+            </Stagger>
+          </div>
 
-          <Reveal delay={0.08}>
-            <h3 className="font-serif text-2xl font-semibold text-ink">Tools I reach for</h3>
-            <p className="mt-2 text-sm text-muted">
-              Picked for the job and the team, not to fill a badge wall.
-            </p>
-            <dl className="mt-6 space-y-5">
+          <div>
+            <Reveal delay={0.08}>
+              <h3 className="font-serif text-2xl font-semibold text-ink">Tools I reach for</h3>
+              <p className="mt-2 text-sm text-muted">
+                Picked for the job and the team, not to fill a badge wall.
+              </p>
+            </Reveal>
+            <Stagger as="dl" delay={0.16} className="mt-6 space-y-5">
               {stack.map(({ group, items }) => (
-                <div key={group}>
+                <StaggerItem key={group} y={8}>
                   <dt className="eyebrow !text-[11px] !text-faint">{group}</dt>
                   <dd className="mt-2 flex flex-wrap gap-1.5">
                     {items.map((item) => (
@@ -98,10 +116,10 @@ export default function Focus() {
                       </span>
                     ))}
                   </dd>
-                </div>
+                </StaggerItem>
               ))}
-            </dl>
-          </Reveal>
+            </Stagger>
+          </div>
         </div>
       </div>
     </section>
