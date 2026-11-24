@@ -5,7 +5,36 @@ import Image from 'next/image';
 import { FaArrowUp, FaExternalLinkAlt, FaGithub, FaSearch, FaTelegramPlane, FaCode } from 'react-icons/fa';
 import { FILTERS, projects } from '../data/projects';
 import { GITHUB_URL } from '../data/site';
-import { Reveal, SectionHeader } from './ui';
+import { SectionHeader } from './ui';
+import { Reveal, useReduceMotion } from './motion';
+import { DISTANCE, DURATION, EASE, STAGGER, TRANSITION, VIEWPORT, presence } from '../lib/motion';
+
+// Motion notes (see .claude/skills: micro-interaction, 60fps-animation,
+// accessible-animation):
+// - Filter buttons share one sliding "pill" (framer layoutId) so the eye
+//   follows the selection from button to button.
+// - The grid animates filtering: cards that leave fade out quickly and are
+//   popped out of flow (AnimatePresence mode="popLayout"), the remaining cards
+//   slide to their new cells (layout="position": transform only, so text and
+//   borders never stretch), and new cards fade in.
+// - On first load each card still reveals on scroll, exactly as before.
+// - Reduced motion: MotionConfig (src/context/theme.js) snaps every layout move
+//   and the pill; what remains is a 150ms opacity fade (Tier 2). Colors and
+//   focus rings are untouched (Tier 3).
+
+// Link underline that fades in on hover/focus (color only, wrap-safe); same
+// behavior as .link-arrow without its font/size. Arbitrary property so the
+// color transition doesn't override anything else on the element.
+const FADE_UNDERLINE =
+  'underline decoration-transparent underline-offset-4 [transition-property:color,text-decoration-color] duration-base ease-enter hover:decoration-current focus-visible:decoration-current';
+
+// "How it works" disclosure. The native <details> stays in charge of open/close
+// (keyboard, find-in-page, no-JS all keep working); its content just fades and
+// rises 8px when it opens. Transform/opacity only, so opening never animates
+// layout. CSS-only, so it also works before hydration. Reduced motion: a 150ms
+// fade with no movement. Closing is instant, as the platform does it.
+const DISCLOSURE_ENTER =
+  'motion-safe:group-open:animate-[fade-up_300ms_cubic-bezier(0.22,1,0.36,1)_backwards] motion-reduce:group-open:animate-[fade-in_150ms_linear_backwards]';
 
 function matches(project, query) {
   if (!query) return true;
@@ -18,9 +47,11 @@ function matches(project, query) {
     .every((word) => haystack.includes(word));
 }
 
+// The card itself is not a link (it holds several links and a <details>), so
+// hover only warms the border; a lift would suggest a click target.
 function ProjectCard({ project }) {
   return (
-    <article className="panel panel-hover flex h-full flex-col overflow-hidden">
+    <article className="panel panel-hover no-lift flex h-full flex-col overflow-hidden">
       {project.image ? (
         <div className="relative aspect-[16/9] border-b border-line">
           <Image
@@ -52,39 +83,48 @@ function ProjectCard({ project }) {
         <p className="mt-3 text-sm leading-relaxed text-muted">{project.problem}</p>
 
         {project.featured ? (
-          <a href="#case-studies" className="link-arrow mt-4 text-xs">
-            <FaArrowUp className="h-3 w-3" aria-hidden="true" /> Full case study above
+          <a href="#case-studies" className="group/up link-arrow mt-4 text-xs">
+            <FaArrowUp
+              className="h-3 w-3 motion-safe:transition-[translate] motion-safe:duration-base motion-safe:ease-enter motion-safe:group-hover/up:[translate:0_-2px] motion-safe:group-focus-visible/up:[translate:0_-2px]"
+              aria-hidden="true"
+            />{' '}
+            Full case study above
           </a>
         ) : (
           <details className="group mt-4 text-sm">
-            <summary className="cursor-pointer list-none font-mono text-xs text-faint hover:text-ink [&::-webkit-details-marker]:hidden">
-              <span className="inline-block transition-transform group-open:rotate-90">›</span> How it works
+            <summary className="cursor-pointer list-none font-mono text-xs text-faint transition-colors duration-base ease-enter hover:text-ink [&::-webkit-details-marker]:hidden">
+              <span className="inline-block transition-transform duration-base ease-enter group-open:rotate-90">
+                ›
+              </span>{' '}
+              How it works
             </summary>
-            <p className="mt-3 leading-relaxed text-muted">{project.description}</p>
-            <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Stack">
-              {project.tech.map((t) => (
-                <li key={t} className="chip">
-                  {t}
-                </li>
-              ))}
-            </ul>
+            <div className={DISCLOSURE_ENTER}>
+              <p className="mt-3 leading-relaxed text-muted">{project.description}</p>
+              <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Stack">
+                {project.tech.map((t) => (
+                  <li key={t} className="chip">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </details>
         )}
 
         <div className="mt-auto pt-5">
           <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-line pt-4 font-mono text-xs">
             {project.github && (
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-muted hover:text-ink">
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-muted transition-colors duration-base ease-enter hover:text-ink">
                 <FaGithub className="h-3.5 w-3.5" aria-hidden="true" /> Code
               </a>
             )}
             {project.live && (
-              <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-accent hover:underline">
-                <FaExternalLinkAlt className="h-3 w-3" aria-hidden="true" /> Live
+              <a href={project.live} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1.5 text-accent ${FADE_UNDERLINE}`}>
+                <FaExternalLinkAlt className="arrow-nudge-up h-3 w-3" aria-hidden="true" /> Live
               </a>
             )}
             {project.telegram && (
-              <a href={project.telegram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-accent hover:underline">
+              <a href={project.telegram} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1.5 text-accent ${FADE_UNDERLINE}`}>
                 <FaTelegramPlane className="h-3.5 w-3.5" aria-hidden="true" /> Open in Telegram
               </a>
             )}
