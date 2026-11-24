@@ -16,6 +16,17 @@
     --accent: 13 128 118;
     --accent-ink: 255 255 255;
     color-scheme: light;
+
+    /* Motion tokens, mirrored in src/lib/motion.js and tailwind.config.js */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-instant: 100ms;
+    --dur-fast: 150ms;
+    --dur-base: 200ms;
+    --dur-moderate: 300ms;
+    --dur-slow: 500ms;
+    --dur-slower: 600ms;
   }
 
   .dark {
